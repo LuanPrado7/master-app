@@ -1,0 +1,25 @@
+
+<!-- 
+<div *ngFor="let ponto of card.pontos_tema; let i = index">
+    <label [ngStyle]="{'color': temas[i].cor}">{{temas[i].titulo}} : {{ponto.pontos}}</label>
+</div>
+
+<br> -->
+
+<div class="container">
+    <div class="card-container">
+      
+      <a href="" class="card user">
+        <div class="media">
+          <div class="media__image">
+            <img src="{{card.foto}}" alt="user" class="img--48x48 img--rounded">
+          </div>
+          <div class="media__bd">
+            <p class="user__sender">{{card.nome}}</p>
+            <p class="user__description">{{card.elo}}</p>
+          </div>
+        </div>
+      </a>
+        
+    </div>
+  </div>

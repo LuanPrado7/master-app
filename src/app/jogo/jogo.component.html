@@ -1,0 +1,15 @@
+<div>
+  <app-pergunta 
+    [temas] = "temas"
+    (id_tema_acertado) = "atualizarRanking($event)"
+  >
+  </app-pergunta>
+</div>
+
+<div>
+  <app-ranking 
+    [temas] = "temas" 
+    [id_jogador] = "id_jogador"
+  >
+  </app-ranking>
+</div>

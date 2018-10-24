@@ -1,0 +1,13 @@
+<div class="quiz">
+  <div class="quiz-header"></div>
+  <h1>Quiz</h1>
+  <div class="question">
+    <h3 [ngStyle]="{'color': getCorTema(perguntas[pergunta_atual].id_tema)}">{{perguntas[pergunta_atual].pergunta}}</h3>
+  </div>
+  <div class="option" id="{{alternativa.alternativa}}" *ngFor="let alternativa of perguntas[pergunta_atual].alternativas">
+    <a (click)="checarResposta(alternativa.alternativa, perguntas[pergunta_atual])">
+      <span class="letter"><p>{{alternativa.alternativa}}</p></span>
+      <span><p>{{alternativa.resposta}}</p></span>
+    </a>
+  </div>
+</div>
