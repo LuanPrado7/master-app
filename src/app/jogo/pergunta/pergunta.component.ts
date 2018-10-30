@@ -22,44 +22,50 @@ export class PerguntaComponent implements OnInit {
 
   perguntas: Pergunta[] = [
     {
-      pergunta: "What's the only city that has hosted the Summer Olympics three times?",
-      id_tema: 1,
+      pergunta: "Qual o livro mais vendido no mundo a seguir à Bíblia?",
+      id_tema: 2,
       alternativas: [
         {
           alternativa: 'A',
-          resposta: 'London'
+          resposta: 'O Senhor dos Anéis'
         }, {
           alternativa: 'B',
-          resposta: 'Paris'
+          resposta: 'Dom Quixote'
         }, {
           alternativa: 'C',
-          resposta: 'Athens'
+          resposta: 'O Pequeno Príncipe'
         }, {
           alternativa: 'D',
-          resposta: 'Los Angeles'
-        },
+          resposta: 'Ela, a Feiticeira'
+        }, {
+          alternativa: 'E',
+          resposta: 'Um Conto de Duas Cidades'
+        }
       ],
       correta: 'B'
     },
     {
-      pergunta: 'EFGH',
-      id_tema: 2,
+      pergunta: 'Qual o maior animal terrestre?',
+      id_tema: 1,
       alternativas: [
         {
+          alternativa: 'A',
+          resposta: 'Baleia Azul'
+        }, {
+          alternativa: 'B',
+          resposta: 'Dinossauro'
+        }, {
+          alternativa: 'C',
+          resposta: 'Elefante africano'
+        }, {
+          alternativa: 'D',
+          resposta: 'Tubarão Branco'
+        }, {
           alternativa: 'E',
-          resposta: 'E'
-        }, {
-          alternativa: 'F',
-          resposta: 'F'
-        }, {
-          alternativa: 'G',
-          resposta: 'G'
-        }, {
-          alternativa: 'H',
-          resposta: 'H'
-        },
+          resposta: 'Girafa'
+        }
       ],
-      correta: 'H'
+      correta: 'A'
     }
   ];
 

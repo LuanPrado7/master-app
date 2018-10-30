@@ -12,6 +12,10 @@ export class CardComponent implements OnInit {
   @Input() card: Card;
   @Input() temas: Tema;
 
+  getCorTema = function(id_tema) {
+    return this.temas.find(tema => tema.id_tema == id_tema).cor;
+  }
+
   constructor() { }
 
   ngOnInit() {
