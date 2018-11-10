@@ -14,7 +14,7 @@ h1, h3 {
     height: 400px;
     background-color: #ECEEEF;
     position: absolute;
-    top: 45%;
+    top: 40%;
     left: 25%;
     border-radius: 5px;
     transform: translate(-50%, -50%);
@@ -94,34 +94,56 @@ h1, h3 {
 
   // Begin Timer css
 
-  @import url(https://fonts.googleapis.com/css?family=Open+Sans:800);
+  #countdown {
+    position: relative;
+    margin: -85px 0 0 390px;
+    height: 160px;
+    width: 160px;
+    text-align: center;
+    font-family: oswald;
+    font-size: 30px;
+  }
+  
+  #countdown-number {
+    display: inline-block;
+    line-height: 160px;
+  }
+  
+  svg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 160px;
+    height: 160px;
+    transform: rotateY(-180deg) rotateZ(-90deg);
+  }
+  
+  svg circle {
+    stroke-dasharray: 251px;
+    stroke-dashoffset: 0px;
+    stroke-linecap: round;
+    stroke-width: 7px;
+    fill: none;
+  }
 
-  .container {
-    margin: auto;
-    width: 400px;
+  .circle-animation {
+    animation: countdown 15s linear infinite forwards;
+    animation-iteration-count: 1;
+  }
+
+  circle {
+    cx: 80;
+    cy: 80;
+    r: 40;
   }
   
-  .path--background {
-    fill: rgb(34, 213, 201);
-    stroke: #fff;
-    stroke-width: 0px;
-  }
-  
-  .pulse {
-    fill: rgb(255, 74, 74) !important;
-  }
-  
-  .path--foreground {
-    fill: #eee;
-    stroke: #eee;
-    stroke-width: 2px;
-  }
-  
-  .label {
-    font: 90px "Open Sans";
-    font-weight: 900;
-    text-anchor: middle;
-    fill: rgb(34, 213, 201);
+  @keyframes countdown {
+    from {
+      stroke-dashoffset: 0px;
+    }
+    to {
+      stroke-dashoffset: 251px;
+    }
   }
 
   // End Timer css

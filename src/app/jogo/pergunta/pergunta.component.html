@@ -1,7 +1,21 @@
 <div class="quiz">
   <div class="quiz-header"></div>
   <h1>Master</h1>
-  <h1>{{timer}}</h1>
+
+  <div id="countdown">
+    <div 
+      id="countdown-number" 
+      [ngStyle]="{'color': getCorTema(perguntas[perguntaAtual].id_tema)}"
+    >{{timer}}</div>
+    <svg>
+      <circle 
+        id="circle-timer"
+        class="circle-animation"
+        [ngStyle]="{'stroke': getCorTema(perguntas[perguntaAtual].id_tema)}"
+      ></circle>
+    </svg>
+  </div>
+
   <div class="question">
     <h3 [ngStyle]="{'color': getCorTema(perguntas[perguntaAtual].id_tema)}">{{perguntas[perguntaAtual].pergunta}}</h3>
   </div>

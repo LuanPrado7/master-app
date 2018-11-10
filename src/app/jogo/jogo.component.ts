@@ -13,33 +13,33 @@ export class JogoComponent implements OnInit {
 
   temas: Tema[] = [
     {
-      logo: '',
+      logo: 'dna.png',
       id_tema: 1,
-      titulo: 'Ciência',
+      titulo: 'Biologia',
       cor: '#00FF00'
     },
     {
-      logo: '',
+      logo: 'game-controller.png',
       id_tema: 2,
-      titulo: 'Entreterimento',
+      titulo: 'Games',
       cor:'#FF6EC7'
     },
     {
-      logo: '',
+      logo: 'innovation.png',
       id_tema: 3,
-      titulo: 'Harry Potter',
+      titulo: 'Tecnologia',
       cor: '#FF0000'
     },
     {
-      logo: '',
+      logo: 'sphinx.png',
       id_tema: 4,
-      titulo: 'Tecnologia',
+      titulo: 'História',
       cor: '#0000FF'
     },
     {
-      logo: '',
+      logo: 'popcorn.png',
       id_tema: 5,
-      titulo: 'Música',
+      titulo: 'Filmes',
       cor: '#FF7F00'
     }
   ];

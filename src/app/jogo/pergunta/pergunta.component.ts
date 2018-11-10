@@ -1,8 +1,9 @@
-import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef} from '@angular/core';
 
 import { Pergunta } from './pergunta';
 import { Tema } from '../tema';
-import { timer, TimeoutError } from 'rxjs';
+
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-pergunta',
@@ -14,16 +15,15 @@ export class PerguntaComponent implements OnInit {
   @Input() temas: Tema[];
   @Output() id_tema_acertado = new EventEmitter<number>();
 
-
   perguntaAtual: number;
   timerToken: number;
   timer: number;
-  tempoPorPergunta: number = 30;
+  tempoPorPergunta: number = 15;
 
   perguntas: Pergunta[] = [
     {
       pergunta: "Qual o livro mais vendido no mundo a seguir à Bíblia?",
-      id_tema: 2,
+      id_tema: 4,
       alternativas: [
         {
           alternativa: 'A',
@@ -82,6 +82,10 @@ export class PerguntaComponent implements OnInit {
   irParaProximaPergunta = function() {
     this.stopTimer();
 
+    $('circle-timer')
+      .removeClass("circle-animation")
+      // .addClass("circle-animation")
+
     if(this.perguntaAtual < this.perguntas.length - 1) {
       this.perguntaAtual++;
       this.startTimer();
@@ -93,12 +97,12 @@ export class PerguntaComponent implements OnInit {
   }
 
   startTimer = function() {
-    this.timer = 0;
+    this.timer = this.tempoPorPergunta;
 
     this.timerToken = setInterval(() => {
-      this.timer++;
+      this.timer--;
 
-      if(this.timer == this.tempoPorPergunta) 
+      if(this.timer == 0) 
         this.irParaProximaPergunta();        
 
     }, 1000);
