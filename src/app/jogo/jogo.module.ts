@@ -19,8 +19,8 @@ import { TimerComponent } from './pergunta/timer/timer.component';
   ],
   declarations: [
     RankingComponent,
-    CardComponent, 
-    JogoComponent, 
+    CardComponent,
+    JogoComponent,
     PerguntaComponent, TimerComponent
   ]
 })

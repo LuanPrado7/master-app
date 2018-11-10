@@ -1,0 +1,50 @@
+body {
+    //essa desgraça não tá renderizando na página inteira, infeliz
+    background: url(../../assets/img/background.jpg) no-repeat fixed;
+    background-size: cover; 
+    color: #eeeeee;
+    // background-color: #1d4457;
+    // min-height: 100%;
+}
+
+.home-container {
+    text-align: center;
+    
+    h1 {
+        margin: auto;
+        margin-top: 100px;
+        font-size: 50px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        padding: 0.2em 0.5em;
+        border: 4px solid #abb9ba;
+        width: 400px;
+    }
+
+    p {
+        margin: 5px;
+    }
+
+    .divisoria {
+        font-size: 9px;
+        color: #abb9ba;
+        margin: 15px;
+    }
+
+    .botoes {
+        margin-top: 100px;
+    
+        .btn {
+            vertical-align: middle;
+            margin: 3px;
+            width: 180px;
+            background-color: rgba(0,0,0,0.1);
+            border: 0px;
+        
+        }
+        .btn:hover{
+            background-color: rgba(0,0,0,0.3);
+            box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.4);
+        }
+    }
+}
