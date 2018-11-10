@@ -27,7 +27,7 @@ export class JogoComponent implements OnInit {
     {
       logo: '',
       id_tema: 3,
-      titulo: 'Cinema',
+      titulo: 'Harry Potter',
       cor: '#FF0000'
     },
     {
@@ -44,10 +44,10 @@ export class JogoComponent implements OnInit {
     }
   ];
 
-  id_jogador: number = 1;
+  id_jogador: number = 4;
 
   atualizarRanking: any = function(id_tema) {
-    this.ranking.adiciona_ponto(id_tema);
+    this.ranking.adicionaPonto(id_tema);
   }
 
   constructor() { }

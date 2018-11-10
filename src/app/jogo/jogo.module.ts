@@ -6,6 +6,7 @@ import { RankingComponent } from './ranking/ranking.component';
 import { CardComponent } from './ranking/card/card.component';
 import { PerguntaComponent } from './pergunta/pergunta.component';
 import { TimerComponent } from './pergunta/timer/timer.component';
+import { ArraySortPipe } from './ranking/sort.pipe';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { TimerComponent } from './pergunta/timer/timer.component';
     RankingComponent,
     CardComponent, 
     JogoComponent, 
-    PerguntaComponent, TimerComponent
+    PerguntaComponent, TimerComponent, 
+    ArraySortPipe
   ]
 })
 export class JogoModule { }

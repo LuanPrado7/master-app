@@ -15,7 +15,7 @@ export class PerguntaComponent implements OnInit {
   @Output() id_tema_acertado = new EventEmitter<number>();
 
 
-  pergunta_atual: number;
+  perguntaAtual: number;
   timerToken: number;
   timer: number;
   tempoPorPergunta: number = 30;
@@ -82,8 +82,8 @@ export class PerguntaComponent implements OnInit {
   irParaProximaPergunta = function() {
     this.stopTimer();
 
-    if(this.pergunta_atual < this.perguntas.length - 1) {
-      this.pergunta_atual++;
+    if(this.perguntaAtual < this.perguntas.length - 1) {
+      this.perguntaAtual++;
       this.startTimer();
     }
   }
@@ -109,7 +109,7 @@ export class PerguntaComponent implements OnInit {
   }
 
   constructor() { 
-    this.pergunta_atual = 0;
+    this.perguntaAtual = 0;
     this.startTimer();
   }
 

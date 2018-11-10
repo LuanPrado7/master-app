@@ -42,7 +42,8 @@ export class RankingComponent implements OnInit {
           id_tema: 5,
           pontos: 0
         }
-      ]
+      ],
+      pontos_total: 0
     },
     {
       nome: 'Leilah',
@@ -70,7 +71,8 @@ export class RankingComponent implements OnInit {
           id_tema: 5,
           pontos: 0
         }
-      ]
+      ],
+      pontos_total: 0
     },
     {
       nome: 'Mônica',
@@ -98,7 +100,8 @@ export class RankingComponent implements OnInit {
           id_tema: 5,
           pontos: 0
         }
-      ]
+      ],
+      pontos_total: 0
     },
     {
       nome: 'Pamela',
@@ -126,13 +129,20 @@ export class RankingComponent implements OnInit {
           id_tema: 5,
           pontos: 0
         }
-      ]
+      ],
+      pontos_total: 0
     }
   ];
 
-  adiciona_ponto: any = function(id_tema) {
+  adicionaPonto: any = function(id_tema) {
     let tema = this.jogador.pontos_tema.find(tema => tema.id_tema == id_tema);
     tema.pontos++;
+    this.jogador.pontos_total++;
+    this.atualizarRanking();
+  }
+
+  atualizarRanking = function() {
+    this.ranking = this.ranking.sort((a,b) => a.pontos_total < b.pontos_total ? 1 : (a.pontos_total > b.pontos_total ? -1 : 0));
   }
 
   constructor() { }

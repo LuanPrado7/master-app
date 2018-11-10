@@ -12,13 +12,17 @@ export class CardComponent implements OnInit {
   @Input() card: Card;
   @Input() temas: Tema;
 
-  getCorTema = function(id_tema) {
-    return this.temas.find(tema => tema.id_tema == id_tema).cor;
+  getStyleTema = function(tema) {
+
+    let tema_atual = this.temas.find(tema_atual => tema_atual.id_tema == tema.id_tema);
+
+    return 'linear-gradient(#a7a7a7 '+ (100 - tema.pontos * 25) +'%, ' + tema_atual.cor + ' '+ (tema.pontos * 25) +'%)'; 
   }
 
   constructor() { }
 
   ngOnInit() {
+    console.log(this.temas);
   }
 
 }

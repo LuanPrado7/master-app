@@ -18,9 +18,12 @@
             <p class="user__sender">{{card.nome}}</p>
             <p class="user__description">{{card.elo}}</p>
           </div>
-          <div *ngFor="let ponto of card.pontos_tema">
-            <p [ngStyle]="{'color': getCorTema(ponto.id_tema)}">{{ponto.pontos}}</p>
+          <div class='col-md-12'>
+            <div *ngFor="let tema of card.pontos_tema" class="col-md-2">
+              <div class="circle" [ngStyle]="{'background': getStyleTema(tema)}"></div>
+            </div>          
           </div>
+
         </div>
       </a>
         

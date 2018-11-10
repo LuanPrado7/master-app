@@ -3,5 +3,6 @@ export interface Card {
     id_jogador: number,
     foto?: string,
     elo?: string,
-    pontos_tema: Object[]
+    pontos_tema: Object[],
+    pontos_total: number
 }
