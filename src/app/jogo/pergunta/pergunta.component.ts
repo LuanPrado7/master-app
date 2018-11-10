@@ -14,6 +14,7 @@ export class PerguntaComponent implements OnInit {
 
   @Input() temas: Tema[];
   @Output() id_tema_acertado = new EventEmitter<number>();
+  @Output() abrir_resumo_partida = new EventEmitter<any>();
 
   perguntaAtual: number;
   timerToken: number;
@@ -70,13 +71,23 @@ export class PerguntaComponent implements OnInit {
   ];
 
   checarResposta = function(selecionada, pergunta) {
+    $("#option-" + pergunta.correta).addClass("correta");
+    
     if(selecionada == pergunta.correta) {
       this.id_tema_acertado.emit(pergunta.id_tema);
     } else {
-      alert("Errou");
+      $("#option-" + selecionada).addClass("errada");
     }
 
-    this.irParaProximaPergunta();
+    this.stopTimer();
+
+    setTimeout(() => {
+      $("div[id ~= 'option']")
+        .removeClass("correta")
+        .removeClass("errada");
+
+      this.irParaProximaPergunta();
+    }, 1000)
   }
 
   irParaProximaPergunta = function() {
@@ -89,6 +100,9 @@ export class PerguntaComponent implements OnInit {
     if(this.perguntaAtual < this.perguntas.length - 1) {
       this.perguntaAtual++;
       this.startTimer();
+    }
+    else {
+      this.abrir_resumo_partida.emit();
     }
   }
 

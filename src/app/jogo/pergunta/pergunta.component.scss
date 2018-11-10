@@ -92,6 +92,14 @@ h1, h3 {
     }
   }
 
+  .correta {
+    background-color: limegreen;
+  }
+
+  .errada {
+    background-color: red;
+  }
+
   // Begin Timer css
 
   #countdown {
@@ -128,7 +136,6 @@ h1, h3 {
 
   .circle-animation {
     animation: countdown 15s linear infinite forwards;
-    animation-iteration-count: 1;
   }
 
   circle {

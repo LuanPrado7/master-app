@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material';
+
 import { Tema } from './tema';
 import { RankingComponent } from './ranking/ranking.component';
+import { ResumoDialogComponent } from './resumo/resumo.component';
 
 @Component({
   selector: 'app-jogo',
@@ -9,7 +12,7 @@ import { RankingComponent } from './ranking/ranking.component';
 })
 export class JogoComponent implements OnInit {
 
-  @ViewChild(RankingComponent) ranking: RankingComponent; 
+  @ViewChild(RankingComponent) rankingComponent: RankingComponent; 
 
   temas: Tema[] = [
     {
@@ -47,10 +50,18 @@ export class JogoComponent implements OnInit {
   id_jogador: number = 4;
 
   atualizarRanking: any = function(id_tema) {
-    this.ranking.adicionaPonto(id_tema);
+    this.rankingComponent.adicionaPonto(id_tema);
   }
 
-  constructor() { }
+  abrirResumoPartida: any = function() {
+    this.resumoDialog.open(ResumoDialogComponent, {
+      width: '800px',
+      height: '600px',
+      data: this.rankingComponent.ranking
+    });
+  }
+
+  constructor(public resumoDialog: MatDialog) { }
 
   ngOnInit() {
   }

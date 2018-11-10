@@ -19,7 +19,7 @@ export class RankingComponent implements OnInit {
     {
       nome: 'Luan',
       id_jogador: 1,
-      foto: 'https://pbs.twimg.com/profile_images/1053055123193122816/IUwo6l_Q_400x400.jpg',
+      foto: 'monkey',
       elo: 'Mestrão',
       pontos_tema : [
         {
@@ -48,7 +48,7 @@ export class RankingComponent implements OnInit {
     {
       nome: 'Leilah',
       id_jogador: 2,
-      foto: 'https://s3.amazonaws.com/uifaces/faces/twitter/sdw/128.jpg',
+      foto: 'hipster-1',
       elo: 'Sabixão',
       pontos_tema : [
         {
@@ -77,7 +77,7 @@ export class RankingComponent implements OnInit {
     {
       nome: 'Mônica',
       id_jogador: 3,
-      foto: 'https://s3.amazonaws.com/uifaces/faces/twitter/rogie/128.jpg',
+      foto: 'detective',
       elo: 'Especialista',
       pontos_tema : [
         {
@@ -106,7 +106,7 @@ export class RankingComponent implements OnInit {
     {
       nome: 'Pamela',
       id_jogador: 4,
-      foto: 'https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg',
+      foto: 'hippie',
       elo: 'Principiante',
       pontos_tema : [
         {
