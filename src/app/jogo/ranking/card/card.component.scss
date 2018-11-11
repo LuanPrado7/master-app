@@ -7,7 +7,7 @@
   .card-container {
     display: flex;
     flex-direction: column;
-    width: 350px;
+    width: 375px;
     margin: 0 auto;
   }
   
@@ -32,13 +32,13 @@
     
     @for $i from 0 through 3 {
       &:nth-child(n+#{$i}) {
-        animation-delay: #{$i * 100}ms;
+        animation-delay: #{$i * 50}ms;
       }
     }
-  }
-  
-  .card p {
-    margin: 0;
+
+    p {
+      margin: 0;
+    }
   }
   
   .user__name {
@@ -46,7 +46,7 @@
   }
   
   .user__description {
-    color: #59646C;
+    color: #b0b4b7;
     font-size: .875em;
   }
   

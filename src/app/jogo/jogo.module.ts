@@ -6,7 +6,6 @@ import { JogoComponent } from './jogo.component';
 import { RankingComponent } from './ranking/ranking.component';
 import { CardComponent } from './ranking/card/card.component';
 import { PerguntaComponent } from './pergunta/pergunta.component';
-import { TimerComponent } from './pergunta/timer/timer.component';
 import { ArraySortPipe } from './ranking/sort.pipe';
 import { ResumoDialogComponent } from './resumo/resumo.component';
 
@@ -27,7 +26,6 @@ import { ResumoDialogComponent } from './resumo/resumo.component';
     CardComponent, 
     JogoComponent, 
     PerguntaComponent, 
-    TimerComponent, 
     ArraySortPipe, 
     ResumoDialogComponent
   ],

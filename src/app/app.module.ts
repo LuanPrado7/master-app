@@ -6,8 +6,10 @@ import { MatNativeDateModule } from '@angular/material';
 import { AppComponent } from './app.component';
 import { JogoModule } from './jogo/jogo.module';
 import { AppRoutingModule } from './app-routing.module';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DemoMaterialModule } from './material-module';
+import { LoginPageModule} from './login-page/login-page.module';
 
 
 @NgModule({
@@ -20,7 +22,8 @@ import { DemoMaterialModule } from './material-module';
     HttpClientModule,
     MatNativeDateModule,
     JogoModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    LoginPageModule
   ],
   providers: [],
   bootstrap: [AppComponent]

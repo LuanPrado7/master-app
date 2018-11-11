@@ -90,19 +90,33 @@ export class PerguntaComponent implements OnInit {
     }, 1000)
   }
 
-  irParaProximaPergunta = function() {
-    this.stopTimer();
+  restartCircleAnimation() {
+    let circleTimer = document.getElementById('circle-timer');
+    
+    circleTimer
+      .classList
+      .remove("circle-animation")
 
-    $('circle-timer')
-      .removeClass("circle-animation")
-      // .addClass("circle-animation")
+    circleTimer.offsetWidth;
+
+    setTimeout(() => {
+      circleTimer
+        .classList
+        .add("circle-animation") 
+    }, 100)
+  }
+
+  irParaProximaPergunta = function() {
+
+    this.restartCircleAnimation();
 
     if(this.perguntaAtual < this.perguntas.length - 1) {
       this.perguntaAtual++;
       this.startTimer();
     }
     else {
-      this.abrir_resumo_partida.emit();
+      // this.abrir_resumo_partida.emit();
+      $("#circle-timer").addClass("circle-animation-paused");
     }
   }
 
@@ -116,8 +130,10 @@ export class PerguntaComponent implements OnInit {
     this.timerToken = setInterval(() => {
       this.timer--;
 
-      if(this.timer == 0) 
+      if(this.timer == 0) {
+        this.stopTimer();
         this.irParaProximaPergunta();        
+      }
 
     }, 1000);
   }

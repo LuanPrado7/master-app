@@ -18,14 +18,12 @@
             <p class="user__sender">{{card.nome}}</p>
             <p class="user__description">{{card.elo}}</p>
           </div>
-          <div class='col-md-12'>
-            <div *ngFor="let tema of card.pontos_tema; let i = index" class="col-md-2">
-              <div class="circle circle-{{i + 1}}" [ngStyle]="{'background': getStyleTema(tema)}">
-                <img class="logo" [src]="getLogoTema(tema)" alt="">
-              </div>
-            </div>          
-          </div>
-
+          
+          <div *ngFor="let tema of card.pontos_tema; let i = index">
+            <div class="circle circle-{{i + 1}}" [ngStyle]="{'background': getStyleTema(tema)}">
+              <img class="logo" [src]="getLogoTema(tema)" alt="">
+            </div>
+          </div>  
         </div>
       </div>
         
