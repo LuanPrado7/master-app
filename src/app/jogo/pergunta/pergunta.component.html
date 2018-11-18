@@ -5,13 +5,13 @@
   <div id="countdown">
     <div 
       id="countdown-number" 
-      [ngStyle]="{'color': getCorTema(perguntas[perguntaAtual].id_tema)}"
+      [ngStyle]="{'color': timer <= 5 ? 'red' : 'white'}"
     >{{timer}}</div>
     <svg>
       <circle 
         id="circle-timer"
         class="circle-animation"
-        [ngStyle]="{'stroke': getCorTema(perguntas[perguntaAtual].id_tema)}"
+        [ngStyle]="{'stroke': timer <= 5 ? 'red' : 'white'}"
       ></circle>
     </svg>
   </div>
@@ -22,6 +22,7 @@
   <div 
     class="option" 
     id="option-{{alternativa.alternativa}}" 
+    [ngClass]="{'option-hover': !block_perguntas}"
     *ngFor="let alternativa of perguntas[perguntaAtual].alternativas"
     (click)="checarResposta(alternativa.alternativa, perguntas[perguntaAtual])"  
   >    

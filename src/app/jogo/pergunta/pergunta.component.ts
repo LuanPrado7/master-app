@@ -20,6 +20,7 @@ export class PerguntaComponent implements OnInit {
   timerToken: number;
   timer: number;
   tempoPorPergunta: number = 15;
+  block_perguntas: boolean = false;
 
   perguntas: Pergunta[] = [
     {
@@ -71,12 +72,20 @@ export class PerguntaComponent implements OnInit {
   ];
 
   checarResposta = function(selecionada, pergunta) {
-    $("#option-" + pergunta.correta).addClass("correta");
+
+    if(this.block_perguntas) return;
+
+    this.block_perguntas = true;
+
+    $("#option-" + pergunta.correta)
+      .addClass("correta");
     
     if(selecionada == pergunta.correta) {
       this.id_tema_acertado.emit(pergunta.id_tema);
     } else {
-      $("#option-" + selecionada).addClass("errada");
+      $("#option-" + selecionada)
+        .removeClass("option-hover")      
+        .addClass("errada");
     }
 
     this.stopTimer();
@@ -84,7 +93,8 @@ export class PerguntaComponent implements OnInit {
     setTimeout(() => {
       $("div[id ~= 'option']")
         .removeClass("correta")
-        .removeClass("errada");
+        .removeClass("errada")
+        .addClass("option-hover");
 
       this.irParaProximaPergunta();
     }, 1000)
@@ -113,6 +123,8 @@ export class PerguntaComponent implements OnInit {
     if(this.perguntaAtual < this.perguntas.length - 1) {
       this.perguntaAtual++;
       this.startTimer();
+
+      this.block_perguntas = false;
     }
     else {
       // this.abrir_resumo_partida.emit();
