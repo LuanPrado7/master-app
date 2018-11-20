@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material';
 import { Tema } from './tema';
 import { RankingComponent } from './ranking/ranking.component';
 import { ResumoDialogComponent } from './resumo/resumo.component';
+import { JogoService } from './jogo.service';
 
 @Component({
   selector: 'app-jogo',
@@ -14,43 +15,13 @@ export class JogoComponent implements OnInit {
 
   @ViewChild(RankingComponent) rankingComponent: RankingComponent; 
 
-  temas: Tema[] = [
-    {
-      logo: 'dna.png',
-      id_tema: 1,
-      titulo: 'Biologia',
-      cor: '#00FF00'
-    },
-    {
-      logo: 'game-controller.png',
-      id_tema: 2,
-      titulo: 'Games',
-      cor:'#FF6EC7'
-    },
-    {
-      logo: 'innovation.png',
-      id_tema: 3,
-      titulo: 'Tecnologia',
-      cor: '#FF0000'
-    },
-    {
-      logo: 'sphinx.png',
-      id_tema: 4,
-      titulo: 'História',
-      cor: '#0000FF'
-    },
-    {
-      logo: 'popcorn.png',
-      id_tema: 5,
-      titulo: 'Filmes',
-      cor: '#FF7F00'
-    }
-  ];
+  temas: Tema[];
+  temasCarregado: boolean = false;
 
   id_jogador: number = 4;
 
-  atualizarRanking: any = function(id_tema) {
-    this.rankingComponent.adicionaPonto(id_tema);
+  atualizarRanking: any = function(idTema) {
+    this.rankingComponent.adicionaPonto(idTema);
   }
 
   abrirResumoPartida: any = function() {
@@ -61,9 +32,32 @@ export class JogoComponent implements OnInit {
     });
   }
 
-  constructor(public resumoDialog: MatDialog) { }
+  getTemas() {
+    this.jogoService.getTemas()
+      .subscribe(
+        temas => {
+          this.temas = temas
+            .map(tema => {
+              return {
+                logo: tema.Icone,
+                id_tema: tema.Id,
+                titulo: tema.Tema,
+                cor: tema.Cor
+              } as Tema            
+            })
+          
+          this.temasCarregado = true;   
+      },
+        errors => console.log(errors)
+      )
+  }
+  constructor(
+    public resumoDialog: MatDialog,
+    private jogoService: JogoService
+  ) { }
 
   ngOnInit() {
+    this.getTemas();
   }
 
 }
