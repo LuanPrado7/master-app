@@ -70,9 +70,12 @@ export class RankingComponent implements OnInit {
         }
       })
 
-    this.ranking.forEach(jogador => jogador.pontos_tema = pontos_tema);
+      
+    this.ranking.forEach(jogador => {
+      let clone = pontos_tema.map(x => Object.assign({}, x));
 
-    console.log(this.ranking)
+      jogador.pontos_tema = clone;
+    });
   }
 
   constructor() { }

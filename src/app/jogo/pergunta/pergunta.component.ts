@@ -20,7 +20,7 @@ export class PerguntaComponent implements OnInit {
   perguntaAtual: number;
   timerToken: number;
   timer: number;
-  tempoPorPergunta: number = 1000;
+  tempoPorPergunta: number = 15;
   block_perguntas: boolean = false;
   perguntasCarregadas: boolean = false
 
@@ -90,7 +90,7 @@ export class PerguntaComponent implements OnInit {
       this.block_perguntas = false;
     }
     else {
-      // this.abrir_resumo_partida.emit();
+      this.abrir_resumo_partida.emit();
       $("#circle-timer").addClass("circle-animation-paused");
     }
   }
@@ -141,7 +141,7 @@ export class PerguntaComponent implements OnInit {
     this.startTimer();
     this.getPerguntas({
       idNivel: 2,
-      idsTema: [401, 501, 601, 701]
+      idsTema: [401, 501, 601, 701, 801]
     })
   }
 
