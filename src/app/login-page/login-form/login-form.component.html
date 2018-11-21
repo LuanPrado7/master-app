@@ -1,16 +1,28 @@
-<button type="button" class="btn btn-primary btn-md" (click)="openVerticallyCentered(content)">Entre na sua conta</button>
+<button type="button" class="btn btn-primary btn-md btn-home" (click)="openVerticallyCentered(content)">Entre na sua conta</button>
 
 <ng-template #content let-modal>
     <div class="modal-header">
-      <h4 class="modal-title">LOGIN</h4>
+      <h4 class="modal-title">CADASTRO</h4>
       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     <div class="modal-body">
-      <p>One fine body&hellip;</p>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+      <form #joinForm="ngForm" (ngSubmit)="onSubmit(joinForm.value)">
+        <div class="form-group">
+          <label for="identifier">Email ou Usuário</label>
+          <input required ngModel name="identifier" #identifier="ngModel" type="text" id="identifier" class="form-control">
+          <div class="alert alert-danger" *ngIf="identifier.touched && !identifier.valid">Campo obrigatório</div>
+        </div>
+        <div class="form-group">
+          <label for="username">Senha</label>
+          <input required ngModel name="password" #password="ngModel" type="password" id="password" class="form-control">
+          <div class="alert alert-danger" *ngIf="password.touched && !password.valid">Campo obrigatório</div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+          <button type="submit" class="btn btn-light">Submit</button>
+        </div>
+      </form>
     </div>
   </ng-template>

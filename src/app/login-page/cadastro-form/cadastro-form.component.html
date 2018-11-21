@@ -1,20 +1,47 @@
 <p>
   Quer virar um Mestrão?
-  <br/>
+  <br />
 </p>
-<button type="button" class="btn btn-primary btn-md" (click)="openVerticallyCentered(content)">Cadastre-se!</button>
+<button type="button" class="btn btn-primary btn-md btn-home" (click)="openVerticallyCentered(content)">Cadastre-se!</button>
 
 <ng-template #content let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title">CADASTRO</h4>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <p>One fine body&hellip;</p>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
-    </div>
-  </ng-template>
+  <div class="modal-header">
+    <h4 class="modal-title">CADASTRO</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form #joinForm="ngForm" (ngSubmit)="onSubmit(joinForm.value)">
+      <div class="form-group">
+        <label for="nome">Nome</label>
+        <input required ngModel name="nome" #nome="ngModel" type="text" id="nome" class="form-control">
+        <div class="alert alert-danger" *ngIf="nome.touched && !nome.valid">O campo "Nome" é obrigatório</div>
+      </div>
+      <div class="form-group">
+        <label for="username">Usuário</label>
+        <input required ngModel name="username" #username="ngModel" type="text" id="username" class="form-control">
+        <div class="alert alert-danger" *ngIf="username.touched && !username.valid">O campo "Usuário" é obrigatório</div>
+      </div>
+      <div class="form-group">
+        <label for="email">E-mail</label>
+        <input required ngModel name="email" #email="ngModel" type="email" id="email" class="form-control">
+        <div class="alert alert-danger" *ngIf="email.touched && !email.valid">O campo "E-mail" é obrigatório</div>
+      </div>
+      <div class="form-group">
+        <label for="password">Senha</label>
+        <input required ngModel name="password" #password="ngModel" type="password" id="password" class="form-control">
+        <div class="alert alert-danger" *ngIf="password.touched && !password.valid">O campo "Senha" é obrigatório</div>
+      </div>
+      <div class="form-group">
+        <label for="confirm-password">Confirme a senha</label>
+        <input required ngModel name="confirm-password" #confirmpassword="ngModel" type="password" id="confirm-password" class="form-control">
+        <div class="alert alert-danger" *ngIf="confirmpassword.touched && !confirmpassword.valid">Confirmação de senha é obrigatório</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+        <button type="submit" class="btn btn-light">Submit</button>
+      </div>
+    </form>
+  </div>
+</ng-template>

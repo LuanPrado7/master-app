@@ -5,7 +5,8 @@ import { JogoComponent } from './jogo/jogo.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 
 const routes: Routes = [
-    {path: '', component: LoginPageComponent},
+    {path: '', redirectTo: '/login', pathMatch: 'full'},
+    {path: 'login', component: LoginPageComponent},
     {path: 'jogo', component: JogoComponent},
     {path: '**', component: JogoComponent}
 ];

@@ -1,0 +1,18 @@
+.dark-modal .modal-content {
+    background-color: #292b2c;
+    color: white;
+}
+.dark-modal .close {
+    color: white;
+}
+.btn-home {
+    vertical-align: middle;
+    margin: 3px;
+    width: 180px;
+    background-color: rgba(0,0,0,0.1);
+    border: 0px;
+}
+.btn-home:hover{
+    background-color: rgba(0,0,0,0.3);
+    box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.4);
+}
