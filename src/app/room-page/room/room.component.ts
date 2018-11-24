@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
+import { HttpClient } from '@angular/common/http';
 
 import { Tema } from "./../tema";
 import { Room } from "./room";
@@ -10,9 +11,20 @@ import { Room } from "./room";
 })
 export class RoomComponent implements OnInit {
   @Input() temas: Tema;
-  @Input() rooms: Room;
+  @Input() rooms: Room[];
 
+  roomClick: string;
   roomVariable: boolean = false;
+
+  room: any;
+
+  getSalas = function() {
+    // this.httpClient.get('http://monica:64803/api/Sala')
+    // .subscribe(
+    //   res => {
+    //     this.room = res;
+    //   });
+  };
 
   getLogoTema = function(tema) {
     let room_temas = this.temas.find(
@@ -32,13 +44,28 @@ export class RoomComponent implements OnInit {
 
   enterRoom = function() {
     this.roomVariable = true;
+    this.room = {
+      NivelId: this.nv_dificuldade,
+      TemasIds: this.temaList,
+      Jogadores: this.nr_jogador,
+      NovaSala: false
+    };
+
+    this.websocket.send(JSON.stringify(this.room));
+
+    this.websocket.onmessage = function(event) {
+      console.log(event.data);
+    };
   };
 
   leaveRoom = function() {
     this.roomVariable = false;
   };
 
-  constructor() {}
+  constructor(private httpClient: HttpClient) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    // this.getSalas();
+    console.log(this.rooms);
+  }
 }
