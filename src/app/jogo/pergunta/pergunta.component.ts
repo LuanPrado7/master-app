@@ -146,7 +146,6 @@ export class PerguntaComponent implements OnInit {
     this.perguntaAtual = 0;
     this.startTimer();
 
-    console.log(this.jogoConfig)
     this.getPerguntas({
       idNivel: this.jogoConfig.idNivel,
       idsTema: this.jogoConfig.idsTema

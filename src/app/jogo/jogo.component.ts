@@ -17,14 +17,21 @@ export class JogoComponent implements OnInit {
 
   temas: Tema[];
   temasCarregado: boolean = false;
+  webSocket: any;
 
   jogoConfig = {
-    id_jogador: 4,
+    idSala: 1,
+    idJogador: 4,
     idNivel: 1,
     idsTema: [401, 501, 601, 701, 801]
   }
 
   atualizarRanking: any = function(obj) {
+    this.webSocket.send(JSON.stringify({
+      idSala: this.jogoConfig.idSala,
+      idTema: obj.id_tema
+    }));
+
     this.rankingComponent.adicionaPonto(obj.id_tema, obj.tempo);
   }
 
@@ -60,6 +67,9 @@ export class JogoComponent implements OnInit {
         errors => console.log(errors)
       )
   }
+
+  
+
   constructor(
     public resumoDialog: MatDialog,
     private jogoService: JogoService
@@ -69,6 +79,18 @@ export class JogoComponent implements OnInit {
     this.getTemas({
       ids: this.jogoConfig.idsTema
     });
+
+    this.webSocket = new WebSocket("ws://monica:64803/api/Partida?UsuarioId=" + this.jogoConfig.idJogador);
+    
+    var _this = this;
+
+    this.webSocket.onmessage = function(event) {
+      var obj = JSON.parse(event.data);
+
+      if(this.jogoConfig.idJogador == obj.IdUsuario) {
+        _this.rankingComponent.adicionaPonto(obj.IdTema, obj.IdUsuario);
+      }
+    }
   }
 
 }

@@ -67,6 +67,15 @@ export class RankingComponent implements OnInit {
     this.atualizarRanking();
   }
 
+  adicionaPontoAdversario: any = function(id_tema, id_jogador) {
+    let jogador = this.ranking.find(jogador => jogador.id_jogador == id_jogador);    
+    let tema = jogador.pontos_tema.find(tema => tema.id_tema == id_tema);
+
+    tema.pontos++;
+    jogador.pontos_total++;
+    this.atualizarRanking();
+  }
+
   atualizarRanking = function() {
     this.ranking = this.ranking.sort((a,b) => a.pontos_total < b.pontos_total ? 1 : (a.pontos_total > b.pontos_total ? -1 : 0));
   }
@@ -101,7 +110,7 @@ export class RankingComponent implements OnInit {
       )
     }
 
-    this.jogador.pontos_geral = (this.jogador.pontos_total * deParaPontosNivel(idNivel)) + (idNivel * ((20 * 15) - this.jogador.tempoDecorrido));
+    this.jogador.pontos_geral = (this.jogador.pontos_total * deParaPontosNivel(idNivel)) + (idNivel * this.jogador.tempoDecorrido);
   }
 
   constructor() { }
