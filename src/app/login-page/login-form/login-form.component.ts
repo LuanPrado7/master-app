@@ -27,9 +27,9 @@ export class LoginFormComponent {
 
   onSubmit(value: any) {
     event.preventDefault();
-    this.requestLogin = new UsuarioLogin(value.UserName, value.Password);
+    this.requestLogin = new UsuarioLogin(value.username, value.senha);
     console.log(this.requestLogin);
-    this.httpClient.post('http://monica:64803/token', this.requestLogin, {observe: 'response'})
+    this.httpClient.post('http://monica:64803/api/Login', this.requestLogin, {observe: 'response'})
       .subscribe(
         res => {
           console.log(res);

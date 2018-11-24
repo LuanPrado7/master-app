@@ -8,6 +8,7 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import {  HttpClientModule } from '@angular/common/http';
 import { NotifierModule, NotifierOptions } from 'angular-notifier';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 const notifierOptions: NotifierOptions = {
   position: {
@@ -53,7 +54,8 @@ const notifierOptions: NotifierOptions = {
     NgbModule,
     FormsModule,
     HttpClientModule,
-    NotifierModule.withConfig(notifierOptions)
+    NotifierModule.withConfig(notifierOptions),
+    NgxSpinnerModule
   ],
   declarations: [
     LoginPageComponent,
