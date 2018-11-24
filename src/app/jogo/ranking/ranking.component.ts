@@ -91,6 +91,14 @@ export class RankingComponent implements OnInit {
     }
 
     this.jogador.pontos_geral = (this.jogador.pontos_total * deParaPontosNivel(idNivel)) + (idNivel * this.jogador.tempoDecorrido);
+
+    return this.jogador.pontos_geral;
+  }
+
+  atualizarPontuacaoGeral = function(id_jogador, pontos) {    
+    let jogador = this.ranking.find(jogador => jogador.id_jogador == id_jogador); 
+
+    jogador.pontos_geral = pontos;
   }
 
   constructor() { }
