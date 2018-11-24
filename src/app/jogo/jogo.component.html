@@ -1,8 +1,9 @@
 <body>
     <div>
         <app-pergunta 
+          *ngIf="temasCarregado"
           [temas] = "temas"
-          (id_tema_acertado) = "atualizarRanking($event)"
+          (idTemaAcertado) = "atualizarRanking($event)"
           (abrir_resumo_partida) = "abrirResumoPartida()"
         >
         </app-pergunta>
@@ -10,6 +11,7 @@
       
       <div>
         <app-ranking 
+          *ngIf="temasCarregado"
           [temas] = "temas" 
           [id_jogador] = "id_jogador"
         >

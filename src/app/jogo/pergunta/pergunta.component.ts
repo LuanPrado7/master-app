@@ -4,6 +4,7 @@ import { Pergunta } from './pergunta';
 import { Tema } from '../tema';
 
 import * as $ from 'jquery';
+import { PerguntaService } from './pergunta.service';
 
 @Component({
   selector: 'app-pergunta',
@@ -13,81 +14,53 @@ import * as $ from 'jquery';
 export class PerguntaComponent implements OnInit {
 
   @Input() temas: Tema[];
-  @Output() id_tema_acertado = new EventEmitter<number>();
+  @Output() idTemaAcertado = new EventEmitter<number>();
   @Output() abrir_resumo_partida = new EventEmitter<any>();
 
   perguntaAtual: number;
   timerToken: number;
   timer: number;
   tempoPorPergunta: number = 15;
+  block_perguntas: boolean = false;
+  perguntasCarregadas: boolean = false
 
-  perguntas: Pergunta[] = [
-    {
-      pergunta: "Qual o livro mais vendido no mundo a seguir à Bíblia?",
-      id_tema: 4,
-      alternativas: [
-        {
-          alternativa: 'A',
-          resposta: 'O Senhor dos Anéis'
-        }, {
-          alternativa: 'B',
-          resposta: 'Dom Quixote'
-        }, {
-          alternativa: 'C',
-          resposta: 'O Pequeno Príncipe'
-        }, {
-          alternativa: 'D',
-          resposta: 'Ela, a Feiticeira'
-        }, {
-          alternativa: 'E',
-          resposta: 'Um Conto de Duas Cidades'
-        }
-      ],
-      correta: 'B'
-    },
-    {
-      pergunta: 'Qual o maior animal terrestre?',
-      id_tema: 1,
-      alternativas: [
-        {
-          alternativa: 'A',
-          resposta: 'Baleia Azul'
-        }, {
-          alternativa: 'B',
-          resposta: 'Dinossauro'
-        }, {
-          alternativa: 'C',
-          resposta: 'Elefante africano'
-        }, {
-          alternativa: 'D',
-          resposta: 'Tubarão Branco'
-        }, {
-          alternativa: 'E',
-          resposta: 'Girafa'
-        }
-      ],
-      correta: 'A'
-    }
-  ];
+  perguntas: Pergunta[] = [];
 
-  checarResposta = function(selecionada, pergunta) {
-    $("#option-" + pergunta.correta).addClass("correta");
-    
-    if(selecionada == pergunta.correta) {
-      this.id_tema_acertado.emit(pergunta.id_tema);
+  checarResposta = function(alternativa, letra, pergunta) {
+
+    if(this.block_perguntas) return;
+
+    this.block_perguntas = true;
+   
+    if(alternativa.Correta) {
+      this.idTemaAcertado.emit(pergunta.IdTema);
     } else {
-      $("#option-" + selecionada).addClass("errada");
+      $("#option-" + letra)
+        .addClass("errada");
     }
 
     this.stopTimer();
 
     setTimeout(() => {
-      $("div[id ~= 'option']")
-        .removeClass("correta")
+      $("#option-" + letra)
         .removeClass("errada");
 
       this.irParaProximaPergunta();
     }, 1000)
+  }
+
+  getLetraAlternativa: any = function(i) {
+    return (
+      i == 0 ? 'A' : (
+        i == 1 ? 'B': (
+          i == 2 ? 'C': (
+            i == 3 ? 'D': (
+              i == 4 ? 'E' : ''
+            )
+          )
+        )
+      )
+    )
   }
 
   restartCircleAnimation() {
@@ -113,9 +86,11 @@ export class PerguntaComponent implements OnInit {
     if(this.perguntaAtual < this.perguntas.length - 1) {
       this.perguntaAtual++;
       this.startTimer();
+
+      this.block_perguntas = false;
     }
     else {
-      // this.abrir_resumo_partida.emit();
+      this.abrir_resumo_partida.emit();
       $("#circle-timer").addClass("circle-animation-paused");
     }
   }
@@ -142,12 +117,32 @@ export class PerguntaComponent implements OnInit {
     clearInterval(this.timerToken);
   }
 
-  constructor() { 
-    this.perguntaAtual = 0;
-    this.startTimer();
+  getPerguntas = function(params) {
+    this.perguntaService.getPerguntas(params)
+      .subscribe(
+        perguntas => {
+          this.perguntas = perguntas
+
+          this.perguntasCarregadas = true;
+        },
+        errors => {
+
+        }
+      )
+  }
+
+  constructor(
+    private perguntaService: PerguntaService
+  ) {
   }
 
   ngOnInit() {
+    this.perguntaAtual = 0;
+    this.startTimer();
+    this.getPerguntas({
+      idNivel: 2,
+      idsTema: [401, 501, 601, 701, 801]
+    })
   }
 
 }
