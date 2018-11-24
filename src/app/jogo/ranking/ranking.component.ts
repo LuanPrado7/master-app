@@ -12,6 +12,7 @@ export class RankingComponent implements OnInit {
 
   @Input() temas: Tema[];
   @Input() id_jogador: number;
+  tempoToken: any;
   
   jogador: Card;
 
@@ -22,7 +23,9 @@ export class RankingComponent implements OnInit {
       foto: 'monkey',
       elo: 'Mestrão',
       pontos_tema : [],
-      pontos_total: 0
+      pontos_total: 0,
+      pontos_geral: 0,
+      tempoDecorrido: 0
     },
     {
       nome: 'Leilah',
@@ -30,7 +33,9 @@ export class RankingComponent implements OnInit {
       foto: 'hipster-1',
       elo: 'Sabixão',
       pontos_tema : [],
-      pontos_total: 0
+      pontos_total: 0,
+      pontos_geral: 0,
+      tempoDecorrido: 0
     },
     {
       nome: 'Mônica',
@@ -38,7 +43,9 @@ export class RankingComponent implements OnInit {
       foto: 'detective',
       elo: 'Especialista',
       pontos_tema : [],
-      pontos_total: 0
+      pontos_total: 0,
+      pontos_geral: 0,
+      tempoDecorrido: 0
     },
     {
       nome: 'Pamela',
@@ -46,14 +53,17 @@ export class RankingComponent implements OnInit {
       foto: 'hippie',
       elo: 'Principiante',
       pontos_tema : [],
-      pontos_total: 0
+      pontos_total: 0,
+      pontos_geral: 0,
+      tempoDecorrido: 0
     }
   ];
 
-  adicionaPonto: any = function(id_tema) {
+  adicionaPonto: any = function(id_tema, tempo) {
     let tema = this.jogador.pontos_tema.find(tema => tema.id_tema == id_tema);
     tema.pontos++;
     this.jogador.pontos_total++;
+    this.jogador.tempoDecorrido += tempo;
     this.atualizarRanking();
   }
 
@@ -76,6 +86,22 @@ export class RankingComponent implements OnInit {
 
       jogador.pontos_tema = clone;
     });
+  }
+
+  calcularPontosGerais = function(idNivel) {
+    let deParaPontosNivel : any = function(idNivel) {
+      return (
+        idNivel == 1 ? 10 : (
+          idNivel == 2 ? 20 : (
+            idNivel == 3 ? 40: (
+              idNivel == 4 ? 80 : 0
+            )
+          )
+        )
+      )
+    }
+
+    this.jogador.pontos_geral = (this.jogador.pontos_total * deParaPontosNivel(idNivel)) + (idNivel * ((20 * 15) - this.jogador.tempoDecorrido));
   }
 
   constructor() { }

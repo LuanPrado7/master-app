@@ -3,8 +3,9 @@
         <app-pergunta 
           *ngIf="temasCarregado"
           [temas] = "temas"
+          [jogoConfig] = "jogoConfig"
           (idTemaAcertado) = "atualizarRanking($event)"
-          (abrir_resumo_partida) = "abrirResumoPartida()"
+          (abrir_resumo_partida) = "fimDeJogo()"
         >
         </app-pergunta>
       </div>
@@ -13,7 +14,7 @@
         <app-ranking 
           *ngIf="temasCarregado"
           [temas] = "temas" 
-          [id_jogador] = "id_jogador"
+          [id_jogador] = "jogoConfig.id_jogador"
         >
         </app-ranking>
       </div>  

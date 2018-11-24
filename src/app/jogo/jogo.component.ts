@@ -18,10 +18,19 @@ export class JogoComponent implements OnInit {
   temas: Tema[];
   temasCarregado: boolean = false;
 
-  id_jogador: number = 4;
+  jogoConfig = {
+    id_jogador: 4,
+    idNivel: 1,
+    idsTema: [401, 501, 601, 701, 801]
+  }
 
-  atualizarRanking: any = function(idTema) {
-    this.rankingComponent.adicionaPonto(idTema);
+  atualizarRanking: any = function(obj) {
+    this.rankingComponent.adicionaPonto(obj.id_tema, obj.tempo);
+  }
+
+  fimDeJogo = function() {
+    this.rankingComponent.calcularPontosGerais(this.jogoConfig.idNivel);
+    this.abrirResumoPartida();
   }
 
   abrirResumoPartida: any = function() {
@@ -58,7 +67,7 @@ export class JogoComponent implements OnInit {
 
   ngOnInit() {
     this.getTemas({
-      ids: [401, 501, 601, 701, 801]
+      ids: this.jogoConfig.idsTema
     });
   }
 

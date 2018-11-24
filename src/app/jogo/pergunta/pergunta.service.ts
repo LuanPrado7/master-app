@@ -13,7 +13,7 @@ export class PerguntaService {
 
   getPerguntas(params) : Observable<any[]>{
     return this.http
-      .post("http://localhost:64803/api/buscarPerguntas", params)
+      .post("http://monica:64803/api/buscarPerguntas", params)
       .pipe(
         map(res => res as any)
       )

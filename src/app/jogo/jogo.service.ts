@@ -13,7 +13,7 @@ export class JogoService {
 
   getTemas(params): Observable<any[]> {
     return this.http
-      .post("http://localhost:64803/api/buscarTemas", params)
+      .post("http://monica:64803/api/buscarTemas", params)
       .pipe(
         map(res => res as any)
       );

@@ -29,7 +29,7 @@ export class ResumoDialogComponent implements OnInit{
         nome: element.nome,
         elo: element.elo,
         pontPartida: element.pontos_total,
-        pontGeral: 0
+        pontGeral: element.pontos_geral
       }
 
       this.dataSource.push(player)
