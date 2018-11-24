@@ -16,7 +16,7 @@ export class CardComponent implements OnInit {
 
     let tema_atual = this.temas.find(tema_atual => tema_atual.id_tema == tema.id_tema);
 
-    return 'linear-gradient(#a7a7a7 '+ (100 - tema.pontos * 25) +'%, ' + tema_atual.cor + ' '+ (tema.pontos * 25) +'%)'; 
+    return 'linear-gradient(#a7a7a7 '+ (100 - tema.pontos * 25) +'%, ' + tema_atual.cor + ' 0%)'; 
   }
 
   getLogoTema = function(tema) {

@@ -1,6 +1,10 @@
 export interface Pergunta {
-    pergunta: string,
-    id_tema: number,
-    alternativas: Object[],
-    correta: string
+    pergunta: {
+        Id: number,
+        Pergunta: string,
+        Patrocinada: boolean,
+        IdTema: number,
+        IdNivel: number
+    },
+    respostas: Object[]
 }

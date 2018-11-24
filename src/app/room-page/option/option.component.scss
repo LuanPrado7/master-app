@@ -1,0 +1,155 @@
+.container {
+  background-color: #343945;
+  color: white;
+  width: 600px;
+  margin-left: 0;
+  padding-top: 10px;
+  padding-bottom: 5px;
+  border-radius: 6px;
+}
+
+.teste {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.room-container {
+  display: flex;
+  flex-direction: column;
+  width: 375px;
+  margin-bottom: 5px;
+  margin-bottom: 30px;
+}
+
+.img--48x48 {
+  width: 48px;
+  height: 48px;
+}
+
+.img--rounded {
+  border-radius: 50%;
+}
+
+.circle {
+  cursor: pointer;
+  border-radius: 100%;
+  width: 50px;
+  height: 50px;
+  border-style: groove;
+  background-color: #b0b4b7;
+  &-1 {
+    margin: 5px 0px 0 0;
+  }
+  &-2 {
+    margin: -50px 0 0 75px;
+  }
+  &-3 {
+    margin: -50px 0 0 150px;
+  }
+  &-4 {
+    margin: -50px 0 0 225px;
+  }
+  &-5 {
+    margin: -50px 0 0 300px;
+  }
+}
+
+.logo {
+  width: 60%;
+  height: 60%;
+  margin: 10px 0px 0px 10px;
+}
+
+.players {
+  margin-left: 45%;
+  color: white;
+  margin-top: -25px;
+}
+
+.difficulty {
+  color: black;
+  border-radius: 6px;
+  font-weight: 600;
+  width: 50px;
+  height: 30px;
+  text-align: center;
+  display: -webkit-box;
+  cursor: pointer;
+  &-1 {
+    background-color: red;
+    border-color: red;
+    margin-right: 20px;
+    &:hover {
+      background-color: rgb(250, 99, 99);
+    }
+    &:disabled {
+      background-color: rgb(133, 129, 129);
+      border-color: rgb(133, 129, 129);
+      cursor: default;
+    }
+  }
+  &-2 {
+    background-color: orangered;
+    border-color: orangered;
+    margin-right: 20px;
+    &:hover {
+      background-color: rgb(245, 130, 88);
+    }
+    &:disabled {
+      background-color: rgb(133, 129, 129);
+      border-color: rgb(133, 129, 129);
+      cursor: default;
+    }
+  }
+  &-3 {
+    background-color: greenyellow;
+    border-color: greenyellow;
+    margin-right: 20px;
+    &:hover {
+      background-color: rgb(215, 247, 168);
+    }
+    &:disabled {
+      background-color: rgb(185, 178, 178);
+      border-color: rgb(133, 129, 129);
+      cursor: default;
+    }
+  }
+  &-4 {
+    background-color: green;
+    border-color: green;
+    margin-right: 20px;
+    &:hover {
+      background-color: rgb(76, 136, 76);
+    }
+    &:disabled {
+      background-color: rgb(133, 129, 129);
+      border-color: rgb(133, 129, 129);
+      cursor: default;
+    }
+  }
+}
+.roominfo {
+  display: inline;
+}
+
+.selectclass {
+  width: 15%;
+  margin-top: -10%;
+  margin-left: 70%;
+  border-color: rgb(51, 50, 50);
+  border-radius: 4px;
+}
+
+.createroom {
+  background-color: rgb(55, 180, 55);
+  border-color: rgb(37, 184, 37);
+  font-weight: 500;
+  color: black;
+  border-radius: 6px;
+  padding: 10px 20px 10px 20px;
+  display: inline-block;
+  margin-bottom: 10px;
+  margin-left: 75%;
+  cursor: pointer;
+}

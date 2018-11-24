@@ -6,7 +6,6 @@ import { JogoComponent } from './jogo.component';
 import { RankingComponent } from './ranking/ranking.component';
 import { CardComponent } from './ranking/card/card.component';
 import { PerguntaComponent } from './pergunta/pergunta.component';
-import { ArraySortPipe } from './ranking/sort.pipe';
 import { ResumoDialogComponent } from './resumo/resumo.component';
 
 @NgModule({
@@ -26,7 +25,6 @@ import { ResumoDialogComponent } from './resumo/resumo.component';
     CardComponent, 
     JogoComponent, 
     PerguntaComponent, 
-    ArraySortPipe, 
     ResumoDialogComponent
   ],
   entryComponents: [
