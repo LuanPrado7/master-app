@@ -78,36 +78,24 @@ export class OptionComponent implements OnInit {
   };
 
   createRoom = function() {
+    var uri = "ws://monica:64803/api/Sala?UsuarioId=1";
+    this.websocket = new WebSocket(uri);
+
     this.room = [
       {
-        id_room: 1,
-        nv_dificuldade: this.nv_dificuldade,
-        nome: "Pâmela",
-        id_jogador: 1,
-        foto: "hippie",
-        elo: "Mestre",
-        nr_jogador: this.nr_jogador,
-        temas: [
-          {
-            id_tema: this.temaList[0]
-          },
-          {
-            id_tema: this.temaList[1]
-          },
-          {
-            id_tema: this.temaList[2]
-          },
-          {
-            id_tema: this.temaList[3]
-          },
-          {
-            id_tema: this.temaList[4]
-          }
-        ]
+        NivelId: this.nv_dificuldade,
+        TemasIds: this.temaList,
+        Jogadores: this.nr_jogador,
+        NovaSala: true
       }
     ];
+
+    this.websocket.onopen = function(event) {
+      console.log(event);
+      this.websocket.send(JSON.stringify(this.room));
+      event.preventDefault();
+    };
     console.log(this.room);
-    this.rooms.emit(this.room);
   };
 
   constructor() {}
