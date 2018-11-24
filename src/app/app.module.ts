@@ -10,9 +10,10 @@ import { JogoModule } from './jogo/jogo.module';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginPageModule } from './login-page/login-page.module';
 import { RoomPageModule } from './room-page/room-page.module';
+import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, MenuComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
