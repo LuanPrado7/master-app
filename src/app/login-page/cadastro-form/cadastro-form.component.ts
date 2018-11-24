@@ -1,5 +1,12 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClient } from '@angular/common/http';
+import { NotifierService } from 'angular-notifier';
+import { NgxSpinnerService } from 'ngx-spinner';
+import {Router} from '@angular/router';
+import { Usuario } from './usuario';
+import { map } from 'rxjs/operators';
+import { IdResponse } from './idResponse';
 
 @Component({
   selector: 'app-cadastro-form',
@@ -9,12 +16,50 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class CadastroFormComponent {
 
-  closeResult: string;
+  @Output() vartestes = new EventEmitter<any>();
 
-  constructor(private modalService: NgbModal) {}
+  closeResult: string;
+  user: Usuario;
+  modal: any;
+  private readonly notifier: NotifierService;
+
+  constructor(
+    private modalService: NgbModal,
+    private httpClient: HttpClient,
+    notifierService: NotifierService,
+    private spinner: NgxSpinnerService,
+    private router: Router) {
+    this.notifier = notifierService;
+  }
 
   openVerticallyCentered(content) {
-    this.modalService.open(content, { windowClass: 'dark-modal', centered: true });
+    this.modal = this.modalService.open(content, { windowClass: 'dark-modal', centered: true });
+  }
+
+  onSubmit(value: any) {
+    event.preventDefault();
+    this.spinner.show();
+    this.user = new Usuario(value.nome, value.username, value.email, value.password);
+    this.httpClient.post('http://monica:64803/api/Usuario', this.user, {observe: 'response'})
+      // .pipe(map(res => res as any))
+      .subscribe(
+        res => {
+          console.log(res);
+          this.spinner.hide();
+          this.modal.close();
+          // const Id = res.body.Id;
+          // setTimeout(() => {
+          //   this.spinner.hide();
+          //   this.modal.close();
+          //   this.router.navigate([`/room?Id=${Id}`]);
+          // }, 2000);
+        },
+        err => {
+          this.spinner.hide();
+          this.notifier.notify( 'error', 'Não foi possível cadastrar. Por favor, tente novamente' );
+          console.log(err);
+        }
+      );
   }
 
 }

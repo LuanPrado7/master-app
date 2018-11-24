@@ -1,16 +1,30 @@
-<button type="button" class="btn btn-primary btn-md" (click)="openVerticallyCentered(content)">Entre na sua conta</button>
+<button type="button" class="btn btn-primary btn-md btn-home" (click)="openVerticallyCentered(content)">Entre na sua
+  conta</button>
 
 <ng-template #content let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title">LOGIN</h4>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <p>One fine body&hellip;</p>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
-    </div>
-  </ng-template>
+  <div class="modal-header">
+    <h4 class="modal-title">LOGIN</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form #joinForm="ngForm" (ngSubmit)="onSubmit(joinForm.value)">
+      <div class="form-group">
+        <label for="identifier">Usuário</label>
+        <input required ngModel name="username" #username="ngModel" type="text" id="username" class="form-control">
+        <div class="alert alert-danger" *ngIf="username.touched && !username.valid">Campo obrigatório</div>
+      </div>
+      <div class="form-group">
+        <label for="senha">Senha</label>
+        <input required ngModel name="senha" #senha="ngModel" type="password" id="senha" class="form-control">
+        <div class="alert alert-danger" *ngIf="senha.touched && !senha.valid">Campo obrigatório</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+        <button type="submit" class="btn btn-light">Submit</button>
+      </div>
+    </form>
+    <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="large" color="#fff" type="pacman"></ngx-spinner>
+  </div>
+</ng-template>

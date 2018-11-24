@@ -1,15 +1,16 @@
-import { Routes, RouterModule } from "@angular/router/";
-import { NgModule } from "@angular/core";
+import { Routes, RouterModule } from '@angular/router/';
+import { NgModule } from '@angular/core';
 
-import { JogoComponent } from "./jogo/jogo.component";
-import { LoginPageComponent } from "./login-page/login-page.component";
-import { RoomPageComponent } from "./room-page/room-page.component";
+import { JogoComponent } from './jogo/jogo.component';
+import { LoginPageComponent } from './login-page/login-page.component';
+import { RoomPageComponent } from './room-page/room-page.component';
 
 const routes: Routes = [
-  { path: "", component: LoginPageComponent },
-  { path: "jogo", component: JogoComponent },
-  { path: "room", component: RoomPageComponent },
-  { path: "**", component: JogoComponent }
+    {path: '', redirectTo: '/login', pathMatch: 'full'},
+    { path: 'room', component: RoomPageComponent },
+    {path: 'login', component: LoginPageComponent},
+    {path: 'jogo', component: JogoComponent},
+    {path: '**', component: LoginPageComponent}
 ];
 
 @NgModule({
