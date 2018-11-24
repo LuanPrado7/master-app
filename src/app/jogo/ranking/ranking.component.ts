@@ -28,30 +28,10 @@ export class RankingComponent implements OnInit {
       tempoDecorrido: 0
     },
     {
-      nome: 'Leilah',
-      id_jogador: 2,
-      foto: 'hipster-1',
-      elo: 'Sabixão',
-      pontos_tema : [],
-      pontos_total: 0,
-      pontos_geral: 0,
-      tempoDecorrido: 0
-    },
-    {
       nome: 'Mônica',
       id_jogador: 3,
       foto: 'detective',
       elo: 'Especialista',
-      pontos_tema : [],
-      pontos_total: 0,
-      pontos_geral: 0,
-      tempoDecorrido: 0
-    },
-    {
-      nome: 'Pamela',
-      id_jogador: 4,
-      foto: 'hippie',
-      elo: 'Principiante',
       pontos_tema : [],
       pontos_total: 0,
       pontos_geral: 0,

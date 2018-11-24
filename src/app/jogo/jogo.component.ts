@@ -21,7 +21,7 @@ export class JogoComponent implements OnInit {
 
   jogoConfig = {
     idSala: 1,
-    idJogador: 4,
+    idJogador: 1,
     idNivel: 1,
     idsTema: [401, 501, 601, 701, 801]
   }
