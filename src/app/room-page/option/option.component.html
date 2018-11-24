@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="room-container">
+    <p>Escolha o nível de dificuldade:</p>
+    <div class="difficulty">
+      <button
+        (click)="difficultyFilter(1)"
+        [disabled]="oneDisabled"
+        class="difficulty difficulty-1"
+      >
+        1
+      </button>
+      <button
+        (click)="difficultyFilter(2)"
+        [disabled]="twoDisabled"
+        class="difficulty difficulty-2"
+        matTooltip="two"
+      >
+        2
+      </button>
+      <button
+        (click)="difficultyFilter(3)"
+        [disabled]="threeDisabled"
+        class="difficulty difficulty-3"
+      >
+        3
+      </button>
+      <button
+        (click)="difficultyFilter(4)"
+        [disabled]="fourDisabled"
+        class="difficulty difficulty-4"
+      >
+        4
+      </button>
+    </div>
+  </div>
+  <div class="room-container">
+    <p>Selecione 5 temas:</p>
+    <div *ngFor="let tema of temas; let i = index">
+      <div
+        class="circle circle-{{i + 1}}"
+        [ngStyle]="{
+          background: getStyleTema(tema),
+          'border-color': enabledTema
+        }"
+        (click)="temaChoice(tema.id_tema)"
+      >
+        <img class="logo" [src]="getLogoTema(tema)" alt="" />
+      </div>
+    </div>
+  </div>
+  <div class="room-container">
+    <p>Defina a quantidade de jogadores:</p>
+    <select
+      [(ngModel)]="nr_jogador"
+      class="selectclass"
+      matNativeControl
+      required
+    >
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+    </select>
+  </div>
+  <button class="createroom" (click)="createRoom()">CRIAR SALA</button>
+</div>
