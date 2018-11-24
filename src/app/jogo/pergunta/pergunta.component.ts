@@ -21,6 +21,9 @@ export class PerguntaComponent implements OnInit {
   timerToken: number;
   timer: number;
   tempoPorPergunta: number = 15;
+  qtdPerguntas: number = 20;
+  tempoDeJogo: number = this.tempoPorPergunta * this.qtdPerguntas;
+  tempoDecorrido: number = 0;
   block_perguntas: boolean = false;
   perguntasCarregadas: boolean = false
 
@@ -140,7 +143,7 @@ export class PerguntaComponent implements OnInit {
     this.perguntaAtual = 0;
     this.startTimer();
     this.getPerguntas({
-      idNivel: 2,
+      idNivel: 4,
       idsTema: [401, 501, 601, 701, 801]
     })
   }

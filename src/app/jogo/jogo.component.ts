@@ -32,8 +32,8 @@ export class JogoComponent implements OnInit {
     });
   }
 
-  getTemas() {
-    this.jogoService.getTemas()
+  getTemas(params) {
+    this.jogoService.getTemas(params)
       .subscribe(
         temas => {
           this.temas = temas
@@ -57,7 +57,9 @@ export class JogoComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getTemas();
+    this.getTemas({
+      ids: [401, 501, 601, 701, 801]
+    });
   }
 
 }

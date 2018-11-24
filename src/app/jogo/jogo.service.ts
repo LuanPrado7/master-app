@@ -11,9 +11,9 @@ export class JogoService {
 
   constructor(private http: HttpClient) { }
 
-  getTemas(): Observable<any[]> {
+  getTemas(params): Observable<any[]> {
     return this.http
-      .get("http://localhost:64803/api/tema")
+      .post("http://localhost:64803/api/buscarTemas", params)
       .pipe(
         map(res => res as any)
       );
