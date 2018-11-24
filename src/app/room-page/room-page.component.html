@@ -1,6 +1,6 @@
 <body>
   <div class="container">
-    <div><app-option [temas]="temas" (rooms)="teste($event)"></app-option></div>
-    <div><app-room [temas]="temas" [rooms]="rooms"></app-room></div>
+    <div><app-option [temas]="temas" (rooms)="salas($event)"></app-option></div>
+    <div><app-room *ngIf="rooms.length > 0" [temas]="temas" [rooms]="rooms"></app-room></div>
   </div>
 </body>
