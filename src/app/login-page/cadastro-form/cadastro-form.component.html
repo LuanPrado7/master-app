@@ -1,3 +1,4 @@
+<notifier-container></notifier-container>
 <p>
   Quer virar um Mestrão?
   <br />
@@ -32,11 +33,6 @@
         <label for="password">Senha</label>
         <input required ngModel name="password" #password="ngModel" type="password" id="password" class="form-control">
         <div class="alert alert-danger" *ngIf="password.touched && !password.valid">O campo "Senha" é obrigatório</div>
-      </div>
-      <div class="form-group">
-        <label for="confirm-password">Confirme a senha</label>
-        <input required ngModel name="confirm-password" #confirmpassword="ngModel" type="password" id="confirm-password" class="form-control">
-        <div class="alert alert-danger" *ngIf="confirmpassword.touched && !confirmpassword.valid">Confirmação de senha é obrigatório</div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
