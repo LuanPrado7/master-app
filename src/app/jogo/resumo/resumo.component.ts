@@ -1,5 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material';
+import { Router } from '@angular/router'
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+
 
 export interface Player {
   foto: string,
@@ -16,10 +19,14 @@ export interface Player {
   styleUrls: ['./resumo.component.scss']
 })
 export class ResumoDialogComponent implements OnInit{
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private router: Router) {}
 
   displayedColumns: string[] = ['posicao', 'foto', 'nome', 'elo', 'pontPartida', 'pontGeral'];
   dataSource = [];
+
+  voltarMenu = function() {
+    this.router.navigate(["/room"])
+  }
 
   ngOnInit() {
     this.data.forEach((element, i) => {
@@ -29,7 +36,7 @@ export class ResumoDialogComponent implements OnInit{
         nome: element.nome,
         elo: element.elo,
         pontPartida: element.pontos_total,
-        pontGeral: 0
+        pontGeral: element.pontos_geral
       }
 
       this.dataSource.push(player)

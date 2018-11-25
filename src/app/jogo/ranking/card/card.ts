@@ -4,5 +4,7 @@ export interface Card {
     foto?: string,
     elo?: string,
     pontos_tema: Object[],
-    pontos_total: number
+    pontos_total: number,
+    pontos_geral: number,
+    tempoDecorrido: number
 }

@@ -1,18 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatDialogModule, MatTableModule } from '@angular/material';
+import { MatDialogModule, MatTableModule, MatIconModule } from '@angular/material';
 
 import { JogoComponent } from './jogo.component';
 import { RankingComponent } from './ranking/ranking.component';
 import { CardComponent } from './ranking/card/card.component';
 import { PerguntaComponent } from './pergunta/pergunta.component';
 import { ResumoDialogComponent } from './resumo/resumo.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   imports: [
     CommonModule,
     MatDialogModule,
-    MatTableModule
+    MatTableModule,
+    MatIconModule,
+    NgxSpinnerModule
   ],
   exports: [
     JogoComponent,

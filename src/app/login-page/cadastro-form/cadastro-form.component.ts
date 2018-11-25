@@ -57,7 +57,7 @@ export class CadastroFormComponent {
       .pipe(map(res => res as any))
       .subscribe(
         res => {
-          localStorage.setItem("userId", JSON.stringify(res.body.Id));
+          localStorage.setItem("userId", JSON.stringify(res.body));
           setTimeout(() => {
             this.spinner.hide();
             this.modal.close();

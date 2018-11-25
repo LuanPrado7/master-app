@@ -14,13 +14,16 @@ import { PerguntaService } from './pergunta.service';
 export class PerguntaComponent implements OnInit {
 
   @Input() temas: Tema[];
-  @Output() idTemaAcertado = new EventEmitter<number>();
+  @Input() jogoConfig;
+  @Output() idTemaAcertado = new EventEmitter<any>();
   @Output() abrir_resumo_partida = new EventEmitter<any>();
 
   perguntaAtual: number;
   timerToken: number;
   timer: number;
   tempoPorPergunta: number = 15;
+  qtdPerguntas: number = 20;
+  tempoDeJogo: number = this.tempoPorPergunta * this.qtdPerguntas;
   block_perguntas: boolean = false;
   perguntasCarregadas: boolean = false
 
@@ -33,7 +36,10 @@ export class PerguntaComponent implements OnInit {
     this.block_perguntas = true;
    
     if(alternativa.Correta) {
-      this.idTemaAcertado.emit(pergunta.IdTema);
+      this.idTemaAcertado.emit({
+        id_tema: pergunta.IdTema, 
+        tempo: this.timer
+      });
     } else {
       $("#option-" + letra)
         .addClass("errada");
@@ -139,9 +145,10 @@ export class PerguntaComponent implements OnInit {
   ngOnInit() {
     this.perguntaAtual = 0;
     this.startTimer();
+
     this.getPerguntas({
-      idNivel: 2,
-      idsTema: [401, 501, 601, 701, 801]
+      idNivel: this.jogoConfig.idNivel,
+      idsTema: this.jogoConfig.idsTema
     })
   }
 

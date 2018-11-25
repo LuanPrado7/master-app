@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
-
 import { Tema } from "./../tema";
+import * as $ from 'jquery';
+import { HttpClient } from '@angular/common/http';
+// import { ConsoleReporter } from 'jasmine';
 
 @Component({
   selector: "app-option",
@@ -21,20 +23,35 @@ export class OptionComponent implements OnInit {
   nv_dificuldade: number;
   nr_jogador: number;
   room = [];
+  websocket: any;
+
+  tema: any;
+
+  id = localStorage.getItem('userId');
+
+
+  getTemas = function() {
+    this.httpClient.get('http://monica:64803/api/Tema')
+    .subscribe(
+      res => {
+        this.tema = res;
+      }
+    );
+  };
 
   getLogoTema = function(tema) {
-    return "assets/img/" + tema.logo;
+    return "assets/img/" + tema.Icone;
   };
 
   getStyleTema = function(tema) {
-    return tema.cor;
+    return tema.Cor;
   };
 
   temaChoice = function(id) {
     this.temaLeave = false;
     this.enabledTema = false;
     if (this.temaList.length < 5) {
-      for (var i = 0; i < 5; i++) {
+      for (let i = 0; i < 5; i++) {
         if (this.temaList[i] === id) {
           this.temaList.splice(i, 1);
           this.temaLeave = true;
@@ -46,7 +63,7 @@ export class OptionComponent implements OnInit {
         this.enabledTema = "#b0b4b7";
       }
     } else {
-      for (var i = 0; i < 5; i++) {
+      for (let i = 0; i < 5; i++) {
         if (this.temaList[i] === id) {
           this.temaList.splice(i, 1);
           this.enabledTema = "white";
@@ -57,19 +74,19 @@ export class OptionComponent implements OnInit {
   };
 
   difficultyFilter = function(number) {
-    if (number == 1) {
+    if (number === 1) {
       this.twoDisabled = !this.twoDisabled;
       this.threeDisabled = !this.threeDisabled;
       this.fourDisabled = !this.fourDisabled;
-    } else if (number == 2) {
+    } else if (number === 2) {
       this.oneDisabled = !this.oneDisabled;
       this.threeDisabled = !this.threeDisabled;
       this.fourDisabled = !this.fourDisabled;
-    } else if (number == 3) {
+    } else if (number === 3) {
       this.oneDisabled = !this.oneDisabled;
       this.twoDisabled = !this.twoDisabled;
       this.fourDisabled = !this.fourDisabled;
-    } else if (number == 4) {
+    } else if (number === 4) {
       this.oneDisabled = !this.oneDisabled;
       this.twoDisabled = !this.twoDisabled;
       this.threeDisabled = !this.threeDisabled;
@@ -78,27 +95,36 @@ export class OptionComponent implements OnInit {
   };
 
   createRoom = function() {
-    var uri = "ws://monica:64803/api/Sala?UsuarioId=1";
-    this.websocket = new WebSocket(uri);
-
-    this.room = [
-      {
+    this.room = {
         NivelId: this.nv_dificuldade,
         TemasIds: this.temaList,
         Jogadores: this.nr_jogador,
         NovaSala: true
-      }
-    ];
+      };
 
-    this.websocket.onopen = function(event) {
-      console.log(event);
       this.websocket.send(JSON.stringify(this.room));
-      event.preventDefault();
-    };
-    console.log(this.room);
+
+      this.websocket.onmessage = function(event) {
+        console.log(event.data);
+      };
   };
 
-  constructor() {}
+  constructor(private httpClient: HttpClient) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    const uri = `ws://monica:64803/api/Sala?UsuarioId=${ this.id }`;
+
+    this.websocket = new WebSocket(uri);
+
+    this.websocket.onopen = () => {
+      this.websocket.send('getsalas');
+    };
+
+    var _this = this;
+
+    this.websocket.onmessage = function(event) {
+      _this.rooms.emit(JSON.parse(event.data));
+    };
+    this.getTemas();
+  }
 }
