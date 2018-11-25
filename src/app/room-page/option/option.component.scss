@@ -77,12 +77,12 @@
   color: black;
   border-radius: 6px;
   font-weight: 600;
-  width: 50px;
   height: 30px;
   text-align: center;
   display: -webkit-box;
   cursor: pointer;
   &-1 {
+    width: 60px;
     background-color: #a5d6a7;
     border-color: #a5d6a7;
     margin-right: 20px;
@@ -96,6 +96,7 @@
     }
   }
   &-2 {
+    width: 70px;
     background-color: #66bb6a;
     border-color: #66bb6a;
     margin-right: 20px;
@@ -109,6 +110,7 @@
     }
   }
   &-3 {
+    width: 120px;
     background-color: #43a047;
     border-color: #43a047;
     margin-right: 20px;
@@ -122,6 +124,7 @@
     }
   }
   &-4 {
+    width: 80px;
     background-color: #2e7d32;
     border-color: #2e7d32;
     margin-right: 20px;
