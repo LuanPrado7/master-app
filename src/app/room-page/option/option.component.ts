@@ -1,22 +1,17 @@
-import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
-import { Tema } from "./../tema";
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Tema } from './../tema';
 import * as $ from 'jquery';
 import { HttpClient } from '@angular/common/http';
-<<<<<<< HEAD
-=======
-// import { ConsoleReporter } from 'jasmine';
->>>>>>> 3ea85f960fd1a631cbfecf9ace630f65e2a84bd7
 
 @Component({
-  selector: "app-option",
-  templateUrl: "./option.component.html",
-  styleUrls: ["./option.component.scss"]
+  selector: 'app-option',
+  templateUrl: './option.component.html',
+  styleUrls: ['./option.component.scss']
 })
 export class OptionComponent implements OnInit {
   @Input() temas: Tema[];
   @Output() rooms = new EventEmitter();
   @Output() roomCreated = new EventEmitter();
-  
 
   oneDisabled = false;
   twoDisabled = false;
@@ -24,7 +19,7 @@ export class OptionComponent implements OnInit {
   fourDisabled = false;
   temaList = [];
   temaLeave = false;
-  enabledTema = "white";
+  enabledTema = 'white';
   nv_dificuldade: number;
   nr_jogador: number;
   room = [];
@@ -46,15 +41,14 @@ export class OptionComponent implements OnInit {
                 id_tema: tema.Id,
                 titulo: tema.Tema,
                 cor: tema.Cor
-              } as Tema            
-            })
-           
+              } as Tema
+            });
           }
-        )
+        );
   }
 
   getLogoTema = function(tema) {
-    return "assets/img/" + tema.Icone;
+    return 'assets/img/' + tema.Icone;
   };
 
   getStyleTema = function(tema) {
@@ -69,18 +63,18 @@ export class OptionComponent implements OnInit {
         if (this.temaList[i] === id) {
           this.temaList.splice(i, 1);
           this.temaLeave = true;
-          this.enabledTema = "white";
+          this.enabledTema = 'white';
         }
       }
       if (this.temaLeave === false) {
         this.temaList.push(id);
-        this.enabledTema = "#b0b4b7";
+        this.enabledTema = '#b0b4b7';
       }
     } else {
       for (let i = 0; i < 5; i++) {
         if (this.temaList[i] === id) {
           this.temaList.splice(i, 1);
-          this.enabledTema = "white";
+          this.enabledTema = 'white';
         }
       }
     }
@@ -120,10 +114,7 @@ export class OptionComponent implements OnInit {
         NovaSala: true
       };
 
-      const uri = `ws://monica:64803/api/Sala?UsuarioId=${ this.id }`;
-
-      var _this = this;
-      
+      const _this = this;
       this.websocket.onopen = () => {
         this.websocket.send(JSON.stringify(this.room));
 
@@ -145,7 +136,7 @@ export class OptionComponent implements OnInit {
       this.websocket.send('getsalas');
     };
 
-    var _this = this;
+    const _this = this;
 
     this.websocket.onmessage = function(event) {
       _this.rooms.emit(JSON.parse(event.data));

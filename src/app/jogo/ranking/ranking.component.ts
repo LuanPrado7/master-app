@@ -61,21 +61,20 @@ export class RankingComponent implements OnInit {
   }
 
   ligarRankingTema = function() {
-    let pontos_tema = this.temas
+    const pontos_tema = this.temas
       .map(tema => {
         return {
           id_tema: tema.id_tema,
           pontos: 0
-        }
-      })
+        };
+      });
 
-      
     this.ranking.forEach(jogador => {
       let clone = pontos_tema.map(x => Object.assign({}, x));
 
       jogador.pontos_tema = clone;
     });
-  }
+  };
 
   calcularPontosGerais = function(idNivel) {
     let deParaPontosNivel : any = function(idNivel) {
