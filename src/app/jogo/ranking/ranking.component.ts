@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { Card } from './card/card';
 import { Tema } from '../tema';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-ranking',
@@ -13,33 +15,23 @@ export class RankingComponent implements OnInit {
   @Input() temas: Tema[];
   @Input() id_jogador: number;
   tempoToken: any;
-  
+
   jogador: Card;
 
   ranking: Card[] = [
     {
       nome: 'Luan',
       id_jogador: 1,
-      foto: 'monkey',
+      foto: 'monkey.png',
       elo: 'Mestrão',
-      pontos_tema : [],
-      pontos_total: 0,
-      pontos_geral: 0,
-      tempoDecorrido: 0
-    },
-    {
-      nome: 'Mônica',
-      id_jogador: 3,
-      foto: 'detective',
-      elo: 'Especialista',
-      pontos_tema : [],
+      pontos_tema: [],
       pontos_total: 0,
       pontos_geral: 0,
       tempoDecorrido: 0
     }
   ];
 
-  adicionaPonto: any = function(id_tema, tempo) {
+  adicionaPonto: any = function (id_tema, tempo) {
     let tema = this.jogador.pontos_tema.find(tema => tema.id_tema == id_tema);
     tema.pontos++;
     this.jogador.pontos_total++;
@@ -47,8 +39,8 @@ export class RankingComponent implements OnInit {
     this.atualizarRanking();
   }
 
-  adicionaPontoAdversario: any = function(id_tema, id_jogador) {
-    let jogador = this.ranking.find(jogador => jogador.id_jogador == id_jogador);    
+  adicionaPontoAdversario: any = function (id_tema, id_jogador) {
+    let jogador = this.ranking.find(jogador => jogador.id_jogador == id_jogador);
     let tema = jogador.pontos_tema.find(tema => tema.id_tema == id_tema);
 
     tema.pontos++;
@@ -56,11 +48,11 @@ export class RankingComponent implements OnInit {
     this.atualizarRanking();
   }
 
-  atualizarRanking = function() {
-    this.ranking = this.ranking.sort((a,b) => a.pontos_total < b.pontos_total ? 1 : (a.pontos_total > b.pontos_total ? -1 : 0));
+  atualizarRanking = function () {
+    this.ranking = this.ranking.sort((a, b) => a.pontos_total < b.pontos_total ? 1 : (a.pontos_total > b.pontos_total ? -1 : 0));
   }
 
-  ligarRankingTema = function() {
+  ligarRankingTema = function () {
     const pontos_tema = this.temas
       .map(tema => {
         return {
@@ -70,18 +62,19 @@ export class RankingComponent implements OnInit {
       });
 
     this.ranking.forEach(jogador => {
+      console.log(jogador);
       let clone = pontos_tema.map(x => Object.assign({}, x));
 
       jogador.pontos_tema = clone;
     });
   };
 
-  calcularPontosGerais = function(idNivel) {
-    let deParaPontosNivel : any = function(idNivel) {
+  calcularPontosGerais = function (idNivel) {
+    let deParaPontosNivel: any = function (idNivel) {
       return (
         idNivel == 1 ? 10 : (
           idNivel == 2 ? 20 : (
-            idNivel == 3 ? 40: (
+            idNivel == 3 ? 40 : (
               idNivel == 4 ? 80 : 0
             )
           )
@@ -94,17 +87,48 @@ export class RankingComponent implements OnInit {
     return this.jogador.pontos_geral;
   }
 
-  atualizarPontuacaoGeral = function(id_jogador, pontos) {    
-    let jogador = this.ranking.find(jogador => jogador.id_jogador == id_jogador); 
+  atualizarPontuacaoGeral = function (id_jogador, pontos) {
+    let jogador = this.ranking.find(jogador => jogador.id_jogador == id_jogador);
 
     jogador.pontos_geral = pontos;
   }
 
-  constructor() { }
+  constructor(
+    private httpClient: HttpClient
+  ) { }
 
   ngOnInit() {
-    this.jogador = this.ranking.find(jogador => jogador.id_jogador == this.id_jogador);    
+    this.ranking = <Card[]>[];
+    let gameData = JSON.parse(localStorage.getItem('gameData'));
+    gameData.jogadoresArray.forEach(element => {
+      this.httpClient
+        .get(`http://monica:64803/api/Usuario/${element}`, {
+          observe: "response"
+        })
+        .pipe(map(res => res as any))
+        .subscribe(
+          res => {
+            let player: Card = {
+              nome: res.body.Nome,
+              id_jogador: res.body.Id,
+              foto: res.body.Skin,
+              elo: res.body.Classificacao,
+              pontos_tema: [],
+              pontos_total: 0,
+              pontos_geral: 0,
+              tempoDecorrido: 0
+            }
+            this.ranking.push(player);
+            // console.log(this.ranking);
+          },
+          err => {
+            console.log(err);
+          }
+        )
+    });
+    this.jogador = this.ranking.find(jogador => jogador.id_jogador == this.id_jogador);
+    console.log(this.ranking);
     this.ligarRankingTema();
-  }  
+  }
 
 }

@@ -44,8 +44,8 @@ export class MenuRankingComponent {
     this.openRanking(content);
   }
 
-  getStyle(row){
-    if(row.currentPlayer){
+  getStyle(row) {
+    if (row.currentPlayer) {
       return "#a5d6a7";
     }
     return;
@@ -66,7 +66,7 @@ export class MenuRankingComponent {
             size: 'lg'
           });
           this.data = res.body;
-          this.data.ranking.forEach((element, i) => {
+          this.data.ranking.forEach((element) => {
             let player: Player = {
               foto: element.Skin,
               posicao: element.Posicao,
@@ -77,19 +77,15 @@ export class MenuRankingComponent {
             }
             this.dataSource.push(player);
           });
-          // if(!this.dataSource.find(x => x.IdUsuario == this.data.usuario.IdUsuario)){
-          //   console.log(x);
-          //   let player: Player = {
-          //     foto: this.data.usuario.Skin,
-          //     posicao: this.data.usuario.Posicao,
-          //     username: this.data.usuario.Username,
-          //     classificacao: this.data.usuario.Classificacao,
-          //     pontos: this.data.usuario.PontosJogada,
-          //     currentPlayer: true
-          //   }
-          //   this.dataSource.push(player);
-          // }
-          // this.currentPlayer = this.data.usuario;
+          let player: Player = {
+            foto: this.data.usuario.Skin,
+            posicao: this.data.usuario.Posicao,
+            username: this.data.usuario.Username,
+            classificacao: this.data.usuario.Classificacao,
+            pontos: this.data.usuario.PontosJogada,
+            currentPlayer: true
+          }
+          this.dataSource.push(player);
         },
         err => {
           setTimeout(() => {

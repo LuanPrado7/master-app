@@ -1,8 +1,16 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
+import { Router } from "@angular/router";
 
 import { RoomComponent } from "./room/room.component";
 import { Tema } from "./tema";
 
+export interface GameData {
+  idSala: number,
+  idNivel: number,
+  jogadoresArray: number[]
+  numJogadores: number
+  idTemaArray: number[],
+}
 @Component({
   selector: "app-room-page",
   templateUrl: "./room-page.component.html",
@@ -15,6 +23,10 @@ export class RoomPageComponent implements OnInit {
   id_usuario = localStorage.getItem('userId');
   websocket: any;
 
+  constructor(
+    private router: Router
+  ) { }
+
   salas(rooms) {
     this.rooms = rooms;
   }
@@ -23,6 +35,7 @@ export class RoomPageComponent implements OnInit {
     this.rooms.push(roomCreated);
   }
 
+
   ngOnInit() {
     const uri = `ws://monica:64803/api/Sala?UsuarioId=${ this.id_usuario }`;
 
@@ -30,7 +43,7 @@ export class RoomPageComponent implements OnInit {
 
     var _this = this;
 
-    this.websocket.onmessage = function(event) {
+    this.websocket.onmessage = (event) => {
       let obj = JSON.parse(event.data);      
       let jaExiste = false;
 
@@ -43,11 +56,17 @@ export class RoomPageComponent implements OnInit {
       _this.salaCriada(obj); 
 
       if(obj.SalaCheia) {
-        /*
-          idNivel,
-          idsTema,
-          Jogadores
-        */
+        console.log(obj);
+        let gameData: GameData = {
+          idNivel: <number>obj.IdNivel,
+          idSala: <number>obj.Id,
+          idTemaArray: <number[]>obj.Temas,
+          jogadoresArray: <number[]>obj.Jogadores,
+          numJogadores: <number>obj.JogadoresNaSala
+        }
+        localStorage.setItem("gameData", JSON.stringify(gameData));
+        console.log(this.router);
+        this.router.navigate(["/jogo"]);
       }
     };
 

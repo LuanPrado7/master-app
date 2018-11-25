@@ -7,6 +7,13 @@ import { ResumoDialogComponent } from './resumo/resumo.component';
 import { JogoService } from './jogo.service';
 import { NgxSpinnerService } from "ngx-spinner";
 
+export interface JogoConfig {
+  idSala: number,
+  idJogador: number,
+  idNivel: number,
+  idsTema: number[]
+}
+
 @Component({
   selector: 'app-jogo',
   templateUrl: './jogo.component.html',
@@ -14,23 +21,23 @@ import { NgxSpinnerService } from "ngx-spinner";
 })
 export class JogoComponent implements OnInit {
 
-  @ViewChild(RankingComponent) rankingComponent: RankingComponent; 
+  @ViewChild(RankingComponent) rankingComponent: RankingComponent;
 
   temas: Tema[];
   temasCarregado: boolean = false;
   webSocket: any;
-
+  gameData: {};
   jogoConfig = {
     idSala: 1,
     idJogador: 1,
     idNivel: 1,
-    idsTema: [401, 501, 601, 701, 801]
+    idsTema: [401, 501, 301]
   }
 
   qtdJogadoresFim: number;
   qtdJogadores: number;
 
-  atualizarRanking: any = function(obj) {
+  atualizarRanking: any = function (obj) {
     this.webSocket.send(JSON.stringify({
       idSala: this.jogoConfig.idSala,
       idTema: obj.id_tema,
@@ -40,7 +47,7 @@ export class JogoComponent implements OnInit {
     this.rankingComponent.adicionaPonto(obj.id_tema, obj.tempo);
   }
 
-  fimDeJogo = function() {
+  fimDeJogo = function () {
     this.webSocket.send(JSON.stringify({
       idSala: this.jogoConfig.idSala,
       finalizou: true,
@@ -50,7 +57,7 @@ export class JogoComponent implements OnInit {
     this.spinner.show();
   }
 
-  abrirResumoPartida: any = function() {
+  abrirResumoPartida: any = function () {
     this.resumoDialog.open(ResumoDialogComponent, {
       width: '800px',
       height: '600px',
@@ -69,16 +76,16 @@ export class JogoComponent implements OnInit {
                 id_tema: tema.Id,
                 titulo: tema.Tema,
                 cor: tema.Cor
-              } as Tema            
+              } as Tema
             })
-          
-          this.temasCarregado = true;   
-      },
+
+          this.temasCarregado = true;
+        },
         errors => console.log(errors)
       )
   }
 
-  
+
 
   constructor(
     public resumoDialog: MatDialog,
@@ -87,6 +94,14 @@ export class JogoComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    let gameData = JSON.parse(localStorage.getItem("gameData"));
+    let importConfig: JogoConfig = {
+      idsTema: gameData.idTemaArray,
+      idNivel: gameData.idNivel,
+      idJogador: parseInt(localStorage.getItem("userId")),
+      idSala: gameData.idSala
+    };
+    this.jogoConfig = importConfig;
     this.getTemas({
       ids: this.jogoConfig.idsTema
     });
@@ -95,21 +110,21 @@ export class JogoComponent implements OnInit {
     this.qtdJogadores = 2;
 
     this.webSocket = new WebSocket("ws://monica:64803/api/Partida?UsuarioId=" + this.jogoConfig.idJogador);
-    
+
     var _this = this;
 
-    this.webSocket.onmessage = function(event) {
+    this.webSocket.onmessage = function (event) {
       var obj = JSON.parse(event.data);
 
-      if(!obj.Finalizou && _this.jogoConfig.idJogador != obj.IdUsuario) {
+      if (!obj.Finalizou && _this.jogoConfig.idJogador != obj.IdUsuario) {
         _this.rankingComponent.adicionaPontoAdversario(obj.IdTema, obj.IdUsuario);
-      } 
-      
-      if(obj.Finalizou) {
+      }
+
+      if (obj.Finalizou) {
         _this.rankingComponent.atualizarPontuacaoGeral(obj.IdUsuario, obj.Pontos);
         _this.qtdJogadoresFim++;
 
-        if(_this.qtdJogadores == _this.qtdJogadoresFim) {
+        if (_this.qtdJogadores == _this.qtdJogadoresFim) {
           _this.spinner.hide();
           _this.abrirResumoPartida();
         }
