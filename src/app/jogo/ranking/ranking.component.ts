@@ -60,13 +60,12 @@ export class RankingComponent implements OnInit {
           pontos: 0
         };
       });
-
     this.ranking.forEach(jogador => {
-      console.log(jogador);
       let clone = pontos_tema.map(x => Object.assign({}, x));
 
       jogador.pontos_tema = clone;
     });
+    console.log(this.ranking);
   };
 
   calcularPontosGerais = function (idNivel) {
@@ -119,16 +118,14 @@ export class RankingComponent implements OnInit {
               tempoDecorrido: 0
             }
             this.ranking.push(player);
-            // console.log(this.ranking);
+            this.jogador = this.ranking.find(jogador => jogador.id_jogador == this.id_jogador);
+            this.ligarRankingTema();
           },
           err => {
             console.log(err);
           }
         )
     });
-    this.jogador = this.ranking.find(jogador => jogador.id_jogador == this.id_jogador);
-    console.log(this.ranking);
-    this.ligarRankingTema();
   }
 
 }
