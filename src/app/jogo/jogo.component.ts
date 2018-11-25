@@ -31,8 +31,6 @@ export class JogoComponent implements OnInit {
   qtdJogadores: number;
 
   atualizarRanking: any = function(obj) {
-    this.spinner.show()
-
     this.webSocket.send(JSON.stringify({
       idSala: this.jogoConfig.idSala,
       idTema: obj.id_tema,
@@ -50,10 +48,6 @@ export class JogoComponent implements OnInit {
     }));
 
     this.spinner.show();
-    if(this.qtdJogadores == this.qtdJogadoresFim) {
-      this.spinner.hide();
-      this.abrirResumoPartida();
-    }
   }
 
   abrirResumoPartida: any = function() {
@@ -111,9 +105,14 @@ export class JogoComponent implements OnInit {
         _this.rankingComponent.adicionaPontoAdversario(obj.IdTema, obj.IdUsuario);
       } 
       
-      if(obj.finalizou) {
-        _this.rankingComponent.atualizarPontuacaoGeral(obj.idUsuario, obj.Pontos);
+      if(obj.Finalizou) {
+        _this.rankingComponent.atualizarPontuacaoGeral(obj.IdUsuario, obj.Pontos);
         _this.qtdJogadoresFim++;
+
+        if(_this.qtdJogadores == _this.qtdJogadoresFim) {
+          _this.spinner.hide();
+          _this.abrirResumoPartida();
+        }
       }
     }
 
