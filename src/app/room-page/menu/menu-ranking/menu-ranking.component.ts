@@ -62,7 +62,6 @@ export class MenuRankingComponent {
       .subscribe(
         res => {
           this.modalService.open(content, {
-            windowClass: "dark-modal",
             centered: true,
             size: 'lg'
           });

@@ -3,43 +3,28 @@
   <h1>Master</h1>
 
   <div id="countdown">
-    <div
-      id="countdown-number"
-      [ngStyle]="{'color': timer <= 5 ? 'red' : 'white'}"
-    >{{timer}}</div>
+    <div id="countdown-number" [ngStyle]="{'color': timer <= 5 ? 'red' : 'white'}">{{timer}}</div>
     <svg>
-      <circle
-        id="circle-timer"
-        class="circle-animation"
-        [ngStyle]="{'stroke': timer <= 5 ? 'red' : 'white'}"
-      ></circle>
+      <circle id="circle-timer" class="circle-animation" [ngStyle]="{'stroke': timer <= 5 ? 'red' : 'white'}"></circle>
     </svg>
   </div>
 
   <div class="question">
     <h3>{{perguntas[perguntaAtual].pergunta.Pergunta}}</h3>
   </div>
-  <div
-    class="option"
-    id="option-{{getLetraAlternativa(i)}}"
-    [ngClass]="{
+  <div class="option" id="option-{{getLetraAlternativa(i)}}" [ngClass]="{
         'option-hover': !block_perguntas, 
         'correta': block_perguntas && alternativa.Correta
       }"
-    *ngFor="let alternativa of perguntas[perguntaAtual].respostas; let i = index"
-    (click)="checarResposta(alternativa, getLetraAlternativa(i), perguntas[perguntaAtual].pergunta)"
-  >
-    
-    <span 
-      class="letter" 
-      [ngStyle]="{'background-color': getCorTema(perguntas[perguntaAtual].pergunta.IdTema)}"
-    >
-        <p>
-          {{
-            getLetraAlternativa(i)
-          }}
-        </p>
-      </span>
-    <span><p>{{alternativa.Resposta}}</p></span>
+    *ngFor="let alternativa of perguntas[perguntaAtual].respostas; let i = index" (click)="checarResposta(alternativa, getLetraAlternativa(i), perguntas[perguntaAtual].pergunta)">
+
+    <span class="letter" [ngStyle]="{'background-color': getCorTema(perguntas[perguntaAtual].pergunta.IdTema)}">
+      <p class="col">
+        {{ getLetraAlternativa(i)}}
+      </p>
+    </span>
+    <span>
+      <p>{{alternativa.Resposta}}</p>
+    </span>
   </div>
 </div>

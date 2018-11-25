@@ -46,7 +46,6 @@ export class RoomComponent implements OnInit {
               classificacao: element.Classificacao
             };
             this.listaUsuario.push(usuario);
-            console.log(this.listaUsuario);
           })
         }
       );
@@ -109,7 +108,7 @@ export class RoomComponent implements OnInit {
     let room_temas = this.listaTema.find(
       room_temas => room_temas.id_tema == temaId
     );
-
+    console.log(room_temas);
     return room_temas.cor;
   };
 

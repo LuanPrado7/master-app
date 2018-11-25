@@ -12,7 +12,8 @@ export interface Player {
   nome: string,
   elo: string,
   pontPartida: number,
-  pontGeral: number
+  pontGeral: number,
+  userId: number
 }
 
 @Component({
@@ -38,33 +39,29 @@ export class ResumoDialogComponent implements OnInit{
         nome: element.nome,
         elo: element.elo,
         pontPartida: element.pontos_total,
-        pontGeral: element.pontos_geral
+        pontGeral: element.pontos_geral,
+        userId: element.id_jogador
       }
-      this.httpClient
-        .get(`http://monica:64803/api/Usuario/${localStorage.getItem('userId')}`, {
-          observe: "response"
-        })
-        .pipe(map(res => res as any))
-        .subscribe(
-          res => {
-            res.body.Pontos = player.pontGeral;
-            console.log(res.body);
-            this.httpClient.put(`http://monica:64803/api/Usuario/`, res.body, {
-              observe: "response"
-            })
-            .subscribe(
-              res => {
-                console.log(res);
-              }
-            )
-          },
-          err => {
-            console.log(err);
-          }
-        );
-
-
+      console.log(player);
       this.dataSource.push(player)
     });
+    let currentPlayer = this.data.find(jogador => jogador.userId == localStorage.getItem('userId'));
+    this.httpClient
+      .get(`http://monica:64803/api/Usuario/${localStorage.getItem('userId')}`, {
+        observe: "response"
+      })
+      .pipe(map(res => res as any))
+      .subscribe(
+        res => {
+          console.log(res.body);
+          res.body.Pontos = res.body.Pontos + currentPlayer.pontGeral;
+          this.httpClient.put(`http://monica:64803/api/Usuario/`, res.body, {
+            observe: "response"
+          })
+        },
+        err => {
+          console.log(err);
+        }
+      );
   }
 }
