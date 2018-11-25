@@ -113,7 +113,7 @@ export class OptionComponent implements OnInit {
     this.getSalas();
 
     this.websocket.onmessage = function(event) {
-      _this.rooms.emit(JSON.parse(event.data));
+      _this.roomCreated.emit(JSON.parse(event.data));
     };
 
     this.getTemas();
