@@ -3,30 +3,30 @@
     <p>Escolha o nível de dificuldade:</p>
     <div class="difficulty">
       <button
-        (click)="difficultyFilter(1)"
-        [disabled]="oneDisabled"
+        (click)="nv_dificuldade = nv_dificuldade == 1 ? null : 1"
+        [disabled]="nv_dificuldade != 1 && nv_dificuldade"
         class="difficulty difficulty-1"
       >
         1
       </button>
       <button
-        (click)="difficultyFilter(2)"
-        [disabled]="twoDisabled"
+        (click)="nv_dificuldade = nv_dificuldade == 2 ? null : 2"
+        [disabled]="nv_dificuldade != 2 && nv_dificuldade"
         class="difficulty difficulty-2"
         matTooltip="two"
       >
         2
       </button>
       <button
-        (click)="difficultyFilter(3)"
-        [disabled]="threeDisabled"
+        (click)="nv_dificuldade = nv_dificuldade == 3 ? null : 3"
+        [disabled]="nv_dificuldade != 3 && nv_dificuldade"
         class="difficulty difficulty-3"
       >
         3
       </button>
       <button
-        (click)="difficultyFilter(4)"
-        [disabled]="fourDisabled"
+        (click)="nv_dificuldade = nv_dificuldade == 4 ? null : 4"
+        [disabled]="nv_dificuldade != 4 && nv_dificuldade"
         class="difficulty difficulty-4"
       >
         4
@@ -35,14 +35,14 @@
   </div>
   <div class="room-container">
     <p>Selecione 5 temas:</p>
-    <div *ngFor="let tema of this.tema; let i = index">
+    <div *ngFor="let tema of this.temas; let i = index">
       <div
         class="circle circle-{{i + 1}}"
         [ngStyle]="{
           background: getStyleTema(tema),
-          'border-color': enabledTema
+          'border-color': tema.borderColor
         }"
-        (click)="temaChoice(tema.Id)"
+        (click)="temaChoice(tema)"
       >
         <img class="logo" [src]="getLogoTema(tema)" alt="" />
       </div>

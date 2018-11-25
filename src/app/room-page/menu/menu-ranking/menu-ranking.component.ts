@@ -7,7 +7,6 @@ import { NotifierService } from "angular-notifier";
 import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
 import { elementProperty } from '@angular/core/src/render3/instructions';
-import { ConsoleReporter } from 'jasmine';
 
 export interface Player {
   foto: string,
