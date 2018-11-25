@@ -1,0 +1,75 @@
+<li class="nav-item" (click)="openVerticallyCentered(content)">
+  <a class="nav-link"><i class="fa fa-shopping-cart"></i> Loja</a>
+</li>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">LOJA - EM CONSTRUÇÃO</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h5>Skins</h5>
+    <img class="avatar-icon" src="../../../assets/img/avatars/alien.png" />
+    <img class="avatar-icon" src="../../../assets/img/avatars/artist.png" />
+    <img class="avatar-icon" src="../../../assets/img/avatars/astronaut.png" />
+    <img
+      class="avatar-icon"
+      src="../../../assets/img/avatars/basketball-player.png"
+    />
+    <img class="avatar-icon" src="../../../assets/img/avatars/bear.png" />
+    <img class="avatar-icon" src="../../../assets/img/avatars/biker.png" />
+    <img class="avatar-icon" src="../../../assets/img/avatars/clown.png" />
+    <img class="avatar-icon" src="../../../assets/img/avatars/cowboy.png" />
+    <img class="avatar-icon" src="../../../assets/img/avatars/deer.png" />
+    <img class="avatar-icon" src="../../../assets/img/avatars/detective.png" />
+    <img class="avatar-icon" src="../../../assets/img/avatars/dog.png" />
+    <img class="avatar-icon" src="../../../assets/img/avatars/elf.png" />
+    <img class="avatar-icon" src="../../../assets/img/avatars/emo.png" />
+    <img class="avatar-icon" src="../../../assets/img/avatars/eskimo.png" />
+    <img class="avatar-icon" src="../../../assets/img/avatars/fox.png" />
+    <img class="avatar-icon" src="../../../assets/img/avatars/geisha.png" />
+    <img class="avatar-icon" src="../../../assets/img/avatars/hippie.png" />
+    <img class="avatar-icon" src="../../../assets/img/avatars/hipster-1.png" />
+    <img class="avatar-icon" src="../../../assets/img/avatars/hipster.png" />
+    <img class="avatar-icon" src="../../../assets/img/avatars/king.png" />
+    <img class="avatar-icon" src="../../../assets/img/avatars/kitten.png" />
+    <img class="avatar-icon" src="../../../assets/img/avatars/knight.png" />
+    <img class="avatar-icon" src="../../../assets/img/avatars/man-1.png" />
+    <img class="avatar-icon" src="../../../assets/img/avatars/mermaid.png" />
+    <img class="avatar-icon" src="../../../assets/img/avatars/monkey.png" />
+    <img class="avatar-icon" src="../../../assets/img/avatars/pilot.png" />
+    <img class="avatar-icon" src="../../../assets/img/avatars/pirate.png" />
+    <img class="avatar-icon" src="../../../assets/img/avatars/police-dog.png" />
+    <img class="avatar-icon" src="../../../assets/img/avatars/princess.png" />
+    <img class="avatar-icon" src="../../../assets/img/avatars/punk-1.png" />
+    <img class="avatar-icon" src="../../../assets/img/avatars/punk.png" />
+    <img class="avatar-icon" src="../../../assets/img/avatars/rapper.png" />
+    <img class="avatar-icon" src="../../../assets/img/avatars/robot.png" />
+    <img
+      class="avatar-icon"
+      src="../../../assets/img/avatars/siberian-husky.png"
+    />
+    <img class="avatar-icon" src="../../../assets/img/avatars/singer.png" />
+    <img class="avatar-icon" src="../../../assets/img/avatars/spy.png" />
+    <img class="avatar-icon" src="../../../assets/img/avatars/squirrel.png" />
+    <img class="avatar-icon" src="../../../assets/img/avatars/student.png" />
+    <img class="avatar-icon" src="../../../assets/img/avatars/vampire.png" />
+    <img class="avatar-icon" src="../../../assets/img/avatars/viking.png" />
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn btn-light"
+        (click)="modal.close('Close click')"
+      >
+        Close
+      </button>
+    </div>
+  </div>
+</ng-template>
