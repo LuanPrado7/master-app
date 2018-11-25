@@ -4,7 +4,6 @@ import { HttpClientModule } from "@angular/common/http";
 import { MatNativeDateModule } from "@angular/material";
 import { FormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
 import { AppComponent } from "./app.component";
 import { JogoModule } from "./jogo/jogo.module";
@@ -25,7 +24,6 @@ import { MenuModule } from "./room-page/menu/menu.module";
     LoginPageModule,
     RoomPageModule,
     FormsModule,
-    FontAwesomeModule,
     MenuModule
   ],
   schemas: [NO_ERRORS_SCHEMA],
