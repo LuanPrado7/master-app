@@ -2,7 +2,6 @@ import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { Tema } from "./../tema";
 import * as $ from 'jquery';
 import { HttpClient } from '@angular/common/http';
-import { ConsoleReporter } from 'jasmine';
 
 @Component({
   selector: "app-option",
@@ -12,6 +11,8 @@ import { ConsoleReporter } from 'jasmine';
 export class OptionComponent implements OnInit {
   @Input() temas: Tema[];
   @Output() rooms = new EventEmitter();
+  @Output() roomCreated = new EventEmitter();
+  
 
   oneDisabled = false;
   twoDisabled = false;
@@ -30,14 +31,23 @@ export class OptionComponent implements OnInit {
   id = localStorage.getItem('userId');
 
 
-  getTemas = function() {
+  getTemas(temas) {
     this.httpClient.get('http://monica:64803/api/Tema')
-    .subscribe(
-      res => {
-        this.tema = res;
-      }
-    );
-  };
+      .subscribe(
+        temas => {
+          this.temas = temas
+            .map(tema => {
+              return {
+                logo: tema.Icone,
+                id_tema: tema.Id,
+                titulo: tema.Tema,
+                cor: tema.Cor
+              } as Tema            
+            })
+           
+          }
+        )
+  }
 
   getLogoTema = function(tema) {
     return "assets/img/" + tema.Icone;
@@ -95,6 +105,10 @@ export class OptionComponent implements OnInit {
   };
 
   createRoom = function() {
+    const uri = `ws://monica:64803/api/Sala?UsuarioId=${ this.id }`;
+
+    this.websocket = new WebSocket(uri);
+
     this.room = {
         NivelId: this.nv_dificuldade,
         TemasIds: this.temaList,
@@ -102,11 +116,18 @@ export class OptionComponent implements OnInit {
         NovaSala: true
       };
 
-      this.websocket.send(JSON.stringify(this.room));
+      const uri = `ws://monica:64803/api/Sala?UsuarioId=${ this.id }`;
 
-      this.websocket.onmessage = function(event) {
-        console.log(event.data);
+      var _this = this;
+      
+      this.websocket.onopen = () => {
+        this.websocket.send(JSON.stringify(this.room));
+
+        this.websocket.onmessage = function(event) {
+          _this.roomCreated.emit(JSON.parse(event.data));
+        };
       };
+
   };
 
   constructor(private httpClient: HttpClient) {}
