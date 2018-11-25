@@ -46,6 +46,17 @@ export class OptionComponent implements OnInit {
         );
   }
 
+  getSalas() {
+    this.httpClient
+      .get('http://monica:64803/api/Sala')
+      .pipe(
+        map(res => res as any)
+      )
+      .subscribe(
+          salas => this.rooms.emit(salas)
+        );
+  }
+
   getLogoTema = function(tema) {
     return 'assets/img/' + tema.logo;
   };
@@ -88,12 +99,6 @@ export class OptionComponent implements OnInit {
     };
 
     this.websocket.send(JSON.stringify(this.room));
-
-  var _this = this; 
-
-    this.websocket.onmessage = function(event) {
-      _this.roomCreated.emit(JSON.parse(event.data));
-    };
   };
 
   constructor(private httpClient: HttpClient) {}
@@ -105,9 +110,7 @@ export class OptionComponent implements OnInit {
 
     var _this = this;
 
-    this.websocket.onopen = () => {
-      _this.websocket.send('getsalas');
-    };
+    this.getSalas();
 
     this.websocket.onmessage = function(event) {
       _this.rooms.emit(JSON.parse(event.data));
