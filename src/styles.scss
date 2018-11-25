@@ -1,13 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 body {
-    //essa desgraça não tá renderizando na página inteira, infeliz
-    background: url(assets/img/background.jpg) no-repeat fixed;
-    background-size: cover; 
-    color: #eeeeee;
-    // background-color: #1d4457;
-    // min-height: 100%;
+  //essa desgraça não tá renderizando na página inteira, infeliz
+  background: url(assets/img/background.jpg) no-repeat fixed;
+  background-size: cover;
+  color: #eeeeee;
+  // background-color: #1d4457;
+  // min-height: 100%;
 }
