@@ -8,9 +8,11 @@ import { RoomPageComponent } from "./room-page.component";
 import { RoomComponent } from "./room/room.component";
 import { OptionComponent } from "./option/option.component";
 import { MenuComponent } from "./menu/menu.component";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
-  imports: [CommonModule, FormsModule, MenuModule],
+  imports: [CommonModule, FormsModule, MenuModule, NgbModule
+  ],
   declarations: [
     RoomPageComponent,
     RoomComponent,

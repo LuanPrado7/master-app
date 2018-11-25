@@ -48,7 +48,11 @@ export class CadastroFormComponent {
       value.nome,
       value.username,
       value.email,
-      value.password
+      value.password,
+      0,
+      1,
+      'default.png',
+      true
     );
     this.httpClient
       .post("http://monica:64803/api/Usuario", this.user, {
