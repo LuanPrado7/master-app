@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Tema } from "./../tema";
 import { Room } from "./room";
 import { map } from "rxjs/operators";
+import { Usuario } from "./usuario";
 
 @Component({
   selector: "app-room",
@@ -11,7 +12,7 @@ import { map } from "rxjs/operators";
   styleUrls: ["./room.component.scss"]
 })
 export class RoomComponent implements OnInit {
-  @Input() temas: Tema;
+  @Input() temas: Tema[];
   @Input() rooms: Room[];
   @Input() websocket: any;
 
@@ -19,11 +20,36 @@ export class RoomComponent implements OnInit {
   roomVariable: boolean = false;
 
   room: any;
-  user: any[];
-  tema: any[];
+  listaUsuario = [];
+  listaTema = [];
+  user: any;
 
-  getTemaStyle(id) {
-
+  getUsers() {
+    this.httpClient
+      .get('http://monica:64803/api/Usuario')
+      .pipe(
+        map(res => res as any)
+      )
+      .subscribe(
+        res => {
+          res.forEach((element) => {
+            let usuario: Usuario = {
+              id: element.Id,
+              nome: element.Nome,
+              username: element.Username,
+              email: element.Email,
+              senha: element.Senha,
+              skin: element.Skin,
+              pontos: element.Pontos,
+              cadastro: element.Cadastro,
+              idclassificacao: element.IdClassificacao,
+              classificacao: element.Classificacao
+            };
+            this.listaUsuario.push(usuario);
+            console.log(this.listaUsuario);
+          })
+        }
+      );
   }
 
   getTemas() {
@@ -33,55 +59,55 @@ export class RoomComponent implements OnInit {
         map(res => res as any)
       )
       .subscribe(
-        tema => {
-          this.tema = tema
-            .map(tema => {
-              return {
-                logo: tema.Icone,
-                id_tema: tema.Id,
-                titulo: tema.Tema,
-                cor: tema.Cor
-              }
-            });
+        res => {
+          res.forEach((element) => {
+            let tema: Tema = {
+              logo: element.Icone,
+              id_tema: element.Id,
+              titulo: element.Tema,
+              cor: element.Cor
+            };
+            this.listaTema.push(tema);
+          })
         }
       );
   }
 
-  getUsers() {
-    this.httpClient
-      .get('http://monica:64803/api/Usuario')
-      .pipe(
-        map(res => res as any)
-      )
-      .subscribe(
-        user => {
-          this.user = user
-            .map(user => {
-              return {
-                Id: user.Id,
-                Nome: user.Nome,
-                Username: user.Username,
-                Email: user.Email,
-                Senha: user.Senha,
-                Pontos: user.Pontos,
-                IdClassificacao: user.IdClassificacao
-              }
-            });
-        }
-      );
+  getUserPicture(userId) {
+    let user = this.listaUsuario.find(
+      user => user.id == userId
+    );
+
+    return user.skin;
+  }
+
+  getUserName(userId) {
+    let user = this.listaUsuario.find(
+      user => user.id == userId
+    );
+
+    return user.nome;
+  }
+
+  getUserDescription(userId) {
+    let user = this.listaUsuario.find(
+      user => user.id == userId
+    );
+
+    return user.classificacao;
   }
 
   getLogoTema = function (temaId) {
-    let room_temas = this.tema.find(
+    let room_temas = this.listaTema.find(
       room_temas => room_temas.id_tema == temaId
     );
 
     return "assets/img/" + room_temas.logo;
   };
 
-  getStyleTema = function (tema) {
-    let room_temas = this.tema.find(
-      room_temas => room_temas.id_tema == tema.id_tema
+  getStyleTema = function (temaId) {
+    let room_temas = this.listaTema.find(
+      room_temas => room_temas.id_tema == temaId
     );
 
     return room_temas.cor;
@@ -113,7 +139,7 @@ export class RoomComponent implements OnInit {
   constructor(private httpClient: HttpClient) { }
 
   ngOnInit() {
-    this.getUsers();
     this.getTemas();
+    this.getUsers()
   }
 }

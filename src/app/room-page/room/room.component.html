@@ -1,16 +1,7 @@
 <div class="teste" *ngIf="this.rooms.length > 0">
   <div class="container" *ngFor="let room of rooms">
     <div class="room-container">
-      <!-- CLass -->
-<<<<<<< HEAD
-      <div class="card room" (click)="roomClick = room.Id" [ngClass]="{ testete: roomClick }">
-=======
-      <div
-        class="card room"
-        (click)="roomClick = room.Id; currentRoom = room"
-        [ngClass]="{ testete: roomClick == room.Id }"
-      >
->>>>>>> bb08041b64e6819b3207819661a1e50855cb671c
+      <div class="card room" (click)="roomClick = room.Id; currentRoom = room" [ngClass]="{ testete: roomClick == room.Id }">
         <div>
           <h5>ROOM {{ room.Id }}</h5>
           <div class="difficulty difficulty-{{room.IdNivel}}">
@@ -18,18 +9,18 @@
           </div>
         </div>
         <div *ngFor="let temaId of room.Temas; let i = index">
-          <div class="circle circle-{{i + 1}}" [ngStyle]="{ background: getStyleTema(tema) }">
+          <div class="circle circle-{{i + 1}}" [ngStyle]="{ background: getStyleTema(temaId) }">
             <img class="logo" [src]="getLogoTema(temaId)" alt="" />
           </div>
         </div>
         <div class="media">
           <div class="media__image">
-            <img src="src/assets/img/avatars/{{room.foto}}.png" alt="user" class="img--48x48 img--rounded" />
+            <img src="src/assets/img/avatars/{{getUserPicture(room.Criador)}}" alt="user" class="img--48x48 img--rounded" />
           </div>
 
           <div class="media__bd">
-            <!-- <p class="user__sender">{{ getUserStyle(room.Id) }}</p>
-            <p class="user__description">{{ user.elo }}</p> -->
+            <p class="user__sender">{{ getUserName(room.Criador) }}</p>
+            <p class="user__description">{{ getUserDescription(room.Criador) }}</p>
           </div>
         </div>
         <div class="players">{{ room.JogadoresNaSala }}/{{ room.MaximoJogadores }} jogadores</div>
