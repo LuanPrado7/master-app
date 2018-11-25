@@ -2,6 +2,10 @@ import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { Tema } from "./../tema";
 import * as $ from 'jquery';
 import { HttpClient } from '@angular/common/http';
+<<<<<<< HEAD
+=======
+// import { ConsoleReporter } from 'jasmine';
+>>>>>>> 3ea85f960fd1a631cbfecf9ace630f65e2a84bd7
 
 @Component({
   selector: "app-option",

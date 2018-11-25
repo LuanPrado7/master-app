@@ -5,6 +5,7 @@ import { Tema } from './tema';
 import { RankingComponent } from './ranking/ranking.component';
 import { ResumoDialogComponent } from './resumo/resumo.component';
 import { JogoService } from './jogo.service';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-jogo',
@@ -26,18 +27,33 @@ export class JogoComponent implements OnInit {
     idsTema: [401, 501, 601, 701, 801]
   }
 
+  qtdJogadoresFim: number;
+  qtdJogadores: number;
+
   atualizarRanking: any = function(obj) {
+    this.spinner.show()
+
     this.webSocket.send(JSON.stringify({
       idSala: this.jogoConfig.idSala,
-      idTema: obj.id_tema
+      idTema: obj.id_tema,
+      finalizou: false,
     }));
 
     this.rankingComponent.adicionaPonto(obj.id_tema, obj.tempo);
   }
 
   fimDeJogo = function() {
-    this.rankingComponent.calcularPontosGerais(this.jogoConfig.idNivel);
-    this.abrirResumoPartida();
+    this.webSocket.send(JSON.stringify({
+      idSala: this.jogoConfig.idSala,
+      finalizou: true,
+      pontos: this.rankingComponent.calcularPontosGerais(this.jogoConfig.idNivel)
+    }));
+
+    this.spinner.show();
+    if(this.qtdJogadores == this.qtdJogadoresFim) {
+      this.spinner.hide();
+      this.abrirResumoPartida();
+    }
   }
 
   abrirResumoPartida: any = function() {
@@ -72,13 +88,17 @@ export class JogoComponent implements OnInit {
 
   constructor(
     public resumoDialog: MatDialog,
-    private jogoService: JogoService
+    private jogoService: JogoService,
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit() {
     this.getTemas({
       ids: this.jogoConfig.idsTema
     });
+
+    this.qtdJogadoresFim = 0;
+    this.qtdJogadores = 2;
 
     this.webSocket = new WebSocket("ws://monica:64803/api/Partida?UsuarioId=" + this.jogoConfig.idJogador);
     
@@ -87,10 +107,16 @@ export class JogoComponent implements OnInit {
     this.webSocket.onmessage = function(event) {
       var obj = JSON.parse(event.data);
 
-      if(this.jogoConfig.idJogador == obj.IdUsuario) {
-        _this.rankingComponent.adicionaPonto(obj.IdTema, obj.IdUsuario);
+      if(_this.jogoConfig.idJogador != obj.IdUsuario) {
+        _this.rankingComponent.adicionaPontoAdversario(obj.IdTema, obj.IdUsuario);
+      } 
+      
+      if(obj.finalizou) {
+        _this.rankingComponent.atualizarPontuacaoGeral(obj.idUsuario, obj.Pontos);
+        _this.qtdJogadoresFim++;
       }
     }
+
   }
 
 }
