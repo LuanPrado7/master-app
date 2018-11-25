@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Tema } from './../tema';
 import * as $ from 'jquery';
 import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators'
 
 @Component({
   selector: 'app-option',
@@ -30,29 +31,35 @@ export class OptionComponent implements OnInit {
   id = localStorage.getItem('userId');
 
 
-  // getTemas(temas) {
-  //   this.httpClient.get('http://monica:64803/api/Tema')
-  //     .subscribe(
-  //       temas => {
-  //         this.temas = temas
-  //           .map(tema => {
-  //             return {
-  //               logo: tema.Icone,
-  //               id_tema: tema.Id,
-  //               titulo: tema.Tema,
-  //               cor: tema.Cor
-  //             } as Tema
-  //           });
-  //         }
-  //       );
-  // }
+  getTemas() {
+    this.httpClient
+      .get('http://monica:64803/api/Tema')
+      .pipe(
+        map(res => res as any)
+      )
+      .subscribe(
+        temas => {
+          this.temas = temas
+            .map(tema => {
+              return {
+                logo: tema.Icone,
+                id_tema: tema.Id,
+                titulo: tema.Tema,
+                cor: tema.Cor
+              } as Tema
+            });
+            
+            console.log(this.temas);
+         }
+        );
+  }
 
   getLogoTema = function(tema) {
-    return 'assets/img/' + tema.Icone;
+    return 'assets/img/' + tema.logo;
   };
 
   getStyleTema = function(tema) {
-    return tema.Cor;
+    return tema.cor;
   };
 
   temaChoice = function(id) {
@@ -125,22 +132,23 @@ export class OptionComponent implements OnInit {
 
   };
 
-  // constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) {}
 
   ngOnInit() {
-  //   const uri = `ws://monica:64803/api/Sala?UsuarioId=${ this.id }`;
+    // const uri = `ws://monica:64803/api/Sala?UsuarioId=${ this.id }`;
 
-  //   this.websocket = new WebSocket(uri);
+    // this.websocket = new WebSocket(uri);
 
-  //   this.websocket.onopen = () => {
-  //     this.websocket.send('getsalas');
-  //   };
+    // this.websocket.onopen = () => {
+    //   this.websocket.send('getsalas');
+    // };
 
-  //   const _this = this;
+    // const _this = this;
 
-  //   this.websocket.onmessage = function(event) {
-  //     _this.rooms.emit(JSON.parse(event.data));
-  //   };
-  //   this.getTemas();
+    // this.websocket.onmessage = function(event) {
+    //   _this.rooms.emit(JSON.parse(event.data));
+    // };
+
+    this.getTemas();
   }
 }
