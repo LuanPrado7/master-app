@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ResumoComponent } from './resumo.component';
+import { ResumoDialogComponent } from './resumo.component';
 
 describe('ResumoComponent', () => {
-  let component: ResumoComponent;
-  let fixture: ComponentFixture<ResumoComponent>;
+  let component: ResumoDialogComponent;
+  let fixture: ComponentFixture<ResumoDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ResumoComponent ]
+      declarations: [ ResumoDialogComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ResumoComponent);
+    fixture = TestBed.createComponent(ResumoDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
