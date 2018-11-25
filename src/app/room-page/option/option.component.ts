@@ -23,7 +23,7 @@ export class OptionComponent implements OnInit {
   tema: any;
 
   id_usuario = localStorage.getItem('userId');
-  
+
   getTemas() {
     this.httpClient
       .get('http://monica:64803/api/Tema')
@@ -40,10 +40,10 @@ export class OptionComponent implements OnInit {
                 titulo: tema.Tema,
                 cor: tema.Cor,
                 borderColor: 'white'
-              } 
+              }
             });
-         }
-        );
+        }
+      );
   }
 
   getSalas() {
@@ -53,19 +53,19 @@ export class OptionComponent implements OnInit {
         map(res => res as any)
       )
       .subscribe(
-          salas => this.rooms.emit(salas)
-        );
+        salas => this.rooms.emit(salas)
+      );
   }
 
-  getLogoTema = function(tema) {
+  getLogoTema = function (tema) {
     return 'assets/img/' + tema.logo;
   };
 
-  getStyleTema = function(tema) {
+  getStyleTema = function (tema) {
     return tema.cor;
   };
 
-  temaChoice = function(tema) {
+  temaChoice = function (tema) {
     this.temaLeave = false;
     tema.borderColor = 'white';
     if (this.temaList.length < 5) {
@@ -90,7 +90,7 @@ export class OptionComponent implements OnInit {
     }
   };
 
-  createRoom = function() {
+  createRoom = function () {
     this.room = {
       NivelId: this.nv_dificuldade,
       TemasIds: this.temaList,
@@ -101,10 +101,10 @@ export class OptionComponent implements OnInit {
     this.websocket.send(JSON.stringify(this.room));
   };
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) { }
 
   ngOnInit() {
-    const uri = `ws://monica:64803/api/Sala?UsuarioId=${ this.id_usuario }`;
+    const uri = `ws://monica:64803/api/Sala?UsuarioId=${this.id_usuario}`;
 
     this.websocket = new WebSocket(uri);
 
@@ -112,7 +112,7 @@ export class OptionComponent implements OnInit {
 
     this.getSalas();
 
-    this.websocket.onmessage = function(event) {
+    this.websocket.onmessage = function (event) {
       _this.roomCreated.emit(JSON.parse(event.data));
     };
 

@@ -2,37 +2,26 @@
   <div class="container" *ngFor="let room of rooms">
     <div class="room-container">
       <!-- CLass -->
-      <div
-        class="card room"
-        (click)="roomClick = room.Id"
-        [ngClass]="{ testete: roomClick }"
-      >
+      <div class="card room" (click)="roomClick = room.Id" [ngClass]="{ testete: roomClick }">
         <div>
           <h5>ROOM {{ room.Id }}</h5>
           <div class="difficulty difficulty-{{room.IdNivel}}">
             <h3>{{ room.IdNivel }}</h3>
           </div>
         </div>
-        <div *ngFor="let tema of room.temas; let i = index">
-          <div
-            class="circle circle-{{i + 1}}"
-            [ngStyle]="{ background: getStyleTema(tema) }"
-          >
-            <img class="logo" [src]="getLogoTema(tema)" alt="" />
+        <div *ngFor="let temaId of room.Temas; let i = index">
+          <div class="circle circle-{{i + 1}}" [ngStyle]="{ background: getStyleTema(tema) }">
+            <img class="logo" [src]="getLogoTema(temaId)" alt="" />
           </div>
         </div>
         <div class="media">
           <div class="media__image">
-            <img
-              src="src/assets/img/avatars/{{room.foto}}.png"
-              alt="user"
-              class="img--48x48 img--rounded"
-            />
+            <img src="src/assets/img/avatars/{{room.foto}}.png" alt="user" class="img--48x48 img--rounded" />
           </div>
 
           <div class="media__bd">
-            <!-- <p class="user__sender">{{ getUsers(room.Id) }}</p> -->
-            <!-- <p class="user__description">{{ user.elo }}</p> -->
+            <!-- <p class="user__sender">{{ getUserStyle(room.Id) }}</p>
+            <p class="user__description">{{ user.elo }}</p> -->
           </div>
         </div>
         <div class="players">{{ room.JogadoresNaSala }}/{{ room.MaximoJogadores }} jogadores</div>
