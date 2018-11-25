@@ -31,8 +31,24 @@ export class RoomPageComponent implements OnInit {
     var _this = this;
 
     this.websocket.onmessage = function(event) {
-      var obj = JSON.parse(event.data);      
-      _this.salaCriada(obj);
+      let obj = JSON.parse(event.data);      
+      let jaExiste = false;
+
+      for(let i = 0; i < _this.rooms.length; i++) {
+        if(_this.rooms[i].Id == obj.Id) {
+          _this.rooms.splice(i, 1);
+        }
+      }
+
+      _this.salaCriada(obj); 
+
+      if(obj.SalaCheia) {
+        /*
+          idNivel,
+          idsTema,
+          Jogadores
+        */
+      }
     };
 
   }
