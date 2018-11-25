@@ -26,6 +26,10 @@ export class LoginPageComponent {
     private httpClient: HttpClient
   ) { }
 
+  ngOnInit() {
+    localStorage.clear();
+  }
+  
   jogar() {
     console.log('entrou');
     
@@ -41,7 +45,6 @@ export class LoginPageComponent {
           localStorage.setItem("userId", JSON.stringify(res.body));
           setTimeout(() => {
             this.spinner.hide();
-            // this.modal.close();
             this.router.navigate(["/room"]);
           }, 2000);
         },

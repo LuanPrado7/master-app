@@ -7,7 +7,7 @@
         [disabled]="nv_dificuldade != 1 && nv_dificuldade"
         class="difficulty difficulty-1"
       >
-        1
+        Fácil
       </button>
       <button
         (click)="nv_dificuldade = nv_dificuldade == 2 ? null : 2"
@@ -15,21 +15,21 @@
         class="difficulty difficulty-2"
         matTooltip="two"
       >
-        2
+        Médio
       </button>
       <button
         (click)="nv_dificuldade = nv_dificuldade == 3 ? null : 3"
         [disabled]="nv_dificuldade != 3 && nv_dificuldade"
         class="difficulty difficulty-3"
       >
-        3
+        Intermediário
       </button>
       <button
         (click)="nv_dificuldade = nv_dificuldade == 4 ? null : 4"
         [disabled]="nv_dificuldade != 4 && nv_dificuldade"
         class="difficulty difficulty-4"
       >
-        4
+        Mestrão
       </button>
     </div>
   </div>
