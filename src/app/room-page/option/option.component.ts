@@ -1,6 +1,4 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Tema } from './../tema';
-import * as $ from 'jquery';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators'
 
@@ -10,14 +8,10 @@ import { map } from 'rxjs/operators'
   styleUrls: ['./option.component.scss']
 })
 export class OptionComponent implements OnInit {
-  @Input() temas: Tema[];
+  @Input() temas: any[];
   @Output() rooms = new EventEmitter();
   @Output() roomCreated = new EventEmitter();
 
-  oneDisabled = false;
-  twoDisabled = false;
-  threeDisabled = false;
-  fourDisabled = false;
   temaList = [];
   temaLeave = false;
   enabledTema = 'white';
@@ -28,9 +22,8 @@ export class OptionComponent implements OnInit {
 
   tema: any;
 
-  id = localStorage.getItem('userId');
-
-
+  id_usuario = localStorage.getItem('userId');
+  
   getTemas() {
     this.httpClient
       .get('http://monica:64803/api/Tema')
@@ -45,11 +38,10 @@ export class OptionComponent implements OnInit {
                 logo: tema.Icone,
                 id_tema: tema.Id,
                 titulo: tema.Tema,
-                cor: tema.Cor
-              } as Tema
+                cor: tema.Cor,
+                borderColor: 'white'
+              } 
             });
-            
-            console.log(this.temas);
          }
         );
   }
@@ -62,92 +54,64 @@ export class OptionComponent implements OnInit {
     return tema.cor;
   };
 
-  temaChoice = function(id) {
+  temaChoice = function(tema) {
     this.temaLeave = false;
-    this.enabledTema = false;
+    tema.borderColor = 'white';
     if (this.temaList.length < 5) {
       for (let i = 0; i < 5; i++) {
-        if (this.temaList[i] === id) {
+        if (this.temaList[i] === tema.id_tema) {
           this.temaList.splice(i, 1);
           this.temaLeave = true;
-          this.enabledTema = 'white';
+          tema.borderColor = 'white';
         }
       }
       if (this.temaLeave === false) {
-        this.temaList.push(id);
-        this.enabledTema = '#b0b4b7';
+        this.temaList.push(tema.id_tema);
+        tema.borderColor = '#b0b4b7';
       }
     } else {
       for (let i = 0; i < 5; i++) {
-        if (this.temaList[i] === id) {
+        if (this.temaList[i] === tema.id_tema) {
           this.temaList.splice(i, 1);
-          this.enabledTema = 'white';
+          tema.borderColor = 'white';
         }
       }
     }
-    console.log(this.temaList);
-  };
-
-  difficultyFilter = function(number) {
-    if (number === 1) {
-      this.twoDisabled = !this.twoDisabled;
-      this.threeDisabled = !this.threeDisabled;
-      this.fourDisabled = !this.fourDisabled;
-    } else if (number === 2) {
-      this.oneDisabled = !this.oneDisabled;
-      this.threeDisabled = !this.threeDisabled;
-      this.fourDisabled = !this.fourDisabled;
-    } else if (number === 3) {
-      this.oneDisabled = !this.oneDisabled;
-      this.twoDisabled = !this.twoDisabled;
-      this.fourDisabled = !this.fourDisabled;
-    } else if (number === 4) {
-      this.oneDisabled = !this.oneDisabled;
-      this.twoDisabled = !this.twoDisabled;
-      this.threeDisabled = !this.threeDisabled;
-    }
-    this.nv_dificuldade = number;
   };
 
   createRoom = function() {
-    const uri = `ws://monica:64803/api/Sala?UsuarioId=${ this.id }`;
-
-    this.websocket = new WebSocket(uri);
-
     this.room = {
-        NivelId: this.nv_dificuldade,
-        TemasIds: this.temaList,
-        Jogadores: this.nr_jogador,
-        NovaSala: true
-      };
+      NivelId: this.nv_dificuldade,
+      TemasIds: this.temaList,
+      Jogadores: this.nr_jogador,
+      NovaSala: true
+    };
 
-      const _this = this;
-      this.websocket.onopen = () => {
-        this.websocket.send(JSON.stringify(this.room));
+    this.websocket.send(JSON.stringify(this.room));
 
-        this.websocket.onmessage = function(event) {
-          _this.roomCreated.emit(JSON.parse(event.data));
-        };
-      };
+  var _this = this; 
 
+    this.websocket.onmessage = function(event) {
+      _this.roomCreated.emit(JSON.parse(event.data));
+    };
   };
 
   constructor(private httpClient: HttpClient) {}
 
   ngOnInit() {
-    // const uri = `ws://monica:64803/api/Sala?UsuarioId=${ this.id }`;
+    const uri = `ws://monica:64803/api/Sala?UsuarioId=${ this.id_usuario }`;
 
-    // this.websocket = new WebSocket(uri);
+    this.websocket = new WebSocket(uri);
 
-    // this.websocket.onopen = () => {
-    //   this.websocket.send('getsalas');
-    // };
+    var _this = this;
 
-    // const _this = this;
+    this.websocket.onopen = () => {
+      _this.websocket.send('getsalas');
+    };
 
-    // this.websocket.onmessage = function(event) {
-    //   _this.rooms.emit(JSON.parse(event.data));
-    // };
+    this.websocket.onmessage = function(event) {
+      _this.rooms.emit(JSON.parse(event.data));
+    };
 
     this.getTemas();
   }

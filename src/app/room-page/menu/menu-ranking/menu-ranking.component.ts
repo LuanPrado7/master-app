@@ -24,7 +24,7 @@ export class MenuRankingComponent {
   private readonly notifier: NotifierService;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    // @Inject(MAT_DIALOG_DATA) public data: any,
     private modalService: NgbModal,
     private httpClient: HttpClient,
     notifierService: NotifierService
