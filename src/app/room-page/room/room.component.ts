@@ -12,12 +12,13 @@ import { Room } from "./room";
 export class RoomComponent implements OnInit {
   @Input() temas: Tema;
   @Input() rooms: Room[];
+  @Input() websocket: any;
 
   roomClick: string;
   roomVariable: boolean = false;
 
-  room: any;
-  user: any;
+  currentRoom: any;
+  id_usuario = localStorage.getItem('userId');
 
   getTemas = function() {
     this.httpClient.get('http://monica:64803/api/Tema')
@@ -27,16 +28,7 @@ export class RoomComponent implements OnInit {
       }
     );
   };
-  
-  getUsers = function(id) {
-    this.httpClient.get('http://monica:64803/api/Usuario')
-    .subscribe(
-      res => {
-        this.user = res;
-      }
-    );
-  };
-
+ 
   getLogoTema = function(tema) {
     let room_temas = this.temas.find(
       room_temas => room_temas.id_tema == tema.id_tema
@@ -54,20 +46,23 @@ export class RoomComponent implements OnInit {
   };
 
   enterRoom = function() {
+    if(!this.currentRoom) return false;
+
+    for(let i = 0; i < this.currentRoom.Jogadores.length; i++) {
+      if(this.currentRoom.Jogadores[i] == this.id_usuario) {
+        return false;
+      }
+    }
+
     this.roomVariable = true;
     this.room = {
-      NivelId: this.nv_dificuldade,
-      TemasIds: this.temaList,
-      Jogadores: this.nr_jogador,
+      SalaId: this.currentRoom.Id,
+      UsuarioId: this.id_usuario,
       NovaSala: false
     };
 
     this.websocket.send(JSON.stringify(this.room));
-
-    this.websocket.onmessage = function(event) {
-      console.log(event.data);
-    };
-  };
+  }
 
   leaveRoom = function() {
     this.roomVariable = false;
