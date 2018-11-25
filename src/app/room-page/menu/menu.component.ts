@@ -12,10 +12,5 @@ export class MenuComponent {
 
   constructor(private modalService: NgbModal) {}
 
-  openVerticallyCentered(content) {
-    this.modal = this.modalService.open(content, {
-      centered: true,
-      size: "lg"
-    });
-  }
+  
 }

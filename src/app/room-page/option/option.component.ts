@@ -30,22 +30,22 @@ export class OptionComponent implements OnInit {
   id = localStorage.getItem('userId');
 
 
-  getTemas(temas) {
-    this.httpClient.get('http://monica:64803/api/Tema')
-      .subscribe(
-        temas => {
-          this.temas = temas
-            .map(tema => {
-              return {
-                logo: tema.Icone,
-                id_tema: tema.Id,
-                titulo: tema.Tema,
-                cor: tema.Cor
-              } as Tema
-            });
-          }
-        );
-  }
+  // getTemas(temas) {
+  //   this.httpClient.get('http://monica:64803/api/Tema')
+  //     .subscribe(
+  //       temas => {
+  //         this.temas = temas
+  //           .map(tema => {
+  //             return {
+  //               logo: tema.Icone,
+  //               id_tema: tema.Id,
+  //               titulo: tema.Tema,
+  //               cor: tema.Cor
+  //             } as Tema
+  //           });
+  //         }
+  //       );
+  // }
 
   getLogoTema = function(tema) {
     return 'assets/img/' + tema.Icone;
@@ -125,22 +125,22 @@ export class OptionComponent implements OnInit {
 
   };
 
-  constructor(private httpClient: HttpClient) {}
+  // constructor(private httpClient: HttpClient) {}
 
   ngOnInit() {
-    const uri = `ws://monica:64803/api/Sala?UsuarioId=${ this.id }`;
+  //   const uri = `ws://monica:64803/api/Sala?UsuarioId=${ this.id }`;
 
-    this.websocket = new WebSocket(uri);
+  //   this.websocket = new WebSocket(uri);
 
-    this.websocket.onopen = () => {
-      this.websocket.send('getsalas');
-    };
+  //   this.websocket.onopen = () => {
+  //     this.websocket.send('getsalas');
+  //   };
 
-    const _this = this;
+  //   const _this = this;
 
-    this.websocket.onmessage = function(event) {
-      _this.rooms.emit(JSON.parse(event.data));
-    };
-    this.getTemas();
+  //   this.websocket.onmessage = function(event) {
+  //     _this.rooms.emit(JSON.parse(event.data));
+  //   };
+  //   this.getTemas();
   }
 }

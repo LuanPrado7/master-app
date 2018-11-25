@@ -10,9 +10,10 @@ body {
 
 body {
   //essa desgraça não tá renderizando na página inteira, infeliz
-  background: url(assets/img/background.jpg) no-repeat fixed;
+  background: #e0e0e0;
+  // background: url(assets/img/background.jpg) no-repeat fixed;
   background-size: cover;
-  color: #eeeeee;
+  color: #323232;
   // background-color: #1d4457;
   // min-height: 100%;
 }
