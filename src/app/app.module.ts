@@ -6,20 +6,12 @@ import { FormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
-<<<<<<< HEAD
 import { AppComponent } from "./app.component";
 import { JogoModule } from "./jogo/jogo.module";
 import { AppRoutingModule } from "./app-routing.module";
 import { LoginPageModule } from "./login-page/login-page.module";
 import { RoomPageModule } from "./room-page/room-page.module";
 import { MenuModule } from "./room-page/menu/menu.module";
-=======
-import { AppComponent } from './app.component';
-import { JogoModule } from './jogo/jogo.module';
-import { AppRoutingModule } from './app-routing.module';
-import { LoginPageModule } from './login-page/login-page.module';
-import { RoomPageModule } from './room-page/room-page.module';
->>>>>>> 3ea85f960fd1a631cbfecf9ace630f65e2a84bd7
 
 @NgModule({
   declarations: [AppComponent],
