@@ -13,6 +13,7 @@ import { map } from "rxjs/operators";
 export class RoomComponent implements OnInit {
   @Input() temas: Tema;
   @Input() rooms: Room[];
+  @Input() websocket: any;
 
   roomClick: string;
   roomVariable: boolean = false;
@@ -87,20 +88,23 @@ export class RoomComponent implements OnInit {
   };
 
   enterRoom = function () {
+    if (!this.currentRoom) return false;
+
+    for (let i = 0; i < this.currentRoom.Jogadores.length; i++) {
+      if (this.currentRoom.Jogadores[i] == this.id_usuario) {
+        return false;
+      }
+    }
+
     this.roomVariable = true;
     this.room = {
-      NivelId: this.nv_dificuldade,
-      TemasIds: this.temaList,
-      Jogadores: this.nr_jogador,
+      SalaId: this.currentRoom.Id,
+      UsuarioId: this.id_usuario,
       NovaSala: false
     };
 
     this.websocket.send(JSON.stringify(this.room));
-
-    this.websocket.onmessage = function (event) {
-      console.log(event.data);
-    };
-  };
+  }
 
   leaveRoom = function () {
     this.roomVariable = false;

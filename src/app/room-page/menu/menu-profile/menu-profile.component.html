@@ -1,71 +1,37 @@
 <li class="nav-item" (click)="openVerticallyCentered(content)">
-  <a class="nav-link"><img class="profile" src="/src/assets/img/avatars/default.png" /> Skin</a>
+  <a class="nav-link"><img class="profile" src="/src/assets/img/avatars/{{userSkin}}" /> Skin</a>
 </li>
 
 <ng-template #content let-modal>
   <div class="modal-header">
-    <h4 class="modal-title">CADASTRO</h4>
-    <button
-      type="button"
-      class="close"
-      aria-label="Close"
-      (click)="modal.dismiss('Cross click')"
-    >
+    <h4 class="modal-title">ESCOLHA SUA SKIN</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    <form (ngSubmit)="onSubmit(joinForm.value)">
-      <div class="form-group">
-        <label for="nome">Nome</label>
-        <input ngModel name="nome" type="text" id="nome" class="form-control" />
-      </div>
-      <div class="form-group">
-        <label for="username">Usuário</label>
-        <input
-          ngModel
-          name="username"
-          type="text"
-          id="username"
-          class="form-control"
-        />
-      </div>
-      <div class="form-group">
-        <label for="email">E-mail</label>
-        <input
-          ngModel
-          name="email"
-          type="email"
-          id="email"
-          class="form-control"
-        />
-      </div>
-      <div class="form-group">
-        <label for="password">Senha</label>
-        <input
-          ngModel
-          name="password"
-          type="password"
-          id="password"
-          class="form-control"
-        />
-      </div>
-      <div class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-light"
-          (click)="modal.close('Close click')"
-        >
-          Close
-        </button>
-        <button type="submit" class="btn btn-light">Submit</button>
-      </div>
-    </form>
-    <ngx-spinner
-      bdColor="rgba(51, 51, 51, 0.8)"
-      size="large"
-      color="#fff"
-      type="pacman"
-    ></ngx-spinner>
+    <p>Skin Selecionada:</p>
+    <img class="avatar-icon" src="/src/assets/img/avatars/{{userSkin}}">
+
+    <hr>
+
+    <p>Escolha sua Skin:</p>
+    <img class="avatar-icon" (click)="changeSkin('boy.png')" src="/src/assets/img/avatars/boy.png">
+    <img class="avatar-icon" (click)="changeSkin('cheerleader.png')" src="/src/assets/img/avatars/cheerleader.png">
+    <img class="avatar-icon" (click)="changeSkin('fisherman.png')" src="/src/assets/img/avatars/fisherman.png">
+    <img class="avatar-icon" (click)="changeSkin('girl-1.png')" src="/src/assets/img/avatars/girl-1.png">
+    <img class="avatar-icon" (click)="changeSkin('girl.png')" src="/src/assets/img/avatars/girl.png">
+    <img class="avatar-icon" (click)="changeSkin('man.png')" src="/src/assets/img/avatars/man.png">
+    <img class="avatar-icon" (click)="changeSkin('muslim.png')" src="/src/assets/img/avatars/muslim.png">
+    <img class="avatar-icon" (click)="changeSkin('penguin.png')" src="/src/assets/img/avatars/penguin.png">
+    <img class="avatar-icon" (click)="changeSkin('runner.png')" src="/src/assets/img/avatars/runner.png">
+    <img class="avatar-icon" (click)="changeSkin('woman.png')" src="/src/assets/img/avatars/woman.png">
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">
+      Close
+    </button>
+  </div>
+    <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="large" color="#fff" type="pacman"></ngx-spinner>
   </div>
 </ng-template>

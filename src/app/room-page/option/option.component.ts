@@ -18,7 +18,7 @@ export class OptionComponent implements OnInit {
   nv_dificuldade: number;
   nr_jogador: number;
   room = [];
-  websocket: any;
+  @Input() websocket: any;
 
   tema: any;
 
@@ -104,6 +104,7 @@ export class OptionComponent implements OnInit {
   constructor(private httpClient: HttpClient) { }
 
   ngOnInit() {
+<<<<<<< HEAD
     const uri = `ws://monica:64803/api/Sala?UsuarioId=${this.id_usuario}`;
 
     this.websocket = new WebSocket(uri);
@@ -117,5 +118,9 @@ export class OptionComponent implements OnInit {
     };
 
     this.getTemas();
+=======
+    this.getSalas();
+    this.getTemas(); 
+>>>>>>> bb08041b64e6819b3207819661a1e50855cb671c
   }
 }

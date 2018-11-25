@@ -2,7 +2,15 @@
   <div class="container" *ngFor="let room of rooms">
     <div class="room-container">
       <!-- CLass -->
+<<<<<<< HEAD
       <div class="card room" (click)="roomClick = room.Id" [ngClass]="{ testete: roomClick }">
+=======
+      <div
+        class="card room"
+        (click)="roomClick = room.Id; currentRoom = room"
+        [ngClass]="{ testete: roomClick == room.Id }"
+      >
+>>>>>>> bb08041b64e6819b3207819661a1e50855cb671c
         <div>
           <h5>ROOM {{ room.Id }}</h5>
           <div class="difficulty difficulty-{{room.IdNivel}}">
@@ -29,7 +37,7 @@
     </div>
   </div>
   <div class="botoes">
-    <button class="enteroom" [hidden]="roomVariable" (click)="enterRoom(room.Id, room.NivelId, room.Jogadores, room.TemasIds)">
+    <button class="enteroom" [hidden]="roomVariable" (click)="enterRoom(room)">
       ENTRAR NA SALA
     </button>
     <button class="leaveroom" [hidden]="!roomVariable" (click)="leaveRoom()">
