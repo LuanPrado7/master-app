@@ -4,9 +4,13 @@ import { CommonModule } from "@angular/common";
 import { MenuProfileComponent } from "./menu-profile/menu-profile.component";
 import { MenuStoreComponent } from "./menu-store/menu-store.component";
 import { MenuRankingComponent } from './menu-ranking/menu-ranking.component';
+import { MatDialogModule, MatTableModule, MatIconModule } from '@angular/material';
 
 @NgModule({
-  imports: [CommonModule, NgxSpinnerModule],
+  imports: [CommonModule, NgxSpinnerModule,
+    MatDialogModule,
+    MatTableModule,
+    MatIconModule],
   exports: [MenuStoreComponent, MenuProfileComponent, MenuRankingComponent],
   declarations: [
     MenuStoreComponent, 
