@@ -39,7 +39,8 @@ export class OptionComponent implements OnInit {
                 id_tema: tema.Id,
                 titulo: tema.Tema,
                 cor: tema.Cor,
-                borderColor: 'white'
+                borderColor: 'white',
+                backgroundColor: '#cfcfcf'
               }
             });
         }
@@ -57,6 +58,10 @@ export class OptionComponent implements OnInit {
       );
   }
 
+  getNomeTema = function (tema) {
+    return tema.titulo;
+  };
+
   getLogoTema = function (tema) {
     return 'assets/img/' + tema.logo;
   };
@@ -67,7 +72,9 @@ export class OptionComponent implements OnInit {
 
   temaChoice = function (tema) {
     this.temaLeave = false;
+    tema.backgroundColor = tema.backgroundColor === tema.cor ? '#cfcfcf' : tema.cor;
     tema.borderColor = 'white';
+
     if (this.temaList.length < 5) {
       for (let i = 0; i < 5; i++) {
         if (this.temaList[i] === tema.id_tema) {

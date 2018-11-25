@@ -13,6 +13,7 @@ import { map } from "rxjs/operators";
 export class MenuProfileComponent {
   modal: any;
   userSkin = '';
+  userName = '';
   tempSkin = '';
   private readonly notifier: NotifierService;
 
@@ -35,6 +36,7 @@ export class MenuProfileComponent {
         res => {
           console.log(res.body);
           this.userSkin = res.body.Skin;
+          this.userName = res.body.Username
         },
         err => {
           setTimeout(() => {

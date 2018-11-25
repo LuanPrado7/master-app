@@ -39,9 +39,10 @@
       <div
         class="circle circle-{{i + 1}}"
         [ngStyle]="{
-          background: getStyleTema(tema),
-          'border-color': tema.borderColor
+          'border-color': tema.borderColor,
+          'background-color': tema.backgroundColor
         }"
+        ngbTooltip={{getNomeTema(tema)}}
         (click)="temaChoice(tema)"
       >
         <img class="logo" [src]="getLogoTema(tema)" alt="" />
