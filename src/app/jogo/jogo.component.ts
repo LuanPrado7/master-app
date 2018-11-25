@@ -101,7 +101,7 @@ export class JogoComponent implements OnInit {
     this.webSocket.onmessage = function(event) {
       var obj = JSON.parse(event.data);
 
-      if(_this.jogoConfig.idJogador != obj.IdUsuario) {
+      if(!obj.Finalizou && _this.jogoConfig.idJogador != obj.IdUsuario) {
         _this.rankingComponent.adicionaPontoAdversario(obj.IdTema, obj.IdUsuario);
       } 
       
