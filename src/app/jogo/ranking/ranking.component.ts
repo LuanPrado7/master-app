@@ -65,7 +65,6 @@ export class RankingComponent implements OnInit {
 
       jogador.pontos_tema = clone;
     });
-    console.log(this.ranking);
   };
 
   calcularPontosGerais = function (idNivel) {

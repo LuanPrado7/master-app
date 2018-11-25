@@ -31,7 +31,7 @@ export class LoginPageComponent {
   }
   
   jogar() {
-    console.log('entrou');
+    ('entrou');
     
     this.user = new Usuario("","","","",0,1,'default.png', false);
 

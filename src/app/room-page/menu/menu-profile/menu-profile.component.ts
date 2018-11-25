@@ -34,7 +34,6 @@ export class MenuProfileComponent {
       .pipe(map(res => res as any))
       .subscribe(
         res => {
-          console.log(res.body);
           this.userSkin = res.body.Skin;
           this.userName = res.body.Username
         },
@@ -72,7 +71,6 @@ export class MenuProfileComponent {
       .subscribe(
         res => {
           res.body.Skin = value;
-          console.log(res.body);
           this.httpClient.put(`http://monica:64803/api/Usuario/`, res.body, {
             observe: "response"
           })

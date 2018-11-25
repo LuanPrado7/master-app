@@ -56,7 +56,6 @@ export class RoomPageComponent implements OnInit {
       _this.salaCriada(obj); 
 
       if(obj.SalaCheia) {
-        console.log(obj);
         let gameData: GameData = {
           idNivel: <number>obj.IdNivel,
           idSala: <number>obj.Id,
@@ -65,7 +64,6 @@ export class RoomPageComponent implements OnInit {
           numJogadores: <number>obj.JogadoresNaSala
         }
         localStorage.setItem("gameData", JSON.stringify(gameData));
-        console.log(this.router);
         this.router.navigate(["/jogo"]);
       }
     };

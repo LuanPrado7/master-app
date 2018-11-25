@@ -42,10 +42,11 @@ export class ResumoDialogComponent implements OnInit{
         pontGeral: element.pontos_geral,
         userId: element.id_jogador
       }
-      console.log(player);
       this.dataSource.push(player)
     });
-    let currentPlayer = this.data.find(jogador => jogador.userId == localStorage.getItem('userId'));
+    console.log(this.data);
+    let currentPlayer = this.data.find(jogador => jogador.id_jogador == parseInt(localStorage.getItem('userId')));
+    console.log(currentPlayer);
     this.httpClient
       .get(`http://monica:64803/api/Usuario/${localStorage.getItem('userId')}`, {
         observe: "response"
@@ -54,10 +55,16 @@ export class ResumoDialogComponent implements OnInit{
       .subscribe(
         res => {
           console.log(res.body);
-          res.body.Pontos = res.body.Pontos + currentPlayer.pontGeral;
+          res.body.Pontos = res.body.Pontos + currentPlayer.pontos_geral;
+          console.log(res);
           this.httpClient.put(`http://monica:64803/api/Usuario/`, res.body, {
             observe: "response"
           })
+          .subscribe(
+            res => {
+              console.log(res);
+            }
+          )
         },
         err => {
           console.log(err);
