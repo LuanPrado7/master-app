@@ -1,0 +1,71 @@
+<li class="nav-item" (click)="openVerticallyCentered(content)">
+  <a class="nav-link"><i class="fa fa-user"></i> Perfil</a>
+</li>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">CADASTRO</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form (ngSubmit)="onSubmit(joinForm.value)">
+      <div class="form-group">
+        <label for="nome">Nome</label>
+        <input ngModel name="nome" type="text" id="nome" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label for="username">Usuário</label>
+        <input
+          ngModel
+          name="username"
+          type="text"
+          id="username"
+          class="form-control"
+        />
+      </div>
+      <div class="form-group">
+        <label for="email">E-mail</label>
+        <input
+          ngModel
+          name="email"
+          type="email"
+          id="email"
+          class="form-control"
+        />
+      </div>
+      <div class="form-group">
+        <label for="password">Senha</label>
+        <input
+          ngModel
+          name="password"
+          type="password"
+          id="password"
+          class="form-control"
+        />
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-light"
+          (click)="modal.close('Close click')"
+        >
+          Close
+        </button>
+        <button type="submit" class="btn btn-light">Submit</button>
+      </div>
+    </form>
+    <ngx-spinner
+      bdColor="rgba(51, 51, 51, 0.8)"
+      size="large"
+      color="#fff"
+      type="pacman"
+    ></ngx-spinner>
+  </div>
+</ng-template>

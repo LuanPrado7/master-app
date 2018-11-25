@@ -16,5 +16,9 @@ export class RoomPageComponent implements OnInit {
     this.rooms = rooms;
   }
 
+  salaCriada(roomCreated) {
+    this.rooms.push(roomCreated);
+  }
+
   ngOnInit() {}
 }

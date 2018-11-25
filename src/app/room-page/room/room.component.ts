@@ -17,14 +17,25 @@ export class RoomComponent implements OnInit {
   roomVariable: boolean = false;
 
   room: any;
+  user: any;
 
-  getSalas = function() {
-    // this.httpClient.get('http://monica:64803/api/Sala')
-    // .subscribe(
-    //   res => {
-    //     this.room = res;
-    //   });
+  getTemas = function() {
+    this.httpClient.get('http://monica:64803/api/Tema')
+    .subscribe(
+      res => {
+        this.tema = res;
+      }
+    );
   };
+  
+  // getUsers = function(id) {
+  //   this.httpClient.get('http://monica:64803/api/Usuario')
+  //   .subscribe(
+  //     res => {
+  //       this.user = res;
+  //     }
+  //   );
+  // };
 
   getLogoTema = function(tema) {
     let room_temas = this.temas.find(
@@ -65,7 +76,6 @@ export class RoomComponent implements OnInit {
   constructor(private httpClient: HttpClient) {}
 
   ngOnInit() {
-    // this.getSalas();
     console.log(this.rooms);
   }
 }
