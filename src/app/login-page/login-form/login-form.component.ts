@@ -30,7 +30,7 @@ export class LoginFormComponent {
   }
 
   openVerticallyCentered(content) {
-    this.modalService.open(content, {
+    this.modal = this.modalService.open(content, {
       windowClass: "dark-modal",
       centered: true
     });
