@@ -12,6 +12,7 @@ import { map } from "rxjs/operators";
 })
 export class MenuProfileComponent {
   modal: any;
+  userSkin = '';
   private readonly notifier: NotifierService;
 
   constructor(
@@ -33,23 +34,21 @@ export class MenuProfileComponent {
     event.preventDefault();
     this.spinner.show();
     this.httpClient
-      .get(`http://monica:64803/api/Usuario/`, {
+      .get(`http://monica:64803/api/Usuario/${localStorage.getItem('userId')}`, {
         observe: "response"
       })
       .pipe(map(res => res as any))
       .subscribe(
         res => {
-          setTimeout(() => {
-            this.spinner.hide();
-            this.modal.close();
-          }, 2000);
+          console.log(res.body);
+          // this.userSkin = res.body.usuario.skin;
         },
         err => {
           setTimeout(() => {
             this.spinner.hide();
             this.notifier.notify(
               "error",
-              "Não foi possível cadastrar. Por favor, tente novamente"
+              "Ocorreu um erro. Por favor, tente novamente mais tarde."
             );
           }, 2000);
         }

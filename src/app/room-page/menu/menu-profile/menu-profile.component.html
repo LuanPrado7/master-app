@@ -4,68 +4,35 @@
 
 <ng-template #content let-modal>
   <div class="modal-header">
-    <h4 class="modal-title">CADASTRO</h4>
-    <button
-      type="button"
-      class="close"
-      aria-label="Close"
-      (click)="modal.dismiss('Cross click')"
-    >
+    <h4 class="modal-title">ESCOLHA SUA SKIN</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    <form (ngSubmit)="onSubmit(joinForm.value)">
-      <div class="form-group">
-        <label for="nome">Nome</label>
-        <input ngModel name="nome" type="text" id="nome" class="form-control" />
-      </div>
-      <div class="form-group">
-        <label for="username">Usuário</label>
-        <input
-          ngModel
-          name="username"
-          type="text"
-          id="username"
-          class="form-control"
-        />
-      </div>
-      <div class="form-group">
-        <label for="email">E-mail</label>
-        <input
-          ngModel
-          name="email"
-          type="email"
-          id="email"
-          class="form-control"
-        />
-      </div>
-      <div class="form-group">
-        <label for="password">Senha</label>
-        <input
-          ngModel
-          name="password"
-          type="password"
-          id="password"
-          class="form-control"
-        />
-      </div>
-      <div class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-light"
-          (click)="modal.close('Close click')"
-        >
-          Close
-        </button>
-        <button type="submit" class="btn btn-light">Submit</button>
-      </div>
-    </form>
-    <ngx-spinner
-      bdColor="rgba(51, 51, 51, 0.8)"
-      size="large"
-      color="#fff"
-      type="pacman"
-    ></ngx-spinner>
+    <p>Skin Selecionada:</p>
+    <img class="profile-skins" src="/src/assets/img/avatars/{{userSkin}}.png">
+
+    <hr>
+
+    <p>Escolha sua Skin:</p>
+    <img class="profile-skins" src="/src/assets/img/avatars/free-avatar/boy.png">
+    <img class="profile-skins" src="/src/assets/img/avatars/free-avatar/cheerleader.png">
+    <img class="profile-skins" src="/src/assets/img/avatars/free-avatar/fisherman.png">
+    <img class="profile-skins" src="/src/assets/img/avatars/free-avatar/girl-1.png">
+    <img class="profile-skins" src="/src/assets/img/avatars/free-avatar/girl.png">
+    <img class="profile-skins" src="/src/assets/img/avatars/free-avatar/man.png">
+    <img class="profile-skins" src="/src/assets/img/avatars/free-avatar/muslim.png">
+    <img class="profile-skins" src="/src/assets/img/avatars/free-avatar/penguin.png">
+    <img class="profile-skins" src="/src/assets/img/avatars/free-avatar/runner.png">
+    <img class="profile-skins" src="/src/assets/img/avatars/free-avatar/woman.png">
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">
+      Close
+    </button>
+    <button type="submit" class="btn btn-light">Submit</button>
+  </div>
+    <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="large" color="#fff" type="pacman"></ngx-spinner>
   </div>
 </ng-template>

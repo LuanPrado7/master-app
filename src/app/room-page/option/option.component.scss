@@ -83,12 +83,12 @@
   display: -webkit-box;
   cursor: pointer;
   &-1 {
-    background-color: red;
-    border-color: red;
+    background-color: #a5d6a7;
+    border-color: #a5d6a7;
     margin-right: 20px;
-    &:hover {
-      background-color: rgb(250, 99, 99);
-    }
+    // &:hover {
+    //   background-color: rgb(250, 99, 99);
+    // }
     &:disabled {
       background-color: rgb(133, 129, 129);
       border-color: rgb(133, 129, 129);
@@ -96,12 +96,12 @@
     }
   }
   &-2 {
-    background-color: orangered;
-    border-color: orangered;
+    background-color: #66bb6a;
+    border-color: #66bb6a;
     margin-right: 20px;
-    &:hover {
-      background-color: rgb(245, 130, 88);
-    }
+    // &:hover {
+    //   background-color: rgb(245, 130, 88);
+    // }
     &:disabled {
       background-color: rgb(133, 129, 129);
       border-color: rgb(133, 129, 129);
@@ -109,12 +109,12 @@
     }
   }
   &-3 {
-    background-color: greenyellow;
-    border-color: greenyellow;
+    background-color: #43a047;
+    border-color: #43a047;
     margin-right: 20px;
-    &:hover {
-      background-color: rgb(215, 247, 168);
-    }
+    // &:hover {
+    //   background-color: rgb(215, 247, 168);
+    // }
     &:disabled {
       background-color: rgb(185, 178, 178);
       border-color: rgb(133, 129, 129);
@@ -122,12 +122,12 @@
     }
   }
   &-4 {
-    background-color: green;
-    border-color: green;
+    background-color: #2e7d32;
+    border-color: #2e7d32;
     margin-right: 20px;
-    &:hover {
-      background-color: rgb(76, 136, 76);
-    }
+    // &:hover {
+    //   background-color: rgb(76, 136, 76);
+    // }
     &:disabled {
       background-color: rgb(133, 129, 129);
       border-color: rgb(133, 129, 129);
