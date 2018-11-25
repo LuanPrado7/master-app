@@ -14,7 +14,8 @@ export interface Player {
   username: string,
   pontos: number,
   classificacao: string,
-  currentPlayer: boolean
+  currentPlayer: boolean,
+  cadastrado: boolean
 }
 @Component({
   selector: 'app-menu-ranking',
@@ -73,19 +74,26 @@ export class MenuRankingComponent {
               username: element.Username,
               classificacao: element.Classificacao,
               pontos: element.PontosJogada,
+              cadastrado: element.Cadastrado,
               currentPlayer: (this.data.usuario.IdUsuario == element.IdUsuario ? true : false)
             }
-            this.dataSource.push(player);
+            if(player.cadastrado){
+              this.dataSource.push(player);
+            };
           });
-          let player: Player = {
-            foto: this.data.usuario.Skin,
-            posicao: this.data.usuario.Posicao,
-            username: this.data.usuario.Username,
-            classificacao: this.data.usuario.Classificacao,
-            pontos: this.data.usuario.PontosJogada,
-            currentPlayer: true
+          let existe = this.data.ranking.find(jogador => jogador.IdUsuario == this.data.usuario.IdUsuario);
+          if(!existe && this.data.usuario.Cadastrado){
+            let player: Player = {
+              foto: this.data.usuario.Skin,
+              posicao: this.data.usuario.Posicao,
+              username: this.data.usuario.Username,
+              classificacao: this.data.usuario.Classificacao,
+              pontos: this.data.usuario.PontosJogada,
+              cadastrado: this.data.usuario.Cadastrado,
+              currentPlayer: true
+            }
+            this.dataSource.push(player);
           }
-          this.dataSource.push(player);
         },
         err => {
           setTimeout(() => {
