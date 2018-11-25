@@ -45,7 +45,6 @@ export class MenuRankingComponent {
   }
 
   getStyle(row){
-    // console.log(row);
     if(row.currentPlayer){
       return "#a5d6a7";
     }
@@ -67,7 +66,6 @@ export class MenuRankingComponent {
             size: 'lg'
           });
           this.data = res.body;
-          console.log(this.data);
           this.data.ranking.forEach((element, i) => {
             let player: Player = {
               foto: element.Skin,
@@ -79,7 +77,6 @@ export class MenuRankingComponent {
             }
             this.dataSource.push(player);
           });
-          console.log(this.dataSource.find(x => x.IdUsuario == this.data.usuario.IdUsuario));
           // if(!this.dataSource.find(x => x.IdUsuario == this.data.usuario.IdUsuario)){
           //   console.log(x);
           //   let player: Player = {
@@ -93,7 +90,6 @@ export class MenuRankingComponent {
           //   this.dataSource.push(player);
           // }
           // this.currentPlayer = this.data.usuario;
-          // console.log(this.dataSource);
         },
         err => {
           setTimeout(() => {

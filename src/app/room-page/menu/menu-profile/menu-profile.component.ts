@@ -13,6 +13,7 @@ import { map } from "rxjs/operators";
 export class MenuProfileComponent {
   modal: any;
   userSkin = '';
+  tempSkin = '';
   private readonly notifier: NotifierService;
 
   constructor(
@@ -24,13 +25,41 @@ export class MenuProfileComponent {
     this.notifier = notifierService;
   }
 
+  ngOnInit(){
+    this.httpClient
+      .get(`http://monica:64803/api/Usuario/${localStorage.getItem('userId')}`, {
+        observe: "response"
+      })
+      .pipe(map(res => res as any))
+      .subscribe(
+        res => {
+          console.log(res.body);
+          this.userSkin = res.body.Skin;
+        },
+        err => {
+          setTimeout(() => {
+            this.spinner.hide();
+            this.notifier.notify(
+              "error",
+              "Ocorreu um erro. Por favor, tente novamente mais tarde."
+            );
+          }, 2000);
+        }
+      );
+  }
+
   openVerticallyCentered(content) {
+    this.onOpenModal(content);
+  }
+
+  onOpenModal(content) {
+    this.spinner.show();
     this.modal = this.modalService.open(content, {
       centered: true
     });
   }
 
-  onSubmit(value: any) {
+  changeSkin(value: any) {
     event.preventDefault();
     this.spinner.show();
     this.httpClient
@@ -40,8 +69,17 @@ export class MenuProfileComponent {
       .pipe(map(res => res as any))
       .subscribe(
         res => {
+          res.body.Skin = value;
           console.log(res.body);
-          // this.userSkin = res.body.usuario.skin;
+          this.httpClient.put(`http://monica:64803/api/Usuario/`, res.body, {
+            observe: "response"
+          })
+          .subscribe(
+            res => {
+              this.spinner.hide();
+              this.userSkin = value;
+            }
+          )
         },
         err => {
           setTimeout(() => {

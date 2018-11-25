@@ -1,5 +1,5 @@
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-
+import { Router } from "@angular/router";
 import { Component } from "@angular/core";
 
 @Component({
@@ -10,7 +10,14 @@ import { Component } from "@angular/core";
 export class MenuComponent {
   modal: any;
 
-  constructor(private modalService: NgbModal) {}
+  constructor(
+    private modalService: NgbModal,
+    private router: Router
+  ) { }
 
-  
+  signOut() {
+    localStorage.clear();
+    this.router.navigate(["/login"]);
+  }
+
 }

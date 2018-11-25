@@ -1,5 +1,5 @@
 <li class="nav-item" (click)="openVerticallyCentered(content)">
-  <a class="nav-link"><img class="profile" src="/src/assets/img/avatars/default.png" /> Skin</a>
+  <a class="nav-link"><img class="profile" src="/src/assets/img/avatars/{{userSkin}}" /> Skin</a>
 </li>
 
 <ng-template #content let-modal>
@@ -11,27 +11,26 @@
   </div>
   <div class="modal-body">
     <p>Skin Selecionada:</p>
-    <img class="profile-skins" src="/src/assets/img/avatars/{{userSkin}}.png">
+    <img class="avatar-icon" src="/src/assets/img/avatars/{{userSkin}}">
 
     <hr>
 
     <p>Escolha sua Skin:</p>
-    <img class="profile-skins" src="/src/assets/img/avatars/free-avatar/boy.png">
-    <img class="profile-skins" src="/src/assets/img/avatars/free-avatar/cheerleader.png">
-    <img class="profile-skins" src="/src/assets/img/avatars/free-avatar/fisherman.png">
-    <img class="profile-skins" src="/src/assets/img/avatars/free-avatar/girl-1.png">
-    <img class="profile-skins" src="/src/assets/img/avatars/free-avatar/girl.png">
-    <img class="profile-skins" src="/src/assets/img/avatars/free-avatar/man.png">
-    <img class="profile-skins" src="/src/assets/img/avatars/free-avatar/muslim.png">
-    <img class="profile-skins" src="/src/assets/img/avatars/free-avatar/penguin.png">
-    <img class="profile-skins" src="/src/assets/img/avatars/free-avatar/runner.png">
-    <img class="profile-skins" src="/src/assets/img/avatars/free-avatar/woman.png">
+    <img class="avatar-icon" (click)="changeSkin('boy.png')" src="/src/assets/img/avatars/boy.png">
+    <img class="avatar-icon" (click)="changeSkin('cheerleader.png')" src="/src/assets/img/avatars/cheerleader.png">
+    <img class="avatar-icon" (click)="changeSkin('fisherman.png')" src="/src/assets/img/avatars/fisherman.png">
+    <img class="avatar-icon" (click)="changeSkin('girl-1.png')" src="/src/assets/img/avatars/girl-1.png">
+    <img class="avatar-icon" (click)="changeSkin('girl.png')" src="/src/assets/img/avatars/girl.png">
+    <img class="avatar-icon" (click)="changeSkin('man.png')" src="/src/assets/img/avatars/man.png">
+    <img class="avatar-icon" (click)="changeSkin('muslim.png')" src="/src/assets/img/avatars/muslim.png">
+    <img class="avatar-icon" (click)="changeSkin('penguin.png')" src="/src/assets/img/avatars/penguin.png">
+    <img class="avatar-icon" (click)="changeSkin('runner.png')" src="/src/assets/img/avatars/runner.png">
+    <img class="avatar-icon" (click)="changeSkin('woman.png')" src="/src/assets/img/avatars/woman.png">
 
   <div class="modal-footer">
     <button type="button" class="btn btn-light" (click)="modal.close('Close click')">
       Close
     </button>
-    <button type="submit" class="btn btn-light">Submit</button>
   </div>
     <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="large" color="#fff" type="pacman"></ngx-spinner>
   </div>
