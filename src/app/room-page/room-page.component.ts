@@ -12,6 +12,9 @@ export class RoomPageComponent implements OnInit {
   @ViewChild(RoomComponent) roomComponent: RoomComponent;
   rooms = [];
 
+  id_usuario = localStorage.getItem('userId');
+  websocket: any;
+
   salas(rooms) {
     this.rooms = rooms;
   }
@@ -20,5 +23,17 @@ export class RoomPageComponent implements OnInit {
     this.rooms.push(roomCreated);
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    const uri = `ws://monica:64803/api/Sala?UsuarioId=${ this.id_usuario }`;
+
+    this.websocket = new WebSocket(uri);
+
+    var _this = this;
+
+    this.websocket.onmessage = function(event) {
+      var obj = JSON.parse(event.data);      
+      _this.salaCriada(obj);
+    };
+
+  }
 }
