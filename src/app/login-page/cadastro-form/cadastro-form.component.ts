@@ -36,7 +36,6 @@ export class CadastroFormComponent {
 
   openVerticallyCentered(content) {
     this.modal = this.modalService.open(content, {
-      windowClass: "dark-modal",
       centered: true
     });
   }
