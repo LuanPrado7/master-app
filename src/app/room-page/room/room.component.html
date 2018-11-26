@@ -1,6 +1,6 @@
 <div class="teste" *ngIf="this.rooms.length > 0">
-  <div class="container" *ngFor="let room of rooms">
-    <div class="room-container">
+  <div class="container" doScroll>
+    <div class="room-container" *ngFor="let room of rooms">
       <div class="card room" (click)="roomClick = room.Id; currentRoom = room" [ngClass]="{ testete: roomClick == room.Id }">
         <div class="card-header">
           <h5>ROOM {{ room.Id }}</h5>

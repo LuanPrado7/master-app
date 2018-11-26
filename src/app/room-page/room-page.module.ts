@@ -9,15 +9,16 @@ import { RoomComponent } from "./room/room.component";
 import { OptionComponent } from "./option/option.component";
 import { MenuComponent } from "./menu/menu.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { DoScrollDirective } from "../directives/do-scroll-directive";
 
 @NgModule({
-  imports: [CommonModule, FormsModule, MenuModule, NgbModule
-  ],
+  imports: [CommonModule, FormsModule, MenuModule, NgbModule],
   declarations: [
     RoomPageComponent,
     RoomComponent,
     OptionComponent,
-    MenuComponent
+    MenuComponent,
+    DoScrollDirective
   ]
 })
 export class RoomPageModule {}

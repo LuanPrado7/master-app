@@ -111,14 +111,14 @@ export class RoomComponent implements OnInit {
       room_temas => room_temas.id_tema == temaId
     );
 
-    return "assets/img/" + room_temas.logo;
+    return "assets/img/" + (room_temas && room_temas.logo);
   };
 
   getStyleTema = function (temaId) {
     let room_temas = this.listaTema.find(
       room_temas => room_temas.id_tema == temaId
     );
-    return room_temas.cor;
+    return room_temas && room_temas.cor;
   };
 
   enterRoom = function () {
@@ -148,6 +148,6 @@ export class RoomComponent implements OnInit {
 
   ngOnInit() {
     this.getTemas();
-    this.getUsers()
+    this.getUsers();
   }
 }
