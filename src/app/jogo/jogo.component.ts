@@ -126,10 +126,10 @@ export class JogoComponent implements OnInit {
           _this.rankingComponent.ranking = _this.rankingComponent.ranking.sort((a, b) => a.pontos_geral < b.pontos_geral ? 1 : (a.pontos_geral > b.pontos_geral ? -1 : 0));
 
           _this.rankingComponent.ranking[0].pontos_geral = (
-            _this.gameData.idNivel == 1 ? (_this.rankingComponent.ranking[0].pontos_geral + 500) : (
-              _this.gameData.idNivel == 2 ? (_this.rankingComponent.ranking[0].pontos_geral + 1000) : (
-                _this.gameData.idNivel == 3 ? (_this.rankingComponent.ranking[0].pontos_geral + 2000) : (
-                  _this.gameData.idNivel == 4 ? (_this.rankingComponent.ranking[0].pontos_geral + 4000) : 0
+            _this.gameData.idNivel == 1 ? (_this.rankingComponent.ranking[0].pontos_geral + 50) : (
+              _this.gameData.idNivel == 2 ? (_this.rankingComponent.ranking[0].pontos_geral + 100) : (
+                _this.gameData.idNivel == 3 ? (_this.rankingComponent.ranking[0].pontos_geral + 200) : (
+                  _this.gameData.idNivel == 4 ? (_this.rankingComponent.ranking[0].pontos_geral + 400) : 0
                 )
               )
             )
