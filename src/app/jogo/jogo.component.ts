@@ -107,7 +107,7 @@ export class JogoComponent implements OnInit {
     });
 
     this.qtdJogadoresFim = 0;
-    this.qtdJogadores = 2;
+    this.qtdJogadores = gameData.numJogadores;
 
     this.webSocket = new WebSocket("ws://monica:64803/api/Partida?UsuarioId=" + this.jogoConfig.idJogador);
 
