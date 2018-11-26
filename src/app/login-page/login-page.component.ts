@@ -45,6 +45,7 @@ export class LoginPageComponent {
           localStorage.setItem("userId", JSON.stringify(res.body));
           setTimeout(() => {
             this.spinner.hide();
+            localStorage.setItem("cadastrado", "false");
             this.router.navigate(["/room"]);
           }, 2000);
         },
