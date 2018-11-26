@@ -1,4 +1,3 @@
-<notifier-container></notifier-container>
 <li class="nav-item show-pointer" (click)="openVerticallyCentered(content)">
   <a class="nav-link"><img class="profile" src="/src/assets/img/avatars/{{userSkin}}" /> {{userName}}</a>
 </li>
@@ -14,19 +13,21 @@
     <p>Skin Selecionada:</p>
     <img class="avatar-icon" src="/src/assets/img/avatars/{{userSkin}}">
 
-    <hr>
 
-    <p>Escolha sua Skin:</p>
-    <img class="avatar-icon" (click)="changeSkin('boy.png')" src="/src/assets/img/avatars/boy.png">
-    <img class="avatar-icon" (click)="changeSkin('cheerleader.png')" src="/src/assets/img/avatars/cheerleader.png">
-    <img class="avatar-icon" (click)="changeSkin('fisherman.png')" src="/src/assets/img/avatars/fisherman.png">
-    <img class="avatar-icon" (click)="changeSkin('girl-1.png')" src="/src/assets/img/avatars/girl-1.png">
-    <img class="avatar-icon" (click)="changeSkin('girl.png')" src="/src/assets/img/avatars/girl.png">
-    <img class="avatar-icon" (click)="changeSkin('man.png')" src="/src/assets/img/avatars/man.png">
-    <img class="avatar-icon" (click)="changeSkin('muslim.png')" src="/src/assets/img/avatars/muslim.png">
-    <img class="avatar-icon" (click)="changeSkin('penguin.png')" src="/src/assets/img/avatars/penguin.png">
-    <img class="avatar-icon" (click)="changeSkin('runner.png')" src="/src/assets/img/avatars/runner.png">
-    <img class="avatar-icon" (click)="changeSkin('woman.png')" src="/src/assets/img/avatars/woman.png">
+    <div *ngIf="cadastrado">
+      <hr>
+      <p>Escolha sua Skin:</p>
+      <img class="avatar-icon" (click)="changeSkin('boy.png')" src="/src/assets/img/avatars/boy.png">
+      <img class="avatar-icon" (click)="changeSkin('cheerleader.png')" src="/src/assets/img/avatars/cheerleader.png">
+      <img class="avatar-icon" (click)="changeSkin('fisherman.png')" src="/src/assets/img/avatars/fisherman.png">
+      <img class="avatar-icon" (click)="changeSkin('girl-1.png')" src="/src/assets/img/avatars/girl-1.png">
+      <img class="avatar-icon" (click)="changeSkin('girl.png')" src="/src/assets/img/avatars/girl.png">
+      <img class="avatar-icon" (click)="changeSkin('man.png')" src="/src/assets/img/avatars/man.png">
+      <img class="avatar-icon" (click)="changeSkin('muslim.png')" src="/src/assets/img/avatars/muslim.png">
+      <img class="avatar-icon" (click)="changeSkin('penguin.png')" src="/src/assets/img/avatars/penguin.png">
+      <img class="avatar-icon" (click)="changeSkin('runner.png')" src="/src/assets/img/avatars/runner.png">
+      <img class="avatar-icon" (click)="changeSkin('woman.png')" src="/src/assets/img/avatars/woman.png">
+    </div>
   </div>
   <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="large" color="#fff" type="pacman"></ngx-spinner>
 </ng-template>

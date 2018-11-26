@@ -15,6 +15,7 @@ export class MenuProfileComponent {
   userSkin = '';
   userName = '';
   tempSkin = '';
+  cadastrado = true;
   private readonly notifier: NotifierService;
 
   constructor(
@@ -27,6 +28,9 @@ export class MenuProfileComponent {
   }
 
   ngOnInit() {
+    if(localStorage.getItem("cadastrado") == "false"){
+      this.cadastrado = false;
+    }
     this.httpClient
       .get(`http://monica:64803/api/Usuario/${localStorage.getItem('userId')}`, {
         observe: "response"
@@ -72,6 +76,7 @@ export class MenuProfileComponent {
         res => {
           if (res.body.Cadastrado) {
             res.body.Skin = value;
+            this.cadastrado = true;
             this.httpClient.put(`http://monica:64803/api/Usuario/`, res.body, {
               observe: "response"
             })
