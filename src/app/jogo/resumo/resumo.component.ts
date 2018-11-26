@@ -28,6 +28,7 @@ export class ResumoDialogComponent implements OnInit{
   dataSource = [];
 
   voltarMenu = function() {
+    localStorage.removeItem("gameData");
     this.router.navigate(["/room"])
   }
 

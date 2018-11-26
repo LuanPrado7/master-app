@@ -26,7 +26,7 @@ export class MenuProfileComponent {
     this.notifier = notifierService;
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.httpClient
       .get(`http://monica:64803/api/Usuario/${localStorage.getItem('userId')}`, {
         observe: "response"
@@ -70,16 +70,27 @@ export class MenuProfileComponent {
       .pipe(map(res => res as any))
       .subscribe(
         res => {
-          res.body.Skin = value;
-          this.httpClient.put(`http://monica:64803/api/Usuario/`, res.body, {
-            observe: "response"
-          })
-          .subscribe(
-            res => {
+          if (res.body.Cadastrado) {
+            res.body.Skin = value;
+            this.httpClient.put(`http://monica:64803/api/Usuario/`, res.body, {
+              observe: "response"
+            })
+              .subscribe(
+                res => {
+                  this.spinner.hide();
+                  this.userSkin = value;
+                }
+              )
+          } else {
+            setTimeout(() => {
               this.spinner.hide();
-              this.userSkin = value;
-            }
-          )
+              this.userSkin = 'default.png';
+              this.notifier.notify(
+                "error",
+                "Você precisa se cadastrar para poder escolher uma nova Skin."
+              );
+            }, 2000);
+          }
         },
         err => {
           setTimeout(() => {
