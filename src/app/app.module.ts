@@ -13,21 +13,22 @@ import { RoomPageModule } from "./room-page/room-page.module";
 import { MenuModule } from "./room-page/menu/menu.module";
 
 @NgModule({
-  declarations: [AppComponent],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    MatNativeDateModule,
-    JogoModule,
-    BrowserAnimationsModule,
-    LoginPageModule,
-    RoomPageModule,
-    FormsModule,
-    MenuModule
-  ],
-  schemas: [NO_ERRORS_SCHEMA],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [AppComponent],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        MatNativeDateModule,
+        JogoModule,
+        BrowserAnimationsModule,
+        LoginPageModule,
+        RoomPageModule,
+        FormsModule,
+        MenuModule
+    ],
+    schemas: [NO_ERRORS_SCHEMA],
+    providers: [],
+    bootstrap: [AppComponent],
+    exports: []
 })
-export class AppModule {}
+export class AppModule { }

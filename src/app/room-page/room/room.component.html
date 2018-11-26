@@ -1,11 +1,11 @@
 <div class="teste" *ngIf="this.rooms.length > 0">
-  <div class="container" *ngFor="let room of rooms">
-    <div class="room-container">
+  <div class="container" doScroll>
+    <div class="room-container" *ngFor="let room of rooms">
       <div class="card room" (click)="roomClick = room.Id; currentRoom = room" [ngClass]="{ testete: roomClick == room.Id }">
-        <div>
+        <div class="card-header">
           <h5>ROOM {{ room.Id }}</h5>
           <div class="difficulty difficulty-{{room.IdNivel}}">
-            <h3>{{ room.IdNivel }}</h3>
+            <h5>{{ getNivel(room.IdNivel) }}</h5>
           </div>
         </div>
         <div *ngFor="let temaId of room.Temas; let i = index">
