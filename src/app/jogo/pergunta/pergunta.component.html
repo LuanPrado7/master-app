@@ -2,6 +2,8 @@
   <div class="quiz-header"></div>
   <h1>Master</h1>
 
+  <img class="star" *ngIf="perguntas[perguntaAtual].pergunta.Patrocinada" src="assets/img/star.png" alt="">
+
   <div id="countdown">
     <div id="countdown-number" [ngStyle]="{'color': timer <= 5 ? 'red' : 'white'}">{{timer}}</div>
     <svg>
