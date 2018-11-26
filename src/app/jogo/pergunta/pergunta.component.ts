@@ -21,7 +21,7 @@ export class PerguntaComponent implements OnInit {
   perguntaAtual: number;
   timerToken: number;
   timer: number;
-  tempoPorPergunta: number = 1000000;
+  tempoPorPergunta: number = 15;
   qtdPerguntas: number = 20;
   tempoDeJogo: number = this.tempoPorPergunta * this.qtdPerguntas;
   block_perguntas: boolean = false;
