@@ -88,6 +88,16 @@ export class RoomComponent implements OnInit {
     return user.nome;
   }
 
+  getNivel(nivelId) {
+    return nivelId === 1 ? 'Fácil' : (
+      nivelId === 2 ? 'Intermediário' : (
+        nivelId === 3 ? 'Difícil' : (
+          nivelId === 4 ? 'Mestrão' : 'inválido'
+        )
+      )
+    )
+  }
+
   getUserDescription(userId) {
     let user = this.listaUsuario.find(
       user => user.id == userId
