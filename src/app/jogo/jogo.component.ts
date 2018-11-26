@@ -26,13 +26,8 @@ export class JogoComponent implements OnInit {
   temas: Tema[];
   temasCarregado: boolean = false;
   webSocket: any;
-  gameData: {};
-  jogoConfig = {
-    idSala: 1,
-    idJogador: 1,
-    idNivel: 1,
-    idsTema: [401, 501, 301]
-  }
+  gameData:any;
+  jogoConfig: any;
 
   qtdJogadoresFim: number;
   qtdJogadores: number;
@@ -94,20 +89,23 @@ export class JogoComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    let gameData = JSON.parse(localStorage.getItem("gameData"));
+    this.gameData = JSON.parse(localStorage.getItem("gameData"));
+
     let importConfig: JogoConfig = {
-      idsTema: gameData.idTemaArray,
-      idNivel: gameData.idNivel,
+      idsTema: this.gameData.idTemaArray,
+      idNivel: this.gameData.idNivel,
       idJogador: parseInt(localStorage.getItem("userId")),
-      idSala: gameData.idSala
+      idSala: this.gameData.idSala
     };
+
     this.jogoConfig = importConfig;
+
     this.getTemas({
       ids: this.jogoConfig.idsTema
     });
 
     this.qtdJogadoresFim = 0;
-    this.qtdJogadores = gameData.numJogadores;
+    this.qtdJogadores = this.gameData.numJogadores;
 
     this.webSocket = new WebSocket("ws://monica:64803/api/Partida?UsuarioId=" + this.jogoConfig.idJogador);
 
@@ -125,6 +123,18 @@ export class JogoComponent implements OnInit {
         _this.qtdJogadoresFim++;
 
         if (_this.qtdJogadores == _this.qtdJogadoresFim) {
+          _this.rankingComponent.ranking = _this.rankingComponent.ranking.sort((a, b) => a.pontos_geral < b.pontos_geral ? 1 : (a.pontos_geral > b.pontos_geral ? -1 : 0));
+
+          _this.rankingComponent.ranking[0].pontos_geral = (
+            _this.gameData.idNivel == 1 ? (_this.rankingComponent.ranking[0].pontos_geral + 500) : (
+              _this.gameData.idNivel == 2 ? (_this.rankingComponent.ranking[0].pontos_geral + 1000) : (
+                _this.gameData.idNivel == 3 ? (_this.rankingComponent.ranking[0].pontos_geral + 2000) : (
+                  _this.gameData.idNivel == 4 ? (_this.rankingComponent.ranking[0].pontos_geral + 4000) : 0
+                )
+              )
+            )
+          )
+
           _this.spinner.hide();
           _this.abrirResumoPartida();
         }
