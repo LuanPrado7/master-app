@@ -24,7 +24,8 @@ import { MenuModule } from "./room-page/menu/menu.module";
         LoginPageModule,
         RoomPageModule,
         FormsModule,
-        MenuModule
+        MenuModule,
+        BrowserAnimationsModule
     ],
     schemas: [NO_ERRORS_SCHEMA],
     providers: [],
