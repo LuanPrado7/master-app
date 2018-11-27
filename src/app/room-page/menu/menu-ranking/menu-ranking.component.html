@@ -17,10 +17,10 @@
       <ng-container matColumnDef="posicao">
         <th mat-header-cell *matHeaderCellDef> Colocação </th>
         <td mat-cell *matCellDef="let element">
+          {{element.posicao}}
           <img class="medalha" *ngIf="element.posicao == 1" src="/src/assets/img/firstplace.png" />
           <img class="medalha" *ngIf="element.posicao == 2" src="/src/assets/img/secondplace.png" />
           <img class="medalha" *ngIf="element.posicao == 3" src="/src/assets/img/thirdplace.png" />
-          {{element.posicao}}
         </td>
       </ng-container>
 
