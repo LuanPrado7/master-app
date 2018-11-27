@@ -52,14 +52,13 @@ export class JogoComponent implements OnInit {
       finalizou: true,
       pontos: this.rankingComponent.calcularPontosGerais(this.jogoConfig.idNivel)
     }));
-
-    this.spinner.show();
   }
 
   abrirResumoPartida: any = function () {
     this.resumoDialog.open(ResumoDialogComponent, {
       width: '800px',
       height: '600px',
+      disableClose: true,
       data: this.rankingComponent.ranking
     });
   }
@@ -147,6 +146,8 @@ export class JogoComponent implements OnInit {
         if (obj.Finalizou) {
           _this.rankingComponent.atualizarPontuacaoGeral(obj.IdUsuario, obj.Pontos);
           _this.qtdJogadoresFim++;
+
+          _this.spinner.show();
 
           if (_this.qtdJogadores == _this.qtdJogadoresFim) {
             _this.rankingComponent.ranking = _this.rankingComponent.ranking.sort((a, b) => a.pontos_geral < b.pontos_geral ? 1 : (a.pontos_geral > b.pontos_geral ? -1 : 0));

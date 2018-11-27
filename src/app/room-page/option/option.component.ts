@@ -8,9 +8,12 @@ import { map } from 'rxjs/operators'
   styleUrls: ['./option.component.scss']
 })
 export class OptionComponent implements OnInit {
-  @Input() temas: any[];
+ temas: any[];
+
   @Output() rooms = new EventEmitter();
   @Output() roomCreated = new EventEmitter();
+  // @Output() aparecerSpinner = new EventEmitter<boolean>();
+
 
   temaList = [];
   temaLeave = false;
@@ -111,6 +114,8 @@ export class OptionComponent implements OnInit {
     this.temas.forEach(tema => {
       tema.backgroundColor = "#cfcfcf";
     });
+
+    // this.aparecerSpinner.emit(true);
 
     this.websocket.send(JSON.stringify(this.room));
   };
