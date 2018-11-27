@@ -87,6 +87,7 @@ export class RoomPageComponent implements OnInit {
         _this.salaCriada(obj);
 
         if (obj.SalaCheia) {
+          this.audio.pause();
           let gameData: GameData = {
             idNivel: <number>obj.IdNivel,
             idSala: <number>obj.Id,
