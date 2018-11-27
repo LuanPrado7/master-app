@@ -39,7 +39,7 @@
     transition: background-color 280ms cubic-bezier(0, 0.2, 0, 1);
     animation: pushIn 360ms 0.1s cubic-bezier(0.25, 0.2, 0, 1) forwards;
     &:hover {
-        background-color: #3d4352;
+        background-color: #4b505c;
     }
     @for $i from 0 through 3 {
         &:nth-child(n + #{$i}) {
