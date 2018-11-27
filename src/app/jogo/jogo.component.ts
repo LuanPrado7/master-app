@@ -60,6 +60,7 @@ export class JogoComponent implements OnInit {
     this.resumoDialog.open(ResumoDialogComponent, {
       width: '800px',
       height: '600px',
+      disableClose: true,
       data: this.rankingComponent.ranking
     });
   }
