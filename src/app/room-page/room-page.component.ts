@@ -35,8 +35,17 @@ export class RoomPageComponent implements OnInit {
     this.rooms.unshift(roomCreated);
   }
 
-
+  playAudio(){
+    let audio = new Audio();
+    audio.src = '../../assets/audio/room-component.mp3';
+    audio.load();
+    audio.play();
+  }
+  
   ngOnInit() {
+    
+    // this.playAudio(); 
+
     const uri = `ws://monica:64803/api/Sala?UsuarioId=${ this.id_usuario }`;
 
     this.websocket = new WebSocket(uri);

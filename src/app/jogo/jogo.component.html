@@ -1,23 +1,14 @@
 <body>
-    <div>
-        <app-pergunta 
-          *ngIf="temasCarregado"
-          [temas] = "temas"
-          [jogoConfig] = "jogoConfig"
-          (idTemaAcertado) = "atualizarRanking($event)"
-          (abrir_resumo_partida) = "fimDeJogo()"
-        >
-        </app-pergunta>
-      </div>
-      
-      <div>
-        <app-ranking 
-          *ngIf="temasCarregado"
-          [temas] = "temas" 
-          [id_jogador] = "jogoConfig.idJogador"
-        >
-        </app-ranking>
-      </div>  
+  <div>
+    <app-pergunta *ngIf="temasCarregado" [temas]="temas" [jogoConfig]="jogoConfig" (idTemaAcertado)="atualizarRanking($event)"
+      (abrir_resumo_partida)="fimDeJogo()">
+    </app-pergunta>
+  </div>
 
-      <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="large" color="#fff" type="pacman"></ngx-spinner>
+  <div>
+    <app-ranking *ngIf="temasCarregado" [temas]="temas" [id_jogador]="jogoConfig.idJogador">
+    </app-ranking>
+  </div>
+
+  <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="large" color="#fff" type="pacman"></ngx-spinner>
 </body>

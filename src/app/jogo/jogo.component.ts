@@ -80,15 +80,25 @@ export class JogoComponent implements OnInit {
       )
   }
 
-
-
   constructor(
     public resumoDialog: MatDialog,
     private jogoService: JogoService,
     private spinner: NgxSpinnerService
   ) { }
 
+  playAudio(){
+    let audio = new Audio();
+    audio.src = '../../assets/audio/game-component.wav';
+    audio.load();
+    audio.play();
+  }
+
   ngOnInit() {
+    this.playAudio();
+    setInterval(() => {
+      this.playAudio();
+    }, 12400);
+
     this.gameData = JSON.parse(localStorage.getItem("gameData"));
 
     let importConfig: JogoConfig = {
