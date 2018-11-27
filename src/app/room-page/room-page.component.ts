@@ -45,6 +45,12 @@ export class RoomPageComponent implements OnInit {
 
     this.websocket.onmessage = (event) => {
       let obj = JSON.parse(event.data);     
+
+      for(let i = 0; i < _this.rooms.length; i++) {
+        if(_this.rooms[i].Id == obj.Id) {
+          _this.rooms.splice(i, 1);
+        }
+      }
       
       if (obj.deuErro) {
         //trigger daquela flagzinha
@@ -52,12 +58,6 @@ export class RoomPageComponent implements OnInit {
       }
 
       let jaExiste = false;
-
-      for(let i = 0; i < _this.rooms.length; i++) {
-        if(_this.rooms[i].Id == obj.Id) {
-          _this.rooms.splice(i, 1);
-        }
-      }
 
       _this.salaCriada(obj); 
 
