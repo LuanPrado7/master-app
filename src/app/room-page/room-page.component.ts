@@ -44,7 +44,7 @@ export class RoomPageComponent implements OnInit {
   
   ngOnInit() {
     
-    // this.playAudio(); 
+    this.playAudio(); 
 
     const uri = `ws://monica:64803/api/Sala?UsuarioId=${ this.id_usuario }`;
 
