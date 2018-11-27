@@ -25,18 +25,18 @@ export class ResumoDialogComponent implements OnInit{
 
   displayedColumns: string[] = ['posicao', 'foto', 'nome', 'elo', 'pontPartida', 'pontGeral'];
   dataSource = [];
+  audio = new Audio();
 
   voltarMenu = function() {
+    this.audio.pause();
     localStorage.removeItem("gameData");
     this.router.navigate(["/room"])
   }
 
   ngOnInit() {
-
-    let audio = new Audio();
-    audio.src = '../../assets/audio/final-ranking.mpeg';
-    audio.load();
-    audio.play();
+    this.audio.src = '../../assets/audio/final-ranking.mpeg';
+    this.audio.load();
+    this.audio.play();
 
     this.data.forEach((element, i) => {
       let player: Player = {
@@ -50,9 +50,7 @@ export class ResumoDialogComponent implements OnInit{
       }
       this.dataSource.push(player)
     });
-    console.log(this.data);
     let currentPlayer = this.data.find(jogador => jogador.id_jogador == parseInt(localStorage.getItem('userId')));
-    console.log(currentPlayer);
     this.httpClient
       .get(`http://monica:64803/api/Usuario/${localStorage.getItem('userId')}`, {
         observe: "response"
