@@ -9,11 +9,19 @@ import { Component } from "@angular/core";
 })
 export class MenuComponent {
   modal: any;
+  light: boolean;
 
   constructor(
     private modalService: NgbModal,
     private router: Router
   ) { }
+
+  ngOnInit(){
+    this.light = false;
+    setInterval(() => {
+      this.light = !this.light;
+    }, 4000)
+  }
 
   signOut() {
     localStorage.clear();
