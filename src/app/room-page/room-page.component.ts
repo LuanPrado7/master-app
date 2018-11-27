@@ -44,6 +44,7 @@ export class RoomPageComponent implements OnInit {
     var _this = this;
 
     this.websocket.onmessage = (event) => {
+      console.log(event);
       let obj = JSON.parse(event.data);      
       let jaExiste = false;
 
