@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
+import { NgxSpinnerService } from "ngx-spinner";
 
 import { RoomComponent } from "./room/room.component";
 import { Tema } from "./tema";
@@ -26,7 +27,8 @@ export class RoomPageComponent implements OnInit {
   websocket: any;
 
   constructor(
-    private router: Router
+    private router: Router,
+    private spinner: NgxSpinnerService
   ) { }
 
   salas(rooms) {
@@ -56,12 +58,6 @@ export class RoomPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(localStorage.getItem('userId'));
-    console.log(typeof(localStorage.getItem('userId')));
-
-    // if (!localStorage.getItem('userId')) {
-    //   this.router.navigate(['/login']);
-    // } else {
       const uri = `ws://monica:64803/api/Sala?UsuarioId=${this.id_usuario}`;
 
       this.websocket = new WebSocket(uri);
@@ -80,11 +76,21 @@ export class RoomPageComponent implements OnInit {
         if (obj.deuErro) {
           //trigger daquela flagzinha
           return;
-        }
-
+        } 
         let jaExiste = false;
 
         _this.salaCriada(obj);
+
+        var existe = false;
+
+        for(var i = 0; i < obj.Jogadores.length; i++) {
+          if(obj.Jogadores[i] == this.id_usuario) {
+            existe = true;
+          } 
+        }
+
+        if(!existe) return;
+        else this.spinner.show();
 
         if (obj.SalaCheia) {
           this.audio.pause();
@@ -95,6 +101,9 @@ export class RoomPageComponent implements OnInit {
             jogadoresArray: <number[]>obj.Jogadores,
             numJogadores: <number>obj.JogadoresNaSala
           }
+
+          this.spinner.hide();
+
           localStorage.setItem("gameData", JSON.stringify(gameData));
           this.router.navigate(["/jogo"]);
         }

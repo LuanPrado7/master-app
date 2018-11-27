@@ -10,9 +10,16 @@ import { OptionComponent } from "./option/option.component";
 import { MenuComponent } from "./menu/menu.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { DoScrollDirective } from "../directives/do-scroll-directive";
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, MenuModule, NgbModule],
+  imports: [
+    CommonModule, 
+    FormsModule, 
+    MenuModule, 
+    NgbModule,
+    NgxSpinnerModule
+  ],
   declarations: [
     RoomPageComponent,
     RoomComponent,
