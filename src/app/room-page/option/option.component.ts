@@ -108,6 +108,9 @@ export class OptionComponent implements OnInit {
     this.nv_dificuldade = '';
     this.temaList = [];
     this.nr_jogador = 0;
+    this.temas.forEach(tema => {
+      tema.backgroundColor = "#cfcfcf";
+    });
 
     this.websocket.send(JSON.stringify(this.room));
   };

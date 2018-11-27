@@ -45,7 +45,14 @@ export class RoomPageComponent implements OnInit {
 
     this.websocket.onmessage = (event) => {
       console.log(event);
-      let obj = JSON.parse(event.data);      
+      let obj = JSON.parse(event.data);     
+      
+      if (obj.deuErro) {
+        console.log("DEEEEEEEEEUUU ERRRROOOOOOO")
+        //trigger daquela flagzinha
+        return;
+      }
+
       let jaExiste = false;
 
       for(let i = 0; i < _this.rooms.length; i++) {
