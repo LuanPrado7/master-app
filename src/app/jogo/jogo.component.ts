@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material';
+import { NgxSpinnerService } from "ngx-spinner";
+import { Router } from '@angular/router';
 
 import { Tema } from './tema';
 import { RankingComponent } from './ranking/ranking.component';
 import { ResumoDialogComponent } from './resumo/resumo.component';
 import { JogoService } from './jogo.service';
-import { NgxSpinnerService } from "ngx-spinner";
 
 export interface JogoConfig {
   idSala: number,
@@ -26,11 +27,14 @@ export class JogoComponent implements OnInit {
   temas: Tema[];
   temasCarregado: boolean = false;
   webSocket: any;
-  gameData:any;
+  gameData: any;
   jogoConfig: any;
 
   qtdJogadoresFim: number;
   qtdJogadores: number;
+
+  audio = new Audio();
+  shouldPlay = false;
 
   atualizarRanking: any = function (obj) {
     this.webSocket.send(JSON.stringify({
@@ -83,74 +87,90 @@ export class JogoComponent implements OnInit {
   constructor(
     public resumoDialog: MatDialog,
     private jogoService: JogoService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private router: Router
   ) { }
 
-  playAudio(){
-    let audio = new Audio();
-    audio.src = '../../assets/audio/game-component.wav';
-    audio.load();
-    audio.play();
+  playAudio() {
+    this.audio.src = '../../assets/audio/game-component.wav';
+    this.audio.load();
+    this.audio.play();
+  }
+
+  pause(value) {
+    this.shouldPlay = value;
+    if (this.shouldPlay) {
+      this.playAudio();
+      setInterval(() => {
+        this.playAudio();
+      }, 160000);
+    } else {
+      this.audio.pause();
+    }
   }
 
   ngOnInit() {
-    this.playAudio();
-    setInterval(() => {
-      this.playAudio();
-    }, 12400);
+    if (!localStorage.getItem('userData')) {
+      this.router.navigate(['/login']);
+    } else if (!localStorage.getItem('gameData')) {
+      this.router.navigate(['/room']);
+    } else {
+      this.gameData = JSON.parse(localStorage.getItem("gameData"));
 
-    this.gameData = JSON.parse(localStorage.getItem("gameData"));
+      let importConfig: JogoConfig = {
+        idsTema: this.gameData.idTemaArray,
+        idNivel: this.gameData.idNivel,
+        idJogador: parseInt(localStorage.getItem("userId")),
+        idSala: this.gameData.idSala
+      };
 
-    let importConfig: JogoConfig = {
-      idsTema: this.gameData.idTemaArray,
-      idNivel: this.gameData.idNivel,
-      idJogador: parseInt(localStorage.getItem("userId")),
-      idSala: this.gameData.idSala
-    };
+      this.jogoConfig = importConfig;
 
-    this.jogoConfig = importConfig;
+      this.getTemas({
+        ids: this.jogoConfig.idsTema
+      });
 
-    this.getTemas({
-      ids: this.jogoConfig.idsTema
-    });
+      this.qtdJogadoresFim = 0;
+      this.qtdJogadores = this.gameData.numJogadores;
 
-    this.qtdJogadoresFim = 0;
-    this.qtdJogadores = this.gameData.numJogadores;
+      this.webSocket = new WebSocket("ws://monica:64803/api/Partida?UsuarioId=" + this.jogoConfig.idJogador);
 
-    this.webSocket = new WebSocket("ws://monica:64803/api/Partida?UsuarioId=" + this.jogoConfig.idJogador);
+      var _this = this;
 
-    var _this = this;
+      this.webSocket.onmessage = function (event) {
+        var obj = JSON.parse(event.data);
 
-    this.webSocket.onmessage = function (event) {
-      var obj = JSON.parse(event.data);
+        if (!obj.Finalizou && _this.jogoConfig.idJogador != obj.IdUsuario) {
+          _this.rankingComponent.adicionaPontoAdversario(obj.IdTema, obj.IdUsuario);
+        }
 
-      if (!obj.Finalizou && _this.jogoConfig.idJogador != obj.IdUsuario) {
-        _this.rankingComponent.adicionaPontoAdversario(obj.IdTema, obj.IdUsuario);
-      }
+        if (obj.Finalizou) {
+          _this.rankingComponent.atualizarPontuacaoGeral(obj.IdUsuario, obj.Pontos);
+          _this.qtdJogadoresFim++;
 
-      if (obj.Finalizou) {
-        _this.rankingComponent.atualizarPontuacaoGeral(obj.IdUsuario, obj.Pontos);
-        _this.qtdJogadoresFim++;
+          if (_this.qtdJogadores == _this.qtdJogadoresFim) {
+            _this.rankingComponent.ranking = _this.rankingComponent.ranking.sort((a, b) => a.pontos_geral < b.pontos_geral ? 1 : (a.pontos_geral > b.pontos_geral ? -1 : 0));
 
-        if (_this.qtdJogadores == _this.qtdJogadoresFim) {
-          _this.rankingComponent.ranking = _this.rankingComponent.ranking.sort((a, b) => a.pontos_geral < b.pontos_geral ? 1 : (a.pontos_geral > b.pontos_geral ? -1 : 0));
-
-          _this.rankingComponent.ranking[0].pontos_geral = (
-            _this.gameData.idNivel == 1 ? (_this.rankingComponent.ranking[0].pontos_geral + 50) : (
-              _this.gameData.idNivel == 2 ? (_this.rankingComponent.ranking[0].pontos_geral + 100) : (
-                _this.gameData.idNivel == 3 ? (_this.rankingComponent.ranking[0].pontos_geral + 200) : (
-                  _this.gameData.idNivel == 4 ? (_this.rankingComponent.ranking[0].pontos_geral + 400) : 0
+            _this.rankingComponent.ranking[0].pontos_geral = (
+              _this.gameData.idNivel == 1 ? (_this.rankingComponent.ranking[0].pontos_geral + 50) : (
+                _this.gameData.idNivel == 2 ? (_this.rankingComponent.ranking[0].pontos_geral + 100) : (
+                  _this.gameData.idNivel == 3 ? (_this.rankingComponent.ranking[0].pontos_geral + 200) : (
+                    _this.gameData.idNivel == 4 ? (_this.rankingComponent.ranking[0].pontos_geral + 400) : 0
+                  )
                 )
               )
             )
-          )
 
-          _this.spinner.hide();
-          _this.abrirResumoPartida();
+            _this.spinner.hide();
+            _this.abrirResumoPartida();
+          }
         }
       }
+
     }
 
+
   }
+
 
 }

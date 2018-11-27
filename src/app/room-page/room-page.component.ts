@@ -19,6 +19,8 @@ export interface GameData {
 export class RoomPageComponent implements OnInit {
   @ViewChild(RoomComponent) roomComponent: RoomComponent;
   rooms = [];
+  audio = new Audio();
+  shouldPlay = false;
 
   id_usuario = localStorage.getItem('userId');
   websocket: any;
@@ -35,53 +37,67 @@ export class RoomPageComponent implements OnInit {
     this.rooms.unshift(roomCreated);
   }
 
-  playAudio(){
-    let audio = new Audio();
-    audio.src = '../../assets/audio/room-component.mp3';
-    audio.load();
-    audio.play();
+  playAudio() {
+    this.audio.src = '../../assets/audio/room-component.mp3';
+    this.audio.load();
+    this.audio.play();
   }
-  
+
+  pause(value){
+    this.shouldPlay = value;
+    if(this.shouldPlay){
+      this.playAudio();
+      setInterval(() => {
+        this.playAudio();
+      }, 160000);
+    } else {
+      this.audio.pause();
+    }
+  }
+
   ngOnInit() {
-    
-    this.playAudio(); 
 
-    const uri = `ws://monica:64803/api/Sala?UsuarioId=${ this.id_usuario }`;
+    if (!localStorage.getItem('userId')) {
+      this.router.navigate(['/login']);
+    } else {
+      const uri = `ws://monica:64803/api/Sala?UsuarioId=${this.id_usuario}`;
 
-    this.websocket = new WebSocket(uri);
+      this.websocket = new WebSocket(uri);
 
-    var _this = this;
+      var _this = this;
 
-    this.websocket.onmessage = (event) => {
-      let obj = JSON.parse(event.data);     
+      this.websocket.onmessage = (event) => {
+        let obj = JSON.parse(event.data);
 
-      for(let i = 0; i < _this.rooms.length; i++) {
-        if(_this.rooms[i].Id == obj.Id) {
-          _this.rooms.splice(i, 1);
+        for (let i = 0; i < _this.rooms.length; i++) {
+          if (_this.rooms[i].Id == obj.Id) {
+            _this.rooms.splice(i, 1);
+          }
         }
-      }
-      
-      if (obj.deuErro) {
-        //trigger daquela flagzinha
-        return;
-      }
 
-      let jaExiste = false;
-
-      _this.salaCriada(obj); 
-
-      if(obj.SalaCheia) {
-        let gameData: GameData = {
-          idNivel: <number>obj.IdNivel,
-          idSala: <number>obj.Id,
-          idTemaArray: <number[]>obj.Temas,
-          jogadoresArray: <number[]>obj.Jogadores,
-          numJogadores: <number>obj.JogadoresNaSala
+        if (obj.deuErro) {
+          //trigger daquela flagzinha
+          return;
         }
-        localStorage.setItem("gameData", JSON.stringify(gameData));
-        this.router.navigate(["/jogo"]);
-      }
-    };
 
+        let jaExiste = false;
+
+        _this.salaCriada(obj);
+
+        if (obj.SalaCheia) {
+          let gameData: GameData = {
+            idNivel: <number>obj.IdNivel,
+            idSala: <number>obj.Id,
+            idTemaArray: <number[]>obj.Temas,
+            jogadoresArray: <number[]>obj.Jogadores,
+            numJogadores: <number>obj.JogadoresNaSala
+          }
+          localStorage.setItem("gameData", JSON.stringify(gameData));
+          this.router.navigate(["/jogo"]);
+        }
+      };
+
+    }
   }
+
 }

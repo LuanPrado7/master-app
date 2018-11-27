@@ -1,5 +1,7 @@
 <body>
   <app-menu></app-menu>
+  <div class="audio-icon" *ngIf="shouldPlay" (click)="pause(false)"><i class="fa fa-pause-circle"></i></div>
+  <div class="audio-icon" *ngIf="!shouldPlay" (click)="pause(true)"><i class="fa fa-play-circle"></i></div>
   <div class="container">
     <div>
       <app-option [temas]="temas" [websocket]="websocket" (rooms)="salas($event)" (roomCreated)="salaCriada($event)"></app-option>

@@ -1,4 +1,6 @@
 <body>
+  <div class="audio-icon" *ngIf="shouldPlay" (click)="pause(false)"><i class="fa fa-pause-circle"></i></div>
+  <div class="audio-icon" *ngIf="!shouldPlay" (click)="pause(true)"><i class="fa fa-play-circle"></i></div>
   <div>
     <app-pergunta *ngIf="temasCarregado" [temas]="temas" [jogoConfig]="jogoConfig" (idTemaAcertado)="atualizarRanking($event)"
       (abrir_resumo_partida)="fimDeJogo()">
