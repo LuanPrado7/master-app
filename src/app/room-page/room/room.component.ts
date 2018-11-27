@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 
 import { Tema } from "./../tema";
@@ -15,6 +15,7 @@ export class RoomComponent implements OnInit {
   @Input() temas: Tema[];
   @Input() rooms: Room[];
   @Input() websocket: any;
+  // @Output() aparecerSpinner = new EventEmitter<boolean>();
 
   roomClick: string;
   roomVariable: boolean = false;
@@ -136,6 +137,8 @@ export class RoomComponent implements OnInit {
       UsuarioId: this.id_usuario,
       NovaSala: false
     };
+
+    // this.aparecerSpinner.emit(true);
 
     this.websocket.send(JSON.stringify(this.room));
   }

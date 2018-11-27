@@ -12,6 +12,8 @@ export class OptionComponent implements OnInit {
 
   @Output() rooms = new EventEmitter();
   @Output() roomCreated = new EventEmitter();
+  // @Output() aparecerSpinner = new EventEmitter<boolean>();
+
 
   temaList = [];
   temaLeave = false;
@@ -109,6 +111,11 @@ export class OptionComponent implements OnInit {
     this.nv_dificuldade = '';
     this.temaList = [];
     this.nr_jogador = 0;
+    this.temas.forEach(tema => {
+      tema.backgroundColor = "#cfcfcf";
+    });
+
+    // this.aparecerSpinner.emit(true);
 
     this.websocket.send(JSON.stringify(this.room));
   };

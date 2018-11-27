@@ -5,18 +5,26 @@ import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
 import  { Usuario } from './cadastro-form/usuario';
 import { NgxSpinnerService } from "ngx-spinner";
-import { log } from "util";
+import { trigger, transition, useAnimation } from '@angular/animations';
+import { fadeInDown } from 'ng-animate';
 
 
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.scss']
+  styleUrls: ['./login-page.component.scss'],
+  animations: [
+    trigger('fadeInDown', [transition('* => *', useAnimation(fadeInDown, {
+      // Set the duration to 5seconds and delay to 2seconds
+      params: { timing: 3, delay: 0 }
+    }))])
+  ]
 })
 
 export class LoginPageComponent {
   user: Usuario;
   modal: any;
+  light: boolean;
   private readonly notifier: NotifierService;
 
   constructor(
@@ -27,6 +35,10 @@ export class LoginPageComponent {
   ) { }
 
   ngOnInit() {
+    this.light = false;
+    setInterval(() => {
+      this.light = !this.light;
+    }, 2000)
     localStorage.clear();
   }
   

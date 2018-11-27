@@ -14,6 +14,7 @@ export class MenuProfileComponent {
   modal: any;
   userSkin = '';
   userName = '';
+  userClassificacao = '';
   tempSkin = '';
   cadastrado = true;
   private readonly notifier: NotifierService;
@@ -38,8 +39,10 @@ export class MenuProfileComponent {
       .pipe(map(res => res as any))
       .subscribe(
         res => {
+          console.log(res.body);
           this.userSkin = res.body.Skin;
-          this.userName = res.body.Username
+          this.userName = res.body.Username;
+          this.userClassificacao = res.body.Classificacao
         },
         err => {
           setTimeout(() => {

@@ -1,5 +1,7 @@
 <body>
   <app-menu></app-menu>
+  <div class="audio-icon" *ngIf="shouldPlay" (click)="pause(false)"><i class="fa fa-pause-circle"></i></div>
+  <div class="audio-icon" *ngIf="!shouldPlay" (click)="pause(true)"><i class="fa fa-play-circle"></i></div>
   <div class="container">
     <div>
       <app-option [websocket]="websocket" (rooms)="salas($event)" (roomCreated)="salaCriada($event)"></app-option>
@@ -8,4 +10,9 @@
       <app-room [rooms]="rooms" [websocket]="websocket"></app-room>
     </div>
   </div>
+
+  <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="large" color="#fff" type="pacman">
+    <h2 class="title">Aguardando os outros jogadores ...</h2>
+  </ngx-spinner>
+
 </body>

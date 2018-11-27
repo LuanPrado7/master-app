@@ -5,7 +5,6 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
-
 export interface Player {
   foto: string,
   posicao: number,
@@ -33,6 +32,12 @@ export class ResumoDialogComponent implements OnInit{
   }
 
   ngOnInit() {
+
+    let audio = new Audio();
+    audio.src = '../../assets/audio/final-ranking.mpeg';
+    audio.load();
+    audio.play();
+
     this.data.forEach((element, i) => {
       let player: Player = {
         foto: element.foto,
