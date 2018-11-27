@@ -16,3 +16,16 @@ table {
 .example-button-row a {
   margin-right: 8px;
 }
+
+.btn {
+    vertical-align: middle;
+    margin: 3px;
+    width: 180px;
+    background-color: rgba(61,153,112,0.7);
+    border: 0px;
+
+}
+.btn:hover{
+    background-color: rgba(61,153,112,0.9);
+    box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.4);
+}

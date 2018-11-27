@@ -65,7 +65,7 @@ export class LoginFormComponent {
               localStorage.clear();
               this.notifier.notify(
                 "error",
-                "Não foi possível cadastrar. Por favor, tente novamente"
+                "Não foi possível logar. Por favor, tente novamente"
               );
             }, 2000);
           }
