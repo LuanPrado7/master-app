@@ -32,7 +32,7 @@ export class RoomPageComponent implements OnInit {
   }
 
   salaCriada(roomCreated) {
-    this.rooms.push(roomCreated);
+    this.rooms.unshift(roomCreated);
   }
 
 
@@ -44,11 +44,9 @@ export class RoomPageComponent implements OnInit {
     var _this = this;
 
     this.websocket.onmessage = (event) => {
-      console.log(event);
       let obj = JSON.parse(event.data);     
       
       if (obj.deuErro) {
-        console.log("DEEEEEEEEEUUU ERRRROOOOOOO")
         //trigger daquela flagzinha
         return;
       }
