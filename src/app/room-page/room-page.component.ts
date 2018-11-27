@@ -32,7 +32,7 @@ export class RoomPageComponent implements OnInit {
   }
 
   salaCriada(roomCreated) {
-    this.rooms.push(roomCreated);
+    this.rooms.unshift(roomCreated);
   }
 
 
@@ -44,22 +44,20 @@ export class RoomPageComponent implements OnInit {
     var _this = this;
 
     this.websocket.onmessage = (event) => {
-      console.log(event);
       let obj = JSON.parse(event.data);     
-      
-      if (obj.deuErro) {
-        console.log("DEEEEEEEEEUUU ERRRROOOOOOO")
-        //trigger daquela flagzinha
-        return;
-      }
-
-      let jaExiste = false;
 
       for(let i = 0; i < _this.rooms.length; i++) {
         if(_this.rooms[i].Id == obj.Id) {
           _this.rooms.splice(i, 1);
         }
       }
+      
+      if (obj.deuErro) {
+        //trigger daquela flagzinha
+        return;
+      }
+
+      let jaExiste = false;
 
       _this.salaCriada(obj); 
 
