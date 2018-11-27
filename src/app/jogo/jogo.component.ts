@@ -143,11 +143,14 @@ export class JogoComponent implements OnInit {
           _this.rankingComponent.adicionaPontoAdversario(obj.IdTema, obj.IdUsuario);
         }
 
+        if(_this.jogoConfig.idJogador == obj.IdUsuario) {
+          _this.spinner.show();
+        }
+
         if (obj.Finalizou) {
           _this.rankingComponent.atualizarPontuacaoGeral(obj.IdUsuario, obj.Pontos);
           _this.qtdJogadoresFim++;
 
-          _this.spinner.show();
 
           if (_this.qtdJogadores == _this.qtdJogadoresFim) {
             _this.rankingComponent.ranking = _this.rankingComponent.ranking.sort((a, b) => a.pontos_geral < b.pontos_geral ? 1 : (a.pontos_geral > b.pontos_geral ? -1 : 0));
