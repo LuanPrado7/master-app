@@ -1,20 +1,24 @@
 <body>
+  <!-- <img class="img-hp-1" src="/src/assets/img/harry-potter.png">
+  <img class="img-culinaria-1" src="/src/assets/img/baker.png">
+  <img class="img-historia-1" src="/src/assets/img/cristo-redentor.png">
+  <img class="img-biologia-1" src="/src/assets/img/dna.png">
+  <img class="img-game-1" src="/src/assets/img/game-controller.png">
+  <img class="img-tecnologia-1" src="/src/assets/img/innovation.png">
+  <img class="img-logica-1" src="/src/assets/img/logic.png"> -->
   <div class="container home-container">
     <div class="row">
       <div class="col-md-12">
-        <h1><strong>Mestrão</strong></h1>
+        <h1><strong>
+            <img class="logo" *ngIf="!light" src="/src/assets/img/lightbulb-off.png" />
+            <img class="logo" *ngIf="light" src="/src/assets/img/lightbulb-on.png" />
+            <br>Mestrão</strong></h1>
         <div class="botoes">
           <app-cadastro-form></app-cadastro-form>
           <p class="divisoria">ou</p>
           <app-login-form></app-login-form>
           <p class="divisoria">ou</p>
-          <button
-            (click)="jogar()"
-            type="button"
-            class="btn btn-primary btn-lg"
-            placement="right"
-            ngbTooltip="Ao iniciar o jogo sem cadastro, seus pontos serão computados apenas durante a partida, sem possibilidade de manter uma pontuação e tornar-se um Mestrão"
-          >
+          <button (click)="jogar()" type="button" class="btn btn-primary btn-lg" placement="right" ngbTooltip="Ao iniciar o jogo sem cadastro, seus pontos serão computados apenas durante a partida, sem possibilidade de manter uma pontuação e tornar-se um Mestrão">
             JOGAR
           </button>
           <notifier-container></notifier-container>

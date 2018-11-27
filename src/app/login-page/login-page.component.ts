@@ -17,6 +17,7 @@ import { log } from "util";
 export class LoginPageComponent {
   user: Usuario;
   modal: any;
+  light: boolean;
   private readonly notifier: NotifierService;
 
   constructor(
@@ -27,6 +28,10 @@ export class LoginPageComponent {
   ) { }
 
   ngOnInit() {
+    this.light = false;
+    setInterval(() => {
+      this.light = !this.light;
+    }, 2000)
     localStorage.clear();
   }
   
