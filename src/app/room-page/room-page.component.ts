@@ -56,10 +56,12 @@ export class RoomPageComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(localStorage.getItem('userId'));
+    console.log(typeof(localStorage.getItem('userId')));
 
-    if (!localStorage.getItem('userId')) {
-      this.router.navigate(['/login']);
-    } else {
+    // if (!localStorage.getItem('userId')) {
+    //   this.router.navigate(['/login']);
+    // } else {
       const uri = `ws://monica:64803/api/Sala?UsuarioId=${this.id_usuario}`;
 
       this.websocket = new WebSocket(uri);
@@ -98,6 +100,6 @@ export class RoomPageComponent implements OnInit {
       };
 
     }
-  }
+  // }
 
 }

@@ -110,11 +110,11 @@ export class JogoComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (!localStorage.getItem('userData')) {
-      this.router.navigate(['/login']);
-    } else if (!localStorage.getItem('gameData')) {
-      this.router.navigate(['/room']);
-    } else {
+    // if (!localStorage.getItem('userData')) {
+    //   this.router.navigate(['/login']);
+    // } else if (!localStorage.getItem('gameData')) {
+    //   this.router.navigate(['/room']);
+    // } else {
       this.gameData = JSON.parse(localStorage.getItem("gameData"));
 
       let importConfig: JogoConfig = {
@@ -170,7 +170,7 @@ export class JogoComponent implements OnInit {
     }
 
 
-  }
+  // }
 
 
 }
