@@ -20,7 +20,7 @@ export class DoScrollDirective implements OnInit {
                 //     height: '75px',
                 //     borderRadius: '5px',
                 //     marginLeft: '-13px'
-                })
+                // })
             });
         }, 0);
     }

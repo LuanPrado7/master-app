@@ -8,7 +8,8 @@ import { map } from 'rxjs/operators'
   styleUrls: ['./option.component.scss']
 })
 export class OptionComponent implements OnInit {
-  @Input() temas: any[];
+ temas: any[];
+
   @Output() rooms = new EventEmitter();
   @Output() roomCreated = new EventEmitter();
 

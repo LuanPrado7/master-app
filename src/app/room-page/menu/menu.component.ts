@@ -20,7 +20,7 @@ export class MenuComponent {
     this.light = false;
     setInterval(() => {
       this.light = !this.light;
-    }, 4000)
+    }, 1500)
   }
 
   signOut() {

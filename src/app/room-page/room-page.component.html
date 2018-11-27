@@ -2,7 +2,7 @@
   <app-menu></app-menu>
   <div class="container">
     <div>
-      <app-option [temas]="temas" [websocket]="websocket" (rooms)="salas($event)" (roomCreated)="salaCriada($event)"></app-option>
+      <app-option [websocket]="websocket" (rooms)="salas($event)" (roomCreated)="salaCriada($event)"></app-option>
     </div>
     <div>
       <app-room [rooms]="rooms" [websocket]="websocket"></app-room>
