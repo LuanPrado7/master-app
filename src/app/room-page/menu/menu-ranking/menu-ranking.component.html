@@ -1,5 +1,7 @@
 <li class="nav-item" (click)="openVerticallyCentered(content)">
-  <a class="nav-link show-pointer"><i class="fa fa-server"></i> Ranking</a>
+  <a class="nav-link show-pointer"><img class="ranking" src="/src/assets/img/podium.png" /> Ranking</a>
+
+  <!-- <a class="nav-link show-pointer"><i class="fa fa-server"></i> Ranking</a> -->
 </li>
 
 <ng-template #content let-modal>
@@ -10,37 +12,42 @@
     </button>
   </div>
   <div class="modal-body">
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-      
-        <ng-container matColumnDef="posicao">
-          <th mat-header-cell *matHeaderCellDef> Colocação </th>
-          <td mat-cell *matCellDef="let element"> {{element.posicao}} </td>
-        </ng-container>
-      
-        <ng-container matColumnDef="foto">
-          <th mat-header-cell *matHeaderCellDef> Jogador </th>
-          <td mat-cell *matCellDef="let element"> 
-            <img src ="/src/assets/img/avatars/{{element.foto}}" class="img--48x48 img--rounded">
-          </td>
-        </ng-container>
-      
-        <ng-container matColumnDef="username">
-          <th mat-header-cell *matHeaderCellDef> Usuário</th>
-          <td mat-cell *matCellDef="let element"> {{element.username}} </td>
-        </ng-container>
-      
-        <ng-container matColumnDef="classificacao">
-          <th mat-header-cell *matHeaderCellDef> Classificação </th>
-          <td mat-cell *matCellDef="let element"> {{element.classificacao}} </td>
-        </ng-container>
-      
-        <ng-container matColumnDef="pontos">
-          <th mat-header-cell *matHeaderCellDef> Pontos </th>
-          <td mat-cell *matCellDef="let element"> {{element.pontos}} </td>
-        </ng-container>
-      
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row [style.background-color]="getStyle(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <ng-container matColumnDef="posicao">
+        <th mat-header-cell *matHeaderCellDef> Colocação </th>
+        <td mat-cell *matCellDef="let element">
+          <img class="medalha" *ngIf="element.posicao == 1" src="/src/assets/img/firstplace.png" />
+          <img class="medalha" *ngIf="element.posicao == 2" src="/src/assets/img/secondplace.png" />
+          <img class="medalha" *ngIf="element.posicao == 3" src="/src/assets/img/thirdplace.png" />
+          {{element.posicao}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="foto">
+        <th mat-header-cell *matHeaderCellDef> Jogador </th>
+        <td mat-cell *matCellDef="let element">
+          <img src="/src/assets/img/avatars/{{element.foto}}" class="img--48x48 img--rounded">
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="username">
+        <th mat-header-cell *matHeaderCellDef> Usuário</th>
+        <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="classificacao">
+        <th mat-header-cell *matHeaderCellDef> Classificação </th>
+        <td mat-cell *matCellDef="let element"> {{element.classificacao}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="pontos">
+        <th mat-header-cell *matHeaderCellDef> Pontos </th>
+        <td mat-cell *matCellDef="let element"> {{element.pontos}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row [style.background-color]="getStyle(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
   </div>
 </ng-template>

@@ -105,6 +105,10 @@ export class OptionComponent implements OnInit {
       NovaSala: true
     };
 
+    this.nv_dificuldade = '';
+    this.temaList = [];
+    this.nr_jogador = 0;
+
     this.websocket.send(JSON.stringify(this.room));
   };
 
