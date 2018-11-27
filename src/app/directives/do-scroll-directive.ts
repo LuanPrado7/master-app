@@ -13,13 +13,13 @@ export class DoScrollDirective implements OnInit {
     ngOnInit() {
         setTimeout(() => {
             $(this.el.nativeElement).doScroll({
-                scrollbar: $('<div></div>').css({
-                    backgroundColor: '#fff',
-                    border: '2px solid #000',
-                    width: '10px',
-                    height: '75px',
-                    borderRadius: '5px',
-                    marginLeft: '-13px'
+                // scrollbar: $('<div></div>').css({
+                //     backgroundColor: '#fff',
+                //     border: '2px solid #000',
+                //     width: '10px',
+                //     height: '75px',
+                //     borderRadius: '5px',
+                //     marginLeft: '-13px'
                 })
             });
         }, 0);
