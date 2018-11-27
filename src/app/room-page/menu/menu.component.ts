@@ -18,9 +18,9 @@ export class MenuComponent {
 
   ngOnInit(){
     this.light = false;
-    // setInterval(() => {
-    //   this.light = !this.light;
-    // }, 4000)
+    setInterval(() => {
+      this.light = !this.light;
+    }, 2000)
   }
 
   signOut() {
