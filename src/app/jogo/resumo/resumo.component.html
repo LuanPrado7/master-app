@@ -4,13 +4,15 @@
 
   <ng-container matColumnDef="posicao">
     <th mat-header-cell *matHeaderCellDef> Colocação </th>
-    <td mat-cell *matCellDef="let element"> {{element.posicao}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.posicao}}
+      <img class="medalha" *ngIf="element.posicao == 1" src="/src/assets/img/classificacao/mestrao.png" />
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="foto">
     <th mat-header-cell *matHeaderCellDef> Jogador </th>
-    <td mat-cell *matCellDef="let element"> 
-      <img src = 'src/assets/img/avatars/{{element.foto}}' class="img--48x48 img--rounded">
+    <td mat-cell *matCellDef="let element">
+      <img src='src/assets/img/avatars/{{element.foto}}' class="img--48x48 img--rounded">
     </td>
   </ng-container>
 
@@ -39,8 +41,6 @@
 </table>
 
 <div class="example-button-row">
-    <br/>
-    <button mat-dialog-close type="button" class="btn btn-menu float-right" (click)="voltarMenu()">Menu</button>
+  <br />
+  <button mat-dialog-close type="button" class="btn btn-menu float-right" (click)="voltarMenu()">Menu</button>
 </div>
-
-
